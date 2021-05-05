@@ -18,6 +18,7 @@ char **binit_array(size_t x, size_t y);
 
 // DUPLICATE A MATRIX
 char **barray_dup(char **src);
+char **barray_cpy(char **dest, char **src);
 
 // SEPARATE A STRING WITH A SEPARATOR IN A MATRIX
 char **bstr_array(char *file, char separator);

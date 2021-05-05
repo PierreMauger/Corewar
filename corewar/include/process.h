@@ -48,4 +48,8 @@ typedef struct {
     size_t lenght;
 } process_list_t;
 
+// CREATE STRUCTURE
+process_t *create_process(process_t *base_process);
+
+
 #endif // PROCESS_H

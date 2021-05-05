@@ -39,4 +39,7 @@ typedef struct {
     size_t dump;
 } vm_t;
 
+// MANAGE LINKED LIST
+void *add_elem(void *actual, void *elem, size_t size_struct);
+
 #endif // COREWAR_H
