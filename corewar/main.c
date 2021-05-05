@@ -1,13 +1,13 @@
 /*
-** EPITECH PROJECT, 2020
-** matchstick
+** EPITECH PROJECT, 2021
+** corewar
 ** File description:
 ** main
 */
 
 #include "corewar.h"
 
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv)
 {
 
     return 0;

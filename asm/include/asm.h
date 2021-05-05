@@ -22,4 +22,6 @@
 
 #include "op.h"
 
+#define READ_SIZE 50
+
 #endif // ASM_H
