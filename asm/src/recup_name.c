@@ -21,18 +21,6 @@ char *get_tab(char *buffer, size_t adv, size_t sz_ft, char *get_name)
     return (NULL);
 }
 
-size_t count_line_buff(char *buffer, size_t adv)
-{
-    size_t count_line = 0;
-
-    while (buffer[adv]) {
-        if (buffer[adv] == '\n')
-            count_line++;
-        adv++;
-    }
-    return (count_line + 1);
-}
-
 void go_to_next_name(size_t *i_name, size_t *sz_ft, char *buffer, size_t *adv)
 {
     (*i_name)++;
@@ -42,11 +30,10 @@ void go_to_next_name(size_t *i_name, size_t *sz_ft, char *buffer, size_t *adv)
         (*adv)++;
 }
 
-size_t check_name_fonc(char *buffer, size_t adv)
+int check_name_fonc(char *buffer, size_t adv, char **stock_name)
 {
     size_t sz_ft = 0;
     size_t i_name = 0;
-    char **stock_name = malloc(sizeof(char *) * (count_line_buff(buffer, adv)));
 
     for (; buffer[adv] && buffer[adv] != ':'; adv++);
     adv += 1;
@@ -58,8 +45,8 @@ size_t check_name_fonc(char *buffer, size_t adv)
         stock_name[i_name] = get_tab(buffer, adv, sz_ft, stock_name[i_name]);
         adv += sz_ft;
         if (stock_name[i_name] == NULL)
-            return (0);
+            return (-1);
         go_to_next_name(&i_name, &sz_ft, buffer, &adv);
     }
-    return (adv);
+    return (0);
 }

@@ -35,6 +35,6 @@ size_t check_asm(char *buffer)
         if (len >= 2048)
             return (0);
     for (; buffer[adv] && buffer[adv] == '\n'; adv++);
-    adv = check_name_fonc(buffer, adv);
+    recup_all(buffer, adv);
     return adv;
 }
