@@ -65,8 +65,8 @@ size_t count_line_buff(char *buffer, size_t adv)
 int recup_all(char *buffer, size_t adv)
 {
     int nb_line = count_line_buff(buffer, adv);
-    char **stock_name = malloc(sizeof(char *) * nb_line);
-    char ***stock_arg = malloc(sizeof(char **) * nb_line);
+    char **stock_name = malloc(sizeof(char *) * nb_line + 1);
+    char ***stock_arg = malloc(sizeof(char **) * nb_line + 1);
 
     if (check_name_fonc(buffer, adv, stock_name) == -1)
         return (1);
@@ -74,5 +74,7 @@ int recup_all(char *buffer, size_t adv)
     display_db_tab(stock_name);
     display_tr_tab(stock_arg);
     display_name_and_arg(stock_name, stock_arg);
+    free_double_tab(stock_name);
+    free_triple_tab(stock_arg);
     return (0);
 }

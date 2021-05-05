@@ -10,6 +10,7 @@ SRC				=	src/check_asm.c				\
 					src/recup_name.c 			\
 					src/recup_arg.c				\
 					src/get_everything.c		\
+					src/free.c					\
 
 SRC				+=	main.c
 

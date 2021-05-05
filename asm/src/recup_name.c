@@ -47,6 +47,7 @@ int check_name_fonc(char *buffer, size_t adv, char **stock_name)
         if (stock_name[i_name] == NULL)
             return (-1);
         go_to_next_name(&i_name, &sz_ft, buffer, &adv);
+        stock_name[i_name] = NULL;
     }
     return (0);
 }

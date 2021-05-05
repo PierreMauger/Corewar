@@ -73,5 +73,6 @@ int get_arg(char *buffer, size_t adv, char **stock_name, char ***stock_arg)
         if (stock_name[i_tab] == NULL)
             break;
     }
+    stock_arg[i_tab] = NULL;
     return (0);
 }
