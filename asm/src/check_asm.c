@@ -25,11 +25,16 @@ size_t check_asm(char *buffer)
     adv = skip_header(buffer);
     if (!bstrncmp(buffer + adv, ".name", 6))
         return 0;
-    for (; buffer[adv + 1] && buffer[adv] != '\n'; adv++);
+    for (size_t len = 0; buffer[adv + 1] && buffer[adv] != '\n'; adv++, len++)
+        if (len >= 128)
+            return (0);
     adv++;
     if (!bstrncmp(buffer + adv, ".comment", 9))
         return 0;
-    for (; buffer[adv] && buffer[adv] != '\n'; adv++);
+    for (size_t len = 0; buffer[adv] && buffer[adv] != '\n'; adv++, len++)
+        if (len >= 2048)
+            return (0);
     for (; buffer[adv] && buffer[adv] == '\n'; adv++);
+    adv = check_name_fonc(buffer, adv);
     return adv;
 }

@@ -7,6 +7,7 @@
 
 ##################### SRC #######################
 SRC				=	src/check_asm.c				\
+					src/recup_name.c 			\
 
 SRC				+=	main.c
 

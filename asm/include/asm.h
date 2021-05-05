@@ -26,5 +26,6 @@
 
 size_t skip_header(char *buffer);
 size_t check_asm(char *buffer);
+size_t check_name_fonc(char *buffer, size_t adv);
 
 #endif // ASM_H
