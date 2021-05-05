@@ -39,4 +39,9 @@ typedef struct {
     size_t dump;
 } vm_t;
 
+// Args parsing funcs
+char **init_checking_flags(void);
+bool check_read_accessibility(char *str);
+int parse_args(char **av);
+
 #endif // COREWAR_H

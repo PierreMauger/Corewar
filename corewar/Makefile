@@ -6,7 +6,8 @@
 ##
 
 ##################### SRC #######################
-SRC				=
+SRC				=	src/parsing.c			\
+					src/parsing_utils.c		\
 
 SRC				+=	main.c
 
