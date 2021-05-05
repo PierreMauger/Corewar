@@ -19,48 +19,12 @@
 #include <errno.h>
 
 #include "blib.h"
-
 #include "op.h"
 
-typedef enum {
-    r1,
-    r2,
-    r3,
-    r4,
-    r5,
-    r6,
-    r7,
-    r8,
-    r9,
-    r10,
-    r11,
-    r12,
-    r13,
-    r14,
-    r15,
-    r16
-} register_name_e;
+#include "process.h"
+#include "champion.h"
 
-typedef struct process_s {
-    int reg[REG_NUMBER];
-    size_t coord_pc;
-    size_t goal_it;
-    size_t current_it;
-    int id_instruct;
-    bool carry;
-    struct process_s *next;
-    struct process_s *last;
-} process_t;
-
-typedef struct champion_s {
-    size_t id;
-    char *name;
-    bool is_alive;
-    process_t *process;
-    struct champion_s *next;
-    struct champion_s *last;
-} champion_t;
-
+// VM
 typedef struct {
     size_t current_it;
     size_t it_max;
@@ -70,7 +34,7 @@ typedef struct {
 
 typedef struct {
     unsigned char memory[MEM_SIZE];
-    champion_t *champion;
+    champion_list_t *champion;
     cycle_t cycle;
     size_t dump;
 } vm_t;
