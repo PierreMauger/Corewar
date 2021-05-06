@@ -29,8 +29,8 @@ size_t check_name(char *buffer, size_t adv)
         if (len >= COMMENT_LENGTH)
             return (0);
     for (; buffer[adv] && buffer[adv] == '\n'; adv++);
-    for (; buffer[adv + 1] && buffer[adv] != '\n'; adv++);
-    adv++;
+    for (; buffer[adv] && buffer[adv] != '\n'; adv++);
+    for (; buffer[adv] && buffer[adv] == '\n'; adv++);
     return adv;
 }
 

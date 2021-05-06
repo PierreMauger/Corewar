@@ -8,10 +8,6 @@
 ##################### SRC #######################
 SRC				=	src/check_asm.c					\
 					src/check_command.c				\
-					src/recup_name.c 				\
-					src/recup_arg.c					\
-					src/get_everything.c			\
-					src/free.c						\
 					src/linked_list/add_elem.c		\
 					src/linked_list/remove_elem.c	\
 
