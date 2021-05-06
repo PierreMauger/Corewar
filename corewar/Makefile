@@ -9,8 +9,12 @@
 SRC				=	src/parsing.c							\
 					src/parsing_utils.c						\
 					src/init_struct/create_process.c		\
-					src/linked_list/add_elem.c				\
-					src/linked_list/remove_elem.c			\
+					src/linked_list/add_node.c				\
+					src/linked_list/remove_node.c			\
+					src/linked_list/create_node.c			\
+					src/linked_list/create_list.c			\
+					src/linked_list/destroy_list.c			\
+					src/linked_list/destroy_node.c			\
 
 SRC				+=	main.c
 

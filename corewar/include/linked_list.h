@@ -10,8 +10,8 @@
 
 #include <stdio.h>
 
-#define foreach(elem, temp) \
-    for (list_node_t *temp = elem; temp; temp = temp->next)
+#define foreach(node, temp) \
+    for (temp = node; temp; temp = temp->next)
 
 typedef struct list_node_s {
     struct list_node_s *next;
@@ -25,7 +25,16 @@ typedef struct {
     size_t lenght;
 } list_t;
 
-list_node_t *add_elem(list_node_t *actual, list_node_t *elem);
-list_node_t *remove_elem(list_node_t *elem);
+// CREATE LIST
+list_t *create_list(void);
+list_node_t *create_node(void *data);
+
+// MANAGE LINKED LIST
+list_node_t *add_node(list_node_t *actual, list_node_t *node);
+list_node_t *remove_node(list_node_t *node);
+
+// DESTROY LIST
+void destroy_list(list_t *list);
+void destroy_node(list_node_t *node);
 
 #endif // LINKED_LIST_H

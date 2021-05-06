@@ -43,5 +43,4 @@ typedef struct {
 // CREATE STRUCTURE
 process_t *create_process(process_t *base_process);
 
-
 #endif // PROCESS_H
