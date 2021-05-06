@@ -9,57 +9,40 @@
 
 void display_name_and_arg(char **stock_name, char ***stock_arg)
 {
-    size_t i = 0;
-    size_t z = 0;
-
-    while (stock_arg[i] != NULL) {
+    for (size_t i = 0; stock_arg[i]; i++) {
         bprintf("%s : ", stock_name[i]);
-        while (stock_arg[i][z] != NULL) {
+        for (size_t z = 0; stock_arg[i][z]; z++) {
             bprintf("[%s]", stock_arg[i][z]);
-            z++;
         }
         bprintf("\n");
-        z = 0;
-        i++;
     }
 }
 
 void display_tr_tab(char ***tab)
 {
-    size_t i = 0;
-    size_t z = 0;
-
-    while (tab[i] != NULL) {
-        while (tab[i][z] != NULL) {
+    for (size_t i = 0; tab[i]; i++) {
+        for (size_t z = 0; tab[i][z]; z++) {
             bprintf("[%s]", tab[i][z]);
-            z++;
         }
         bprintf("\n");
-        z = 0;
-        i++;
     }
 }
 
 void display_db_tab(char **tab)
 {
-    size_t i = 0;
-
-    while (tab[i] != NULL) {
+    for (size_t i = 0; tab[i]; i++)
         bprintf("%s\n", tab[i]);
-        i++;
-    }
 }
 
 size_t count_line_buff(char *buffer, size_t adv)
 {
     size_t count_line = 0;
 
-    while (buffer[adv]) {
+    for (; buffer[adv]; adv++) {
         if (buffer[adv] == '\n')
             count_line++;
-        adv++;
     }
-    return (count_line + 1);
+    return count_line + 1;
 }
 
 int recup_all(char *buffer, size_t adv)
@@ -69,12 +52,12 @@ int recup_all(char *buffer, size_t adv)
     char ***stock_arg = malloc(sizeof(char **) * nb_line + 1);
 
     if (check_name_fonc(buffer, adv, stock_name) == -1)
-        return (1);
+        return 1;
     get_arg(buffer, adv, stock_name, stock_arg);
     display_db_tab(stock_name);
     display_tr_tab(stock_arg);
     display_name_and_arg(stock_name, stock_arg);
-    free_double_tab(stock_name);
+    bfree_array(stock_name);
     free_triple_tab(stock_arg);
-    return (0);
+    return 0;
 }

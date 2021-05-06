@@ -9,28 +9,10 @@
 
 void free_triple_tab(char ***tab)
 {
-    size_t i = 0;
-    size_t z = 0;
-
-    while (tab[i] != NULL) {
-        while (tab[i][z] != NULL) {
+    for (size_t i = 0; tab[i] != NULL; i++) {
+        for (size_t z = 0; tab[i][z] != NULL; z++)
             free(tab[i][z]);
-            z++;
-        }
         free(tab[i]);
-        z = 0;
-        i++;
-    }
-    free(tab);
-}
-
-void free_double_tab(char **tab)
-{
-    size_t i = 0;
-
-    while (tab[i] != NULL) {
-        free(tab[i]);
-        i++;
     }
     free(tab);
 }

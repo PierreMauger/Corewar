@@ -20,15 +20,11 @@ size_t check_name(char *buffer, size_t adv)
 {
     if (!bstrncmp(buffer + adv, NAME_CMD_STRING, 6))
         return 0;
-    for (size_t len = 0; buffer[adv + 1] && buffer[adv] != '\n'; adv++, len++)
-        if (len >= 128)
-            return (0);
+    for (; buffer[adv + 1] && buffer[adv] != '\n'; adv++);
     adv++;
     if (!bstrncmp(buffer + adv, COMMENT_CMD_STRING, 9))
         return 0;
-    for (size_t len = 0; buffer[adv] && buffer[adv] != '\n'; adv++, len++)
-        if (len >= 2048)
-            return (0);
+    for (; buffer[adv] && buffer[adv] != '\n'; adv++);
     for (; buffer[adv] && buffer[adv] == '\n'; adv++);
     for (; buffer[adv + 1] && buffer[adv] != '\n'; adv++);
     adv++;
