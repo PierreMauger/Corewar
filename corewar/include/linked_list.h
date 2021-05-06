@@ -23,5 +23,6 @@ typedef struct {
 } list_t;
 
 list_node_t *add_elem(list_node_t *actual, list_node_t *elem);
+list_node_t *remove_elem(list_node_t *elem);
 
 #endif // LINKED_LIST_H
