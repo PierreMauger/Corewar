@@ -10,6 +10,9 @@
 
 #include <stdio.h>
 
+#define foreach(elem, temp) \
+    for (list_node_t *temp = elem; temp; temp = temp->next)
+
 typedef struct list_node_s {
     struct list_node_s *next;
     struct list_node_s *last;
