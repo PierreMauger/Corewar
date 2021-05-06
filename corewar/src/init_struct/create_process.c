@@ -13,7 +13,9 @@ process_t *create_process(process_t *base_process)
 
     if (base_process) {
         process->coord_pc = base_process->coord_pc;
-        barray_cpy(process->reg, base_process->reg);
+        for (size_t adv = 0; adv < REG_NUMBER; adv++) {
+            process->reg[adv] = base_process->reg[adv];
+        }
     }
     return process;
 }

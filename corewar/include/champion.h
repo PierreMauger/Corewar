@@ -12,22 +12,15 @@
 
 #include "op.h"
 
+#include "linked_list.h"
 #include "process.h"
 
 // CHAMPION LIST
-typedef struct champion_s {
+typedef struct {
     size_t id;
     char *name;
     bool is_alive;
-    process_list_t *process_list;
-    struct champion_s *next;
-    struct champion_s *last;
+    list_t *process_list;
 } champion_t;
-
-typedef struct {
-    champion_t *head;
-    champion_t *tail;
-    size_t lenght;
-} champion_list_t;
 
 #endif // CHAMPION_H

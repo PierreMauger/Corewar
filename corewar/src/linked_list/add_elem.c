@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void *add_elem(void *actual, void *elem, size_t size_struct)
+void *add_elem(void *actual, void *elem)
 {
     void *temp = NULL;
 

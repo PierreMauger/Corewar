@@ -34,7 +34,7 @@ typedef struct {
 
 typedef struct {
     unsigned char memory[MEM_SIZE];
-    champion_list_t *champion;
+    list_t *champion;
     cycle_t cycle;
     size_t dump;
 } vm_t;
