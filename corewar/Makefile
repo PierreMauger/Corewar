@@ -6,7 +6,9 @@
 ##
 
 ##################### SRC #######################
-SRC				=	src/init_struct/create_process.c		\
+SRC				=	src/parsing.c			\
+					src/parsing_utils.c		\
+					src/init_struct/create_process.c		\
 					src/linked_list/add_elem.c				\
 
 SRC				+=	main.c
