@@ -7,9 +7,9 @@
 
 #include "corewar.h"
 
-void *add_elem(void *actual, void *elem)
+list_node_t *add_elem(list_node_t *actual, list_node_t *elem)
 {
-    void *temp = NULL;
+    list_node_t *temp = NULL;
 
     if (!actual || !elem)
         return NULL;
@@ -18,6 +18,6 @@ void *add_elem(void *actual, void *elem)
     elem->last = actual;
     elem->next = temp;
     if (temp)
-        temp->before = elem;
+        temp->last = elem;
     return elem;
 }
