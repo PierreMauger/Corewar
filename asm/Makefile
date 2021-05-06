@@ -7,6 +7,7 @@
 
 ##################### SRC #######################
 SRC				=	src/check_asm.c				\
+					src/check_command.c			\
 
 SRC				+=	main.c
 

@@ -25,6 +25,9 @@
 #define READ_SIZE 50
 
 size_t skip_header(char *buffer);
+size_t check_name(char *buffer, size_t adv);
 size_t check_asm(char *buffer);
+
+size_t check_command(char *buffer, size_t adv);
 
 #endif // ASM_H
