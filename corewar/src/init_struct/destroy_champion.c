@@ -7,8 +7,7 @@
 
 #include "corewar.h"
 
-void destroy_node(list_node_t *node)
+void destroy_champion(champion_t *champion)
 {
-    free(node->data);
-    free(node);
+    free(champion->name);
 }

@@ -23,4 +23,7 @@ typedef struct {
     list_t *process_list;
 } champion_t;
 
+// CREATE CHAMPION
+champion_t *create_champion(size_t id, char *name);
+
 #endif // CHAMPION_H

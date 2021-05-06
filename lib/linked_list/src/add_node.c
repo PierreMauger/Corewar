@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "corewar.h"
+#include "linked_list.h"
 
 list_node_t *add_node(list_node_t *actual, list_node_t *node)
 {

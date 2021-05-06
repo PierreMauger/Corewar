@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "corewar.h"
+#include "linked_list.h"
 
 list_t *create_list(void)
 {

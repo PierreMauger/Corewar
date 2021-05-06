@@ -9,12 +9,7 @@
 SRC				=	src/parsing.c							\
 					src/parsing_utils.c						\
 					src/init_struct/create_process.c		\
-					src/linked_list/add_node.c				\
-					src/linked_list/remove_node.c			\
-					src/linked_list/create_node.c			\
-					src/linked_list/create_list.c			\
-					src/linked_list/destroy_list.c			\
-					src/linked_list/destroy_node.c			\
+					src/init_struct/create_champion.c		\
 
 SRC				+=	main.c
 
@@ -36,7 +31,7 @@ OBJ_TEST		=	$(SRC_TEST:.c=.o)
 
 
 ##################### FLAGS #####################
-CFLAGS			=	-I include -I ../include -L ../lib/ -lblib -Wall -Wextra -W
+CFLAGS			=	-I include -I ../include -L ../lib/ -lblib -llinked_list -Wall -Wextra -W
 
 CFLAGS_TEST		=	--coverage -lcriterion
 
@@ -46,6 +41,7 @@ CFLAGS_DEBUG	=	-g
 ################## COMPILATION ##################
 $(NAME):	$(OBJ)
 	@make -C ../lib/blib
+	@make -C ../lib/linked_list
 	@(gcc $(OBJ) -o $(NAME) $(CFLAGS)) > /dev/null
 
 all:	$(NAME)
@@ -57,6 +53,7 @@ re:	fclean all
 
 clean:
 	@(make clean -C ../lib/blib) > /dev/null
+	@(make clean -C ../lib/linked_list) > /dev/null
 	@(rm -f $(OBJ)) > /dev/null
 	@find . -name "*.gcno" -delete
 	@find . -name "*.gcda" -delete
@@ -64,6 +61,7 @@ clean:
 
 fclean:	clean
 	@(make fclean -C ../lib/blib) > /dev/null
+	@(make fclean -C ../lib/linked_list) > /dev/null
 	@rm -f $(NAME)
 	@(rm -f $(NAME) $(NAME_TEST)) > /dev/null
 	@(rm -rf tests/coverage) > /dev/null

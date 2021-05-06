@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "corewar.h"
+#include "linked_list.h"
 
 list_node_t *remove_node(list_node_t *node)
 {

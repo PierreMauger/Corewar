@@ -9,6 +9,9 @@
 #define LINKED_LIST_H
 
 #include <stdio.h>
+#include <stdlib.h>
+
+#include "blib.h"
 
 #define foreach(node, temp) \
     for (temp = node; temp; temp = temp->next)
@@ -34,7 +37,7 @@ list_node_t *add_node(list_node_t *actual, list_node_t *node);
 list_node_t *remove_node(list_node_t *node);
 
 // DESTROY LIST
-void destroy_list(list_t *list);
-void destroy_node(list_node_t *node);
+void destroy_list(list_t *list, void (*destroy_data)(void *data));
+void destroy_node(list_node_t *node, void (*destroy_data)(void *data));
 
 #endif // LINKED_LIST_H
