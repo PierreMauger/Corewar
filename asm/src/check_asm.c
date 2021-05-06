@@ -42,6 +42,6 @@ size_t check_asm(char *buffer)
         return 0;
     adv = skip_header(buffer);
     adv = check_name(buffer, adv);
-    adv = check_command(buffer, adv);
+    adv = get_command(buffer, adv);
     return adv;
 }

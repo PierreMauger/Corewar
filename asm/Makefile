@@ -8,6 +8,9 @@
 ##################### SRC #######################
 SRC				=	src/check_asm.c					\
 					src/check_command.c				\
+					src/get_command_name.c			\
+					src/get_command_params.c		\
+					src/get_command.c				\
 					src/linked_list/add_elem.c		\
 					src/linked_list/remove_elem.c	\
 

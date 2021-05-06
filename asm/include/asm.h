@@ -25,15 +25,25 @@
 
 #define READ_SIZE 50
 
+    // check_asm.c
 size_t skip_header(char *buffer);
 size_t check_name(char *buffer, size_t adv);
 size_t check_asm(char *buffer);
-int recup_all(char *buffer, size_t adv);
-int check_name_fonc(char *buffer, size_t adv, char **stock_name);
-int get_arg(char *buffer, size_t adv, char **stock_name, char ***stock_arg);
-void free_triple_tab(char ***tab);
 
+    // check_command.c
 size_t check_command(char *buffer, size_t adv);
+
+    // get_command_name.c
+char *get_command_name(char *buffer, size_t adv);
+
+    // get_command_params.c
+int get_param_len(char *buffer, size_t *adv);
+char *get_one_param(char *buffer, size_t *adv);
+char **get_command_params(char *buffer, size_t adv);
+
+    // get_command.c
+list_node_t *create_elem(char *buffer, size_t adv);
+size_t get_command(char *buffer, size_t adv);
 
 typedef struct {
     char *name;
