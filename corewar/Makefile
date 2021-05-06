@@ -10,6 +10,8 @@ SRC				=	src/parsing.c							\
 					src/parsing_utils.c						\
 					src/init_struct/create_process.c		\
 					src/init_struct/create_champion.c		\
+					src/init_struct/destroy_champion.c		\
+					src/init_struct/create_vm.c				\
 
 SRC				+=	main.c
 

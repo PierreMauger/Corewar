@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <errno.h>
 
+#include "linked_list.h"
 #include "blib.h"
 #include "op.h"
 
@@ -38,6 +39,9 @@ typedef struct {
     cycle_t cycle;
     size_t dump;
 } vm_t;
+
+// CREATE VM
+vm_t *create_vm(void);
 
 // Args parsing funcs
 char **init_checking_flags(void);
