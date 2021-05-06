@@ -31,7 +31,7 @@ size_t check_name(char *buffer, size_t adv);
 size_t check_asm(char *buffer);
 
     // check_command.c
-size_t check_command(char *buffer, size_t adv);
+size_t check_command(list_t *list);
 
     // get_command_name.c
 char *get_command_name(char *buffer, size_t adv);
@@ -43,7 +43,7 @@ char **get_command_params(char *buffer, size_t adv);
 
     // get_command.c
 list_node_t *create_elem(char *buffer, size_t adv);
-size_t get_command(char *buffer, size_t adv);
+list_node_t *get_command(char *buffer, size_t adv);
 
 typedef struct {
     char *name;

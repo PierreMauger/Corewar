@@ -7,7 +7,7 @@
 
 #include "asm.h"
 
-size_t check_command(char *buffer, size_t adv)
+size_t check_command(list_t *list)
 {
-    return adv;
+    return 0;
 }

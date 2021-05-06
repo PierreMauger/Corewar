@@ -37,11 +37,13 @@ size_t check_name(char *buffer, size_t adv)
 size_t check_asm(char *buffer)
 {
     size_t adv = 0;
+    list_node_t *list = NULL;
 
     if (!buffer)
         return 0;
     adv = skip_header(buffer);
     adv = check_name(buffer, adv);
-    adv = get_command(buffer, adv);
+    list = get_command(buffer, adv);
+    //check_command(list);
     return adv;
 }

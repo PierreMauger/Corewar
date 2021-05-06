@@ -33,7 +33,7 @@ void print_elem(command_t *elem)
     bprintf("\n");
 }
 
-size_t get_command(char *buffer, size_t adv)
+list_node_t *get_command(char *buffer, size_t adv)
 {
     list_node_t *list = NULL;
     list_node_t *elem = NULL;
@@ -46,5 +46,5 @@ size_t get_command(char *buffer, size_t adv)
         add_elem(list, elem);
         for (; buffer[adv] && buffer[adv] != '\n'; adv++);
     }
-    return adv;
+    return list;
 }
