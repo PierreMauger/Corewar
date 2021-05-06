@@ -19,6 +19,7 @@
 #include <errno.h>
 
 #include "blib.h"
+#include "linked_list.h"
 
 #include "op.h"
 
@@ -33,5 +34,10 @@ int get_arg(char *buffer, size_t adv, char **stock_name, char ***stock_arg);
 void free_triple_tab(char ***tab);
 
 size_t check_command(char *buffer, size_t adv);
+
+typedef struct {
+    char *name;
+    char **params;
+} command_t;
 
 #endif // ASM_H

@@ -6,12 +6,14 @@
 ##
 
 ##################### SRC #######################
-SRC				=	src/check_asm.c				\
-					src/check_command.c			\
-					src/recup_name.c 			\
-					src/recup_arg.c				\
-					src/get_everything.c		\
-					src/free.c					\
+SRC				=	src/check_asm.c					\
+					src/check_command.c				\
+					src/recup_name.c 				\
+					src/recup_arg.c					\
+					src/get_everything.c			\
+					src/free.c						\
+					src/linked_list/add_elem.c		\
+					src/linked_list/remove_elem.c	\
 
 SRC				+=	main.c
 
@@ -33,7 +35,7 @@ OBJ_TEST		=	$(SRC_TEST:.c=.o)
 
 
 ##################### FLAGS #####################
-CFLAGS			=	-I include -I ../include -g -L ../lib/ -lblib -Wall -Wextra -W
+CFLAGS			=	-I include -I ../include -L ../lib/ -lblib -Wall -Wextra -W
 
 CFLAGS_TEST		=	--coverage -lcriterion
 
