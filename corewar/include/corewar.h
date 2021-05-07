@@ -35,7 +35,7 @@ typedef struct {
 
 typedef struct {
     unsigned char memory[MEM_SIZE];
-    list_t *champion;
+    list_t *champion_list;
     cycle_t cycle;
     size_t dump;
 } vm_t;
@@ -47,5 +47,9 @@ vm_t *create_vm(void);
 char **init_checking_flags(void);
 bool check_read_accessibility(char *str);
 int parse_args(char **av);
+
+// UPDATE VM
+void update_process(process_t *process);
+void update_champion(champion_t *champion);
 
 #endif // COREWAR_H
