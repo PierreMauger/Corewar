@@ -9,10 +9,14 @@
 
 bool check_read_accessibility(char *str)
 {
-    if (bread_file(str, 20) == NULL)
+    char *temp = NULL;
+
+    if ((temp = bread_file(str, 20)) == NULL)
         return false;
-    else
+    else {
+        free(temp);
         return true;
+    }
 }
 
 char **init_checking_flags(void)
