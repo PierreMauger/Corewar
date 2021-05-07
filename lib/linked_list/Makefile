@@ -5,9 +5,11 @@
 ## Makefile
 ##
 
-SRC		=	src/remove_node.c			\
+SRC		=	src/add_node.c				\
+			src/remove_node.c			\
 			src/create_node.c			\
 			src/create_list.c			\
+			src/add_node.c				\
 			src/destroy_list.c			\
 			src/destroy_node.c			\
 

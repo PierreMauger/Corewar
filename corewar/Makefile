@@ -6,12 +6,14 @@
 ##
 
 ##################### SRC #######################
-SRC				=	src/parsing.c							\
-					src/parsing_utils.c						\
-					src/init_struct/create_process.c		\
-					src/init_struct/create_champion.c		\
-					src/init_struct/destroy_champion.c		\
-					src/init_struct/create_vm.c				\
+SRC				=	src/parsing.c								\
+					src/parsing_utils.c							\
+					src/init_struct/create_process.c			\
+					src/init_struct/create_champion.c			\
+					src/init_struct/destroy_champion.c			\
+					src/init_struct/create_vm.c					\
+					src/update_all_process/update_process.c		\
+					src/update_all_process/update_all_process.c	\
 
 SRC				+=	main.c
 
