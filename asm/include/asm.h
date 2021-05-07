@@ -25,6 +25,11 @@
 
 #define READ_SIZE 50
 
+typedef struct {
+    char *name;
+    char **params;
+} command_t;
+
     // check_asm.c
 size_t skip_header(char *buffer);
 size_t check_name(char *buffer, size_t adv);
@@ -44,10 +49,5 @@ char **get_command_params(char *buffer, size_t adv);
     // get_command.c
 command_t *create_com(char *buffer, size_t adv);
 list_t *get_command(char *buffer, size_t adv);
-
-typedef struct {
-    char *name;
-    char **params;
-} command_t;
 
 #endif // ASM_H
