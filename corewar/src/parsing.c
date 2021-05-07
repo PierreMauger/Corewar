@@ -69,7 +69,14 @@ int get_arguments_index(char **av, char *str, int iterations)
     return 0;
 }
 
-list_t *store_arguments(char **av)
+list_t *store_champ_arguments(char **av, vm_t *vm)
 {
+    list_t *champs = create_list();
+    champion_t *tempchamp = NULL;
+    int temp = 0;
+
+    if ((temp = get_arguments_index(av, "-dump", 1)) != 0)
+        vm->dump = batoi(av[temp + 1]);
     
+    return champs;
 }
