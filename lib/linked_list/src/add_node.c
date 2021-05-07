@@ -19,5 +19,4 @@ void add_node(list_t *list, list_node_t *node)
     node->last = list->tail;
     list->tail->next = node;
     list->tail = node;
-    node->last = list;
 }
