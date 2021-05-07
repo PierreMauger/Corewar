@@ -7,6 +7,11 @@
 
 ##################### SRC #######################
 SRC				=	src/check_asm.c				\
+					src/check_command.c			\
+					src/recup_name.c 			\
+					src/recup_arg.c				\
+					src/get_everything.c		\
+					src/free.c					\
 
 SRC				+=	main.c
 
@@ -28,7 +33,7 @@ OBJ_TEST		=	$(SRC_TEST:.c=.o)
 
 
 ##################### FLAGS #####################
-CFLAGS			=	-I include -I ../include -L ../lib/ -lblib -Wall -Wextra -W
+CFLAGS			=	-I include -I ../include -g -L ../lib/ -lblib -llinked_list -Wall -Wextra -W
 
 CFLAGS_TEST		=	--coverage -lcriterion
 
@@ -38,7 +43,8 @@ CFLAGS_DEBUG	=	-g
 ################## COMPILATION ##################
 $(NAME):	$(OBJ)
 	@make -C ../lib/blib
-	@(gcc $(OBJ) -o $(NAME) $(CFLAGS)) > /dev/null
+	@make -C ../lib/linked_list
+	@(gcc $(OBJ) -o $(NAME) -g $(CFLAGS)) > /dev/null
 
 all:	$(NAME)
 
@@ -49,6 +55,7 @@ re:	fclean all
 
 clean:
 	@(make clean -C ../lib/blib) > /dev/null
+	@(make clean -C ../lib/linked_list) > /dev/null
 	@(rm -f $(OBJ)) > /dev/null
 	@find . -name "*.gcno" -delete
 	@find . -name "*.gcda" -delete
@@ -56,6 +63,7 @@ clean:
 
 fclean:	clean
 	@(make fclean -C ../lib/blib) > /dev/null
+	@(make fclean -C ../lib/linked_list) > /dev/null
 	@rm -f $(NAME)
 	@(rm -f $(NAME) $(NAME_TEST)) > /dev/null
 	@(rm -rf tests/coverage) > /dev/null

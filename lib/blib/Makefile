@@ -35,7 +35,6 @@ SRC		=	print/bfprintf/bfprint_char.c			\
 			array/badd_array.c						\
 			array/barray_len.c						\
 			array/barray_dup.c						\
-			array/barray_cpy.c						\
 			array/bremove_array.c					\
 			array/bfree_array.c						\
 			file/bread_file.c						\
