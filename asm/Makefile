@@ -34,7 +34,7 @@ OBJ_TEST		=	$(SRC_TEST:.c=.o)
 
 
 ##################### FLAGS #####################
-CFLAGS			=	-I include -I ../include -L ../lib/ -lblib -Wall -Wextra -W
+CFLAGS			=	-I include -I ../include -L ../lib/ -lblib -llinked_list -Wall -Wextra -W
 
 CFLAGS_TEST		=	--coverage -lcriterion
 
@@ -45,7 +45,7 @@ CFLAGS_DEBUG	=	-g
 $(NAME):	$(OBJ)
 	@make -C ../lib/blib
 	@make -C ../lib/linked_list
-	@(gcc $(OBJ) -o $(NAME) -g $(CFLAGS)) > /dev/null
+	@(gcc $(OBJ) -o $(NAME) $(CFLAGS)) > /dev/null
 
 all:	$(NAME)
 

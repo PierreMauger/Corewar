@@ -41,8 +41,8 @@ list_t *get_command(char *buffer, size_t adv)
     adv++;
     for (; buffer[adv]; adv++) {
         elem = create_com(buffer, adv);
-        // print_elem((command_t *)elem->data);
-        // add_elem(list, elem);
+        node = create_node((void *)elem);
+        add_node(list, node);
         for (; buffer[adv] && buffer[adv] != '\n'; adv++);
     }
     return list;
