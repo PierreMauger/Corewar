@@ -68,3 +68,8 @@ int get_arguments_index(char **av, char *str, int iterations)
     }
     return 0;
 }
+
+list_t *store_arguments(char **av)
+{
+    
+}
