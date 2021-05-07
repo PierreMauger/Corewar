@@ -51,5 +51,6 @@ int parse_args(char **av);
 // UPDATE VM
 void update_process(process_t *process);
 void update_champion(champion_t *champion);
+void update_vm(vm_t *vm);
 
 #endif // COREWAR_H
