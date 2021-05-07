@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 {
     int champ_count = 0;
     vm_t *vm = NULL;
-    
+
     if (argc == 1)
         return 84;
     if ((champ_count = parse_args(argv)) != 84)

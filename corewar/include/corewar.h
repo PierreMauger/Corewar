@@ -18,8 +18,8 @@
 #include <stdio.h>
 #include <errno.h>
 
-#include "linked_list.h"
 #include "blib.h"
+#include "linked_list.h"
 #include "op.h"
 
 #include "process.h"
@@ -52,5 +52,6 @@ list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count);
 // UPDATE VM
 void update_process(process_t *process);
 void update_champion(champion_t *champion);
+void update_vm(vm_t *vm);
 
 #endif // COREWAR_H
