@@ -47,5 +47,6 @@ vm_t *create_vm(void);
 char **init_checking_flags(void);
 bool check_read_accessibility(char *str);
 int parse_args(char **av);
+list_t *store_champ_arguments(char **av, vm_t *vm);
 
 #endif // COREWAR_H

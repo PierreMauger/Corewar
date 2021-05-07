@@ -26,4 +26,7 @@ typedef struct {
 // CREATE CHAMPION
 champion_t *create_champion(size_t id, char *name);
 
+// DESTROY CHAMP
+void destroy_champion(champion_t *champion);
+
 #endif // CHAMPION_H
