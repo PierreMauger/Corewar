@@ -10,7 +10,7 @@
 int main(int argc, char **argv)
 {
     vm_t *vm = NULL;
-    
+
     if (argc == 1)
         return 84;
     if (parse_args(argv) == 0)
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
         return 84;
     }
     vm = create_vm();
-    vm->champion = store_champ_arguments(argv, vm);
+    vm->champion_list = store_champ_arguments(argv, vm);
     printf("dump = %ld\n", vm->dump);
     free(vm);
     return 0;

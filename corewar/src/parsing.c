@@ -77,6 +77,6 @@ list_t *store_champ_arguments(char **av, vm_t *vm)
 
     if ((temp = get_arguments_index(av, "-dump", 1)) != 0)
         vm->dump = batoi(av[temp + 1]);
-    
+
     return champs;
 }
