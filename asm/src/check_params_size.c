@@ -18,19 +18,24 @@ int is_num(char *str)
 
 int is_reg(char *str)
 {
-    if (str[0] == 'r' && batoi(str + 1) <= REG_NUMBER && batoi(str + 1) > 0)
+    if (str[0] == 'r' && batoi(str + 1) <= REG_NUMBER && batoi(str + 1) > 0) {
         return 1;
+    }
     return 0;
 }
 
 int check_size(char **params, args_type_t *type)
 {
-    for (size_t i = 0; i < barray_len(params); i++) {
-        if (is_reg(params[i]) && type[i] % 2 != 1)
-            return 0;
-        if (params[i][0] == '%' && type[i] % 4 < 2)
-            return 0;
-        if (is_num(params[i]) && type[i] < 4)
+    bool check = false;
+
+    for (size_t i = 0; i < barray_len(params); i++, check = false) {
+        if (is_reg(params[i]) && type[i] % 2 != REG_SIZE)
+            check = true;
+        if (params[i][0] == '%' && type[i] % 4 >= IND_SIZE)
+            check = true;
+        if (is_num(params[i]) && type[i] >= DIR_SIZE)
+            check = true;
+        if (check == false)
             return 0;
     }
     return 1;

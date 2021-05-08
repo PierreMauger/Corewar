@@ -1,11 +1,8 @@
 /*
-** op.h for  korewar
-**
-** Made by Astek
-** Login   <astek@epitech.net>
-**
-** Started on  Mon Mar 30 11:14:31 2009 Astek
-** Last update Tue Mar 22 16:44:20 2011 Astek
+** EPITECH PROJECT, 2021
+** include corewar
+** File description:
+** op
 */
 
 #ifndef _OP_H_
@@ -41,12 +38,12 @@ typedef char args_type_t;
 #define T_LAB    8     /* LABEL */
 
 typedef struct {
-   char         *mnemonique;
-   char         nbr_args;
-   args_type_t  type[MAX_ARGS_NUMBER];
-   char         code;
-   int          nbr_cycles;
-   char         *comment;
+    char         *mnemonique;
+    char         nbr_args;
+    args_type_t  type[MAX_ARGS_NUMBER];
+    char         code;
+    int          nbr_cycles;
+    char         *comment;
 } op_t;
 
 /* size (in bytes) */
@@ -65,10 +62,10 @@ extern op_t op_tab[];
 #define COREWAR_EXEC_MAGIC 0xea83f3
 
 typedef struct {
-   int  magic;
-   char prog_name[PROG_NAME_LENGTH + 1];
-   int  prog_size;
-   char comment[COMMENT_LENGTH + 1];
+    int  magic;
+    char prog_name[PROG_NAME_LENGTH + 1];
+    int  prog_size;
+    char comment[COMMENT_LENGTH + 1];
 } header_t;
 
 /* live */
