@@ -51,9 +51,11 @@ list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count);
 bool is_id_valid(list_t *champs, int curr);
 int get_champ_index(char **av, int iterations);
 
-// UPDATE VM
+// VM LOOP
 void update_process(process_t *process);
-void update_champion(champion_t *champion);
-void update_vm(vm_t *vm);
+void check_process(process_t *process);
+
+void process_loop(champion_t *champion);
+void champion_loop(vm_t *vm);
 
 #endif // COREWAR_H
