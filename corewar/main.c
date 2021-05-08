@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 
     if (argc == 1)
         return 84;
-    if ((champ_count = parse_args(argv)) != 84)
+    if ((champ_count = parse_champ_args(argv)) != 84)
         bprintf("This is fine\n");
     else
         return 84;

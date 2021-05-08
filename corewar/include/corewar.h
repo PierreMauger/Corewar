@@ -48,6 +48,8 @@ char **init_checking_flags(void);
 bool check_read_accessibility(char *str);
 int parse_champ_args(char **av);
 list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count);
+bool is_id_valid(list_t *champs, int curr);
+int get_champ_index(char **av, int iterations);
 
 // UPDATE VM
 void update_process(process_t *process);

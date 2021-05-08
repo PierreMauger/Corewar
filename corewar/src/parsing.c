@@ -60,6 +60,8 @@ int get_arguments_index(char **av, char *str, int iterations)
 {
     int count = 0;
 
+    if (str == NULL)
+        
     for (int i = 1; av[i] != NULL; i++) {
         if (bstrcmp(av[i], str) == 0)
             count++;
@@ -82,7 +84,14 @@ list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count)
     for (int i = 0; i != champ_count; i++, curr++) {
         if ((temp = get_arguments_index(av, "-n", curr)) != 0)
             temp = batoi(av[temp + 1]);
+        else temp = curr;
+        if (is_id_valid(champs, curr) == false) {
+            destroy_list(champs, destroy_champion);
+            return NULL;
+        }
         tempchamp = create_champion(temp, NULL);
+        add_node(champs, tempchamp);
+        tempchamp = NULL;
     }
     return champs;
 }
