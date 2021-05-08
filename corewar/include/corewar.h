@@ -46,8 +46,8 @@ vm_t *create_vm(void);
 // Args parsing funcs
 char **init_checking_flags(void);
 bool check_read_accessibility(char *str);
-int parse_args(char **av);
-list_t *store_champ_arguments(char **av, vm_t *vm);
+int parse_champ_args(char **av);
+list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count);
 
 // VM LOOP
 void update_process(process_t *process);

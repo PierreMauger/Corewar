@@ -34,7 +34,7 @@ static bool check_arg_validity(char **av, int arg_index, char **flags)
         return true;
 }
 
-int parse_args(char **av)
+int parse_champ_args(char **av)
 {
     int champ_count = 0;
     bool is_valid = true;
@@ -53,7 +53,7 @@ int parse_args(char **av)
     bfree_array(flags);
     if (champ_count == 0)
         return 84;
-    return 0;
+    return champ_count;
 }
 
 int get_arguments_index(char **av, char *str, int iterations)
@@ -69,14 +69,20 @@ int get_arguments_index(char **av, char *str, int iterations)
     return 0;
 }
 
-list_t *store_champ_arguments(char **av, vm_t *vm)
+list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count)
 {
     list_t *champs = create_list();
     champion_t *tempchamp = NULL;
+    int curr = 1;
+    int id = 1;
     int temp = 0;
 
     if ((temp = get_arguments_index(av, "-dump", 1)) != 0)
         vm->dump = batoi(av[temp + 1]);
-
+    for (int i = 0; i != champ_count; i++, curr++) {
+        if ((temp = get_arguments_index(av, "-n", curr)) != 0)
+            temp = batoi(av[temp + 1]);
+        tempchamp = create_champion(temp, NULL);
+    }
     return champs;
 }
