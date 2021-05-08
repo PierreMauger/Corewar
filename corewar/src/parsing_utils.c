@@ -11,7 +11,7 @@ bool check_read_accessibility(char *str)
 {
     char *temp = NULL;
 
-    if ((temp = bread_file(str, 20)) == NULL)
+    if ((temp = bread_file(str, READ_SIZE)) == NULL)
         return false;
     else {
         free(temp);
@@ -21,21 +21,20 @@ bool check_read_accessibility(char *str)
 
 char **init_checking_flags(void)
 {
-    char **flags = binit_array_light(4);
+    char **flags = binit_array_light(FLAGS_NBR);
 
     flags[0] = bstrdup("-dump");
     flags[1] = bstrdup("-n");
     flags[2] = bstrdup("-a");
-    flags[3] = NULL;
     return flags;
 }
 
-bool is_id_valid(list_t *champs, int curr)
+bool is_id_valid(list_t *champs, size_t curr)
 {
     list_node_t *temp = NULL;
     champion_t *data = NULL;
 
-    foreach(champs, temp) {
+    foreach(champs->head, temp) {
         data = (champion_t *)temp->data;
         if (data->id == curr)
             return false;

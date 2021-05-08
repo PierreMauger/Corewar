@@ -25,6 +25,10 @@
 #include "process.h"
 #include "champion.h"
 
+// DEFINES
+#define READ_SIZE 1024
+#define FLAGS_NBR 3
+
 // VM
 typedef struct {
     size_t current_it;
@@ -48,8 +52,9 @@ char **init_checking_flags(void);
 bool check_read_accessibility(char *str);
 int parse_champ_args(char **av);
 list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count);
-bool is_id_valid(list_t *champs, int curr);
+bool is_id_valid(list_t *champs, size_t curr);
 int get_champ_index(char **av, int iterations);
+int get_arguments_index(char **av, char *str, int iterations);
 
 // VM LOOP
 void update_process(process_t *process);
