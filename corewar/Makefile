@@ -15,6 +15,7 @@ SRC				=	src/parsing.c								\
 					src/main_loop.c								\
 					src/update_process.c						\
 					src/check_champion.c						\
+					src/exec_instruc.c							\
 
 SRC				+=	main.c
 

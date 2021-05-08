@@ -7,8 +7,8 @@
 
 #include "corewar.h"
 
-void update_process(process_t *process)
+bool exec_instruct(process_t *process)
 {
-    if (process->goal_it != 0)
-        process->current_it++;
+    // EXEC FUNCT
+    return 0;
 }

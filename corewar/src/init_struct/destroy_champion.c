@@ -7,7 +7,9 @@
 
 #include "corewar.h"
 
-void destroy_champion(champion_t *champion)
+void destroy_champion(void *champion)
 {
-    free(champion->name);
+    champion_t *champion_cast = (champion_t *)champion;
+
+    free(champion_cast->name);
 }

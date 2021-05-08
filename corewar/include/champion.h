@@ -27,6 +27,9 @@ typedef struct {
 champion_t *create_champion(size_t id, char *name);
 
 // DESTROY CHAMP
-void destroy_champion(champion_t *champion);
+void destroy_champion(void *champion);
+
+// CHECK OP
+int check_op(unsigned char index_value);
 
 #endif // CHAMPION_H
