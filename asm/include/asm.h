@@ -36,7 +36,12 @@ size_t check_name(char *buffer, size_t adv);
 size_t check_asm(char *buffer);
 
     // check_command.c
+size_t get_id(char *name);
 size_t check_command(list_t *list);
+
+    // check_params_size.c
+int is_num(char *str);
+int check_size(char **params, args_type_t *type);
 
     // get_command_name.c
 char *get_command_name(char *buffer, size_t adv);

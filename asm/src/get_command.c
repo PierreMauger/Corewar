@@ -11,6 +11,12 @@ command_t *create_com(char *buffer, size_t adv)
 {
     command_t *com = malloc(sizeof(command_t));
 
+    for (size_t temp = 0; buffer[adv + temp] && buffer[adv + temp] != '\n' &&
+    buffer[adv + temp] != ' '; temp++)
+        if (buffer[adv + temp] == ':') {
+            for (; buffer[adv] && buffer[adv - 1] != ':'; adv++);
+            for (; buffer[adv] && buffer[adv] == ' '; adv++);
+        }
     com->name = get_command_name(buffer, adv);
     if (!com->name)
         return NULL;
@@ -43,6 +49,7 @@ list_t *get_command(char *buffer, size_t adv)
         elem = create_com(buffer, adv);
         node = create_node((void *)elem);
         add_node(list, node);
+        print_elem(elem);
         for (; buffer[adv] && buffer[adv] != '\n'; adv++);
     }
     return list;
