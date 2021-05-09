@@ -19,7 +19,7 @@ int check_op(unsigned char index_value)
 
 void check_process(process_t *process)
 {
-    if (process->current_it == process->goal_it) {
+    if (process->current_it != 0 && process->current_it == process->goal_it) {
         process->current_it = 0;
         process->goal_it = 0;
         // EXEC NEXT INSTRUCTION
