@@ -60,12 +60,10 @@ int get_champ_index(char **av, int iterations);
 int get_arguments_index(char **av, char *str, int iterations);
 
 // VM LOOP
-void update_process(process_t *process);
-
 void check_case(vm_t *vm, process_t *process);
 void check_iteration(vm_t *vm, process_t *process);
 
-bool exec_instruct(process_t *process);
+bool exec_instruct(vm_t *vm, process_t *process);
 
 void process_loop(vm_t *vm, champion_t *champion);
 void champion_loop(vm_t *vm);

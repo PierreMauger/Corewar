@@ -13,7 +13,6 @@ void process_loop(vm_t *vm, champion_t *champion)
     list_node_t *temp = NULL;
 
     foreach(process_list->head, temp) {
-        update_process((process_t *)temp->data);
         check_iteration(vm, (process_t *)temp->data);
     }
 }

@@ -82,7 +82,7 @@ list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count)
         return NULL;
     foreach(champs->head, tempnode) {
         tempchamp = (champion_t *)tempnode->data;
-        printf("id[] = %ld\n", tempchamp->id);
+        bprintf("id[] = %ld\n", tempchamp->id);
     }
     return champs;
 }
