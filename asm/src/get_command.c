@@ -53,12 +53,13 @@ list_t *get_command(char *buffer, size_t adv)
     list_node_t *node = NULL;
     command_t *elem = NULL;
 
-    for (; buffer[adv]; adv++) {
+    while (buffer[adv]) {
         elem = create_com(buffer, adv);
         node = create_node((void *)elem);
         add_node(list, node);
         print_elem(elem);
         for (; buffer[adv] && buffer[adv] != '\n'; adv++);
+        for (; buffer[adv] && buffer[adv] == '\n'; adv++);
     }
     return list;
 }
