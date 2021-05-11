@@ -26,3 +26,8 @@ void champion_loop(vm_t *vm)
         process_loop(vm, (champion_t *)temp->data);
     }
 }
+
+int vm_loop(vm_t *vm)
+{
+
+}

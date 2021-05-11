@@ -24,6 +24,7 @@ void check_case(vm_t *vm, process_t *process)
     process->coord_pc.y++;
     process->coord_pc.y %= IDX_MOD;
     !process->coord_pc.y ? process->coord_pc.x++ : 0;
+    process->coord_pc.x %= IDX_NBR;
     instruct_nbr = check_op(GET_CASE(vm, process));
     if (instruct_nbr != -1) {
         process->id_instruct = instruct_nbr;

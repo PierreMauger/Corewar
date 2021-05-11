@@ -68,4 +68,6 @@ bool exec_instruct(vm_t *vm, process_t *process);
 void process_loop(vm_t *vm, champion_t *champion);
 void champion_loop(vm_t *vm);
 
+int vm_loop(vm_t *vm);
+
 #endif // COREWAR_H
