@@ -16,6 +16,11 @@ champion_t *create_champion(size_t id, char *name)
     return result;
 }
 
+static int get_champ_id(list_t *champs, char **av, int curr)
+{
+    
+}
+
 int create_all_champs(list_t *champs, char **av, int champ_count)
 {
     champion_t *tempchamp = NULL;
@@ -23,7 +28,7 @@ int create_all_champs(list_t *champs, char **av, int champ_count)
     int temp = 0;
 
     for (int i = 0; i != champ_count; i++) {
-        if ((temp = get_arguments_index(av, "-n", i + 1)) != 0)
+        if ((temp = get_arguments_index(av, "-n", i + 1)) != 0) // WORK HERE
             temp = batoi(av[temp + 1]);
         else {
             temp = curr;

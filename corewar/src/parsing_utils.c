@@ -47,7 +47,7 @@ int get_champ_index(char **av, int iterations)
     int count = 0;
 
     for (int i = 1; av[i] != NULL; i++) {
-        if (av[i][0] != '-')
+        if (av[i][0] != '-' && av[i - 1][0] != '-')
             count++;
         if (count == iterations)
             return i;
