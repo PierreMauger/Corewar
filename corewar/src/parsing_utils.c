@@ -34,6 +34,8 @@ bool is_id_valid(list_t *champs, size_t curr)
     list_node_t *temp = NULL;
     champion_t *data = NULL;
 
+    if (curr <= 0)
+        return false;
     foreach(champs->head, temp) {
         data = (champion_t *)temp->data;
         if (data->id == curr)
@@ -46,6 +48,8 @@ int get_champ_index(char **av, int iterations)
 {
     int count = 0;
 
+    if (iterations == 0)
+        return 0;
     for (int i = 1; av[i] != NULL; i++) {
         if (av[i][0] != '-' && av[i - 1][0] != '-')
             count++;
