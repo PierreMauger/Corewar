@@ -63,5 +63,7 @@ int create_all_champs(list_t *champs, char **av, int champ_count)
         add_node(champs, create_node(tempchamp));
         tempchamp = NULL;
     }
+    champs->lenght = champ_count;
+    init_champs_process(champs, av);
     return 0;
 }

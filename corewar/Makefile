@@ -11,6 +11,7 @@ SRC				=	src/parsing.c								\
 					src/init_struct/create_process.c			\
 					src/init_struct/create_champion.c			\
 					src/init_struct/destroy_champion.c			\
+					src/init_struct/mem_loading.c				\
 					src/init_struct/create_vm.c					\
 					src/init_struct/destroy_vm.c				\
 					src/main_loop.c								\

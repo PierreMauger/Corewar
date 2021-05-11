@@ -9,8 +9,6 @@
 
 void destroy_vm(vm_t *vm)
 {
-    for (int i = 0; i != IDX_NBR; i++)
-        free(vm->memory[i]);
-    free(vm->memory);
+    bfree_array((char **)vm->memory);
     free(vm);
 }
