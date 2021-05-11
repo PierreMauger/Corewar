@@ -32,7 +32,7 @@ typedef struct {
 } command_t;
 
     // check_asm.c
-size_t check_asm(char *buffer);
+list_t *check_asm(char *buffer);
 
     // check_header.c
 size_t skip_head(char *buffer);
