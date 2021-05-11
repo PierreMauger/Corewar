@@ -60,6 +60,8 @@ int get_arguments_index(char **av, char *str, int iterations)
 {
     int count = 0;
 
+    if (iterations == 0)
+        return 0;
     for (int i = 1; av[i] != NULL; i++) {
         if (bstrcmp(av[i], str) == 0)
             count++;
@@ -82,7 +84,7 @@ list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count)
         return NULL;
     foreach(champs->head, tempnode) {
         tempchamp = (champion_t *)tempnode->data;
-        bprintf("id[] = %ld\n", tempchamp->id);
+        bprintf("id[] = %d\n", tempchamp->id);
     }
     return champs;
 }
