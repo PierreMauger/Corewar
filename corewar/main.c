@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     if (argc == 1)
         return 84;
     if ((champ_count = parse_champ_args(argv)) == 84) {
-        bprintf("Bad arguments.\nUSAGE\n");
+        bdprintf(2, "Bad arguments.\nUSAGE\n");
         bprintf("./corewar [-dump nbr_cycle] [[-n prog_number] ");
         bprintf("[-a load_address] prog_name] ...\n");
         return 84;

@@ -37,6 +37,10 @@ static int get_champ_id(list_t *champs, char **av, int curr)
             id = batoi(av[index - 1]);
             return return_err_check(champs, id);
         }
+        if (tempid != 0 && tempid == index - 4) {
+            id = batoi(av[index - 3]);
+            return return_err_check(champs, id);
+        }
     }
     id = 1;
     while (!is_id_valid(champs, id))
@@ -52,7 +56,7 @@ int create_all_champs(list_t *champs, char **av, int champ_count)
     for (int i = 1; i <= champ_count; i++) {
         if ((temp = get_champ_id(champs, av, i)) == -1) {
             destroy_list(champs, destroy_champion);
-            bprintf("ID error, Aborted.\n");
+            bdprintf(2, "ID error, Aborted.\n");
             return 84;
         }
         tempchamp = create_champion(temp, NULL);
