@@ -14,6 +14,7 @@ int get_param_len(char *buffer, size_t *adv)
 
     if (buffer[*adv] == ',')
         (*adv)++;
+    for (; buffer[*adv] == ' '; (*adv)++);
     compt = *adv;
     while (buffer[compt] && buffer[compt] != ' ' && buffer[compt] != '\n') {
         compt++;
@@ -34,6 +35,7 @@ char *get_one_param(char *buffer, size_t *adv)
             break;
         param[fill_tab] = buffer[*adv];
     }
+    for (; buffer[*adv] == ' '; (*adv)++);
     param[fill_tab] = '\0';
     return param;
 }
@@ -43,7 +45,7 @@ char **get_command_params(char *buffer, size_t adv)
     char **params_tab = malloc(sizeof(char *) * MAX_ARGS_NUMBER);
     int i = 0;
 
-    for (; buffer[adv] && buffer[adv] != '\n'; i++, adv++) {
+    for (; buffer[adv] && buffer[adv] != '\n'; i++) {
         params_tab[i] = get_one_param(buffer, &adv);
         if (buffer[adv] == '\n') {
             i++;
