@@ -25,8 +25,10 @@ command_t *create_com(char *buffer, size_t adv)
 {
     command_t *com = malloc(sizeof(command_t));
 
+    if (!com)
+        return NULL;
     com->var = variable_name(buffer, &adv);
-    com->name = get_command_name(buffer, adv);
+    com->name = get_command_name(buffer, &adv);
     if (!com->name)
         return NULL;
     adv += bstrlen(com->name);
@@ -53,11 +55,13 @@ list_t *get_command(char *buffer, size_t adv)
     list_node_t *node = NULL;
     command_t *elem = NULL;
 
+    if (!list)
+        return NULL;
     while (buffer[adv]) {
         elem = create_com(buffer, adv);
-        if (elem == NULL)
-            return (NULL);
         node = create_node((void *)elem);
+        if (!elem || !node)
+            return NULL;
         add_node(list, node);
         print_elem(elem);
         for (; buffer[adv] && buffer[adv] != '\n'; adv++);

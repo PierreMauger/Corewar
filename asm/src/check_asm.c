@@ -7,7 +7,7 @@
 
 #include "asm.h"
 
-size_t check_asm(char *buffer)
+list_t *check_asm(char *buffer)
 {
     size_t adv = 0;
     list_t *list = NULL;
@@ -18,9 +18,9 @@ size_t check_asm(char *buffer)
     adv = check_header(buffer, adv);
     if (adv) {
         list = get_command(buffer, adv);
-        if (list == NULL)
-            return (0);
+        if (!list)
+            return NULL;
         adv = check_command(list);
     }
-    return adv;
+    return list;
 }
