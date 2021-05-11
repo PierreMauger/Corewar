@@ -32,7 +32,7 @@ command_t *create_com(char *buffer, size_t adv)
     adv += bstrlen(com->name);
     for (; buffer[adv] && (buffer[adv] == ' ' || buffer[adv] == ':'); adv++);
     com->params = get_command_params(buffer, adv);
-    if (!com->params[0])
+    if (com->params == NULL)
         return NULL;
     return com;
 }
@@ -55,6 +55,8 @@ list_t *get_command(char *buffer, size_t adv)
 
     while (buffer[adv]) {
         elem = create_com(buffer, adv);
+        if (elem == NULL)
+            return (NULL);
         node = create_node((void *)elem);
         add_node(list, node);
         print_elem(elem);
