@@ -24,14 +24,34 @@ int is_reg(char *str)
     return 0;
 }
 
-int check_size(char **params, args_type_t *type)
+int is_var(char *str, list_t *list)
+{
+    list_node_t *temp = NULL;
+
+    foreach(list->head, temp) {
+        if (str[0] == ':' && ((command_t *)temp->data)->var &&
+        !bstrcmp(((command_t *)temp->data)->var, str + 1))
+            return 1;
+    }
+    return 0;
+}
+
+int is_ind(char *str, list_t *list)
+{
+    if (str[0] == '%' && (is_num(str + 1) || is_var(str + 1, list))) {
+        return 1;
+    }
+    return 0;
+}
+
+int check_size(char **params, args_type_t *type, list_t *list)
 {
     bool check = false;
 
     for (size_t i = 0; i < barray_len(params); i++, check = false) {
         if (is_reg(params[i]) && type[i] % 2 != REG_SIZE)
             check = true;
-        if (params[i][0] == '%' && type[i] % 4 >= IND_SIZE)
+        if (is_ind(params[i], list) && type[i] % 4 >= IND_SIZE)
             check = true;
         if (is_num(params[i]) && type[i] >= DIR_SIZE)
             check = true;

@@ -1,9 +1,10 @@
 *.o
 *.a
+*.s
 *.gcda
 *.gcno
 .vscode
 corewar/corewar
 asm/asm
 asm/test_files
-test.cor
+*.cor

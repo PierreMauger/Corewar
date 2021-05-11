@@ -47,8 +47,9 @@ typedef struct {
     size_t dump;
 } vm_t;
 
-// CREATE VM
+// VM
 vm_t *create_vm(void);
+void destroy_vm(vm_t *vm);
 
 // Args parsing funcs
 char **init_checking_flags(void);
