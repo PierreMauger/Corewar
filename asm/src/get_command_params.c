@@ -28,7 +28,7 @@ char *get_one_param(char *buffer, size_t *adv)
     size_t fill_tab = 0;
     char *param = malloc(sizeof(char) * (len + 1));
 
-    if (param == NULL)
+    if (!param)
         return (NULL);
     for (; buffer[*adv] && buffer[*adv] != ' ' && buffer[*adv] != ','
         && buffer[*adv] != '\n'; (*adv)++, fill_tab++) {
