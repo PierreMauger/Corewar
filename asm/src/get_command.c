@@ -28,7 +28,7 @@ command_t *create_com(char *buffer, size_t adv)
     if (!com)
         return NULL;
     com->var = variable_name(buffer, &adv);
-    com->name = get_command_name(buffer, adv);
+    com->name = get_command_name(buffer, &adv);
     if (!com->name)
         return NULL;
     adv += bstrlen(com->name);

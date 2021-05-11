@@ -48,7 +48,7 @@ int is_num(char *str);
 int check_size(char **params, args_type_t *type, list_t *list);
 
     // get_command_name.c
-char *get_command_name(char *buffer, size_t adv);
+char *get_command_name(char *buffer, size_t *adv);
 
     // get_command_params.c
 size_t get_param_len(char *buffer, size_t *adv);
