@@ -7,22 +7,25 @@
 
 #include "asm.h"
 
-size_t variable_name(char *buffer, size_t adv)
+char *variable_name(char *buffer, size_t *adv)
 {
-    for (size_t temp = 0; buffer[adv + temp] && buffer[adv + temp] != '\n' &&
-    buffer[adv + temp] != ' '; temp++)
-    if (buffer[adv + temp] == ':') {
-        for (; buffer[adv] && buffer[adv - 1] != ':'; adv++);
-        for (; buffer[adv] && buffer[adv] == ' '; adv++);
+    char *var = NULL;
+
+    for (size_t temp = 0; buffer[*adv + temp] && buffer[*adv + temp] != '\n' &&
+    buffer[*adv + temp] != ' '; temp++)
+    if (buffer[*adv + temp] == ':') {
+        var = bstrndup(buffer + *adv, temp);
+        for (; buffer[*adv] && buffer[*adv - 1] != ':'; (*adv)++);
+        for (; buffer[*adv] && buffer[*adv] == ' '; (*adv)++);
     }
-    return adv;
+    return var;
 }
 
 command_t *create_com(char *buffer, size_t adv)
 {
     command_t *com = malloc(sizeof(command_t));
 
-    adv = variable_name(buffer, adv);
+    com->var = variable_name(buffer, &adv);
     com->name = get_command_name(buffer, adv);
     if (!com->name)
         return NULL;
@@ -40,6 +43,7 @@ void print_elem(command_t *elem)
     for (size_t i = 0; i < barray_len(elem->params); i++) {
         bprintf("\e[35m%s \e[0m", elem->params[i]);
     }
+    bprintf("\e[31m%s\e[0m", elem->var);
     bprintf("\n");
 }
 

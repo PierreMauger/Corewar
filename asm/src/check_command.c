@@ -25,7 +25,8 @@ size_t check_command(list_t *list)
         if ((int)barray_len(((command_t *)temp->data)->params) !=
         op_tab[id].nbr_args)
             return 0;
-        if (!check_size(((command_t *)temp->data)->params, op_tab[id].type))
+        if (!check_size(((command_t *)temp->data)->params, op_tab[id].type,
+        list))
             return 0;
     }
     return 1;

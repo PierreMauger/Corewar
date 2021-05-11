@@ -28,6 +28,7 @@
 typedef struct {
     char *name;
     char **params;
+    char *var;
 } command_t;
 
     // check_asm.c
@@ -44,7 +45,7 @@ size_t check_command(list_t *list);
 
     // check_params_size.c
 int is_num(char *str);
-int check_size(char **params, args_type_t *type);
+int check_size(char **params, args_type_t *type, list_t *list);
 
     // get_command_name.c
 char *get_command_name(char *buffer, size_t adv);
