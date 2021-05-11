@@ -12,6 +12,7 @@ SRC				=	src/parsing.c								\
 					src/init_struct/create_champion.c			\
 					src/init_struct/destroy_champion.c			\
 					src/init_struct/create_vm.c					\
+					src/init_struct/destroy_vm.c				\
 					src/main_loop.c								\
 					src/check_champion.c						\
 					src/exec_instruc.c							\
