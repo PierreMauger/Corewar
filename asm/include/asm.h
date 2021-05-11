@@ -31,9 +31,12 @@ typedef struct {
 } command_t;
 
     // check_asm.c
-size_t skip_header(char *buffer);
-size_t check_name(char *buffer, size_t adv);
 size_t check_asm(char *buffer);
+
+    // check_header.c
+size_t skip_head(char *buffer);
+size_t check_name(char *buffer, size_t adv, char *param_name, int param_len);
+size_t check_header(char *buffer, size_t adv);
 
     // check_command.c
 size_t get_id(char *name);

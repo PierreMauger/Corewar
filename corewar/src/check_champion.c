@@ -14,14 +14,34 @@ int check_op(unsigned char index_value)
             return adv;
         }
     }
-    return 0;
+    return -1;
 }
 
-void check_process(process_t *process)
+void check_case(vm_t *vm, process_t *process)
 {
-    if (process->current_it == process->goal_it) {
+    int instruct_nbr = 0;
+
+    process->coord_pc.y++;
+    process->coord_pc.y %= IDX_MOD;
+    !process->coord_pc.y ? process->coord_pc.x++ : 0;
+    instruct_nbr = check_op(GET_CASE(vm, process));
+    if (instruct_nbr != -1) {
+        process->id_instruct = instruct_nbr;
+        process->goal_it = op_tab[instruct_nbr].nbr_cycles;
+    }
+}
+
+void check_iteration(vm_t *vm, process_t *process)
+{
+    if (process->goal_it == 0) {
+        check_case(vm, process);
+    }
+    else if (process->current_it == process->goal_it) {
         process->current_it = 0;
         process->goal_it = 0;
-        // EXEC NEXT INSTRUCTION
+        exec_instruct(vm ,process);
+    }
+    else {
+        process->current_it++;
     }
 }

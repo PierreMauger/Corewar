@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-bool exec_instruct(process_t *process)
+bool exec_instruct(vm_t *vm, process_t *process)
 {
     // EXEC FUNCT
     return 0;

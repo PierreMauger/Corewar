@@ -32,8 +32,13 @@ typedef enum {
 } register_name_e;
 
 typedef struct {
+    size_t x;
+    size_t y;
+} coord_t;
+
+typedef struct {
     int reg[REG_NUMBER];
-    size_t coord_pc;
+    coord_t coord_pc;
     size_t goal_it;
     size_t current_it;
     int id_instruct;

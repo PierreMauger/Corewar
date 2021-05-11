@@ -1,13 +1,13 @@
 <mxfile>
     <diagram id="sJNl7T-JgA-OTRm8y5UO" name="Page-1">
-        <mxGraphModel dx="1444" dy="798" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1960" dy="706" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="gSWYZH3rOPVy1YwnoG2c-80" value="vm_t" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
                     <mxGeometry x="1020" y="40" width="265" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="gSWYZH3rOPVy1YwnoG2c-81" value="unsigned char *memory" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="gSWYZH3rOPVy1YwnoG2c-80" vertex="1">
+                <mxCell id="gSWYZH3rOPVy1YwnoG2c-81" value="list_t *memory" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="gSWYZH3rOPVy1YwnoG2c-80" vertex="1">
                     <mxGeometry y="26" width="265" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="gSWYZH3rOPVy1YwnoG2c-82" value="list_t *champion&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="gSWYZH3rOPVy1YwnoG2c-80" vertex="1">
@@ -32,7 +32,7 @@
                     <mxGeometry x="1410" y="49" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="gSWYZH3rOPVy1YwnoG2c-94" value="cycle_t" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="720" y="250" width="300" height="130" as="geometry"/>
+                    <mxGeometry x="360" y="230" width="300" height="130" as="geometry"/>
                 </mxCell>
                 <mxCell id="gSWYZH3rOPVy1YwnoG2c-95" value="size_t current_it  (who increment to max_it)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="gSWYZH3rOPVy1YwnoG2c-94" vertex="1">
                     <mxGeometry y="26" width="300" height="26" as="geometry"/>
@@ -61,7 +61,7 @@
                 <mxCell id="gSWYZH3rOPVy1YwnoG2c-104" value="list_t *process" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="gSWYZH3rOPVy1YwnoG2c-101" vertex="1">
                     <mxGeometry y="78" width="300" height="26" as="geometry"/>
                 </mxCell>
-                <mxCell id="48" value="bool is_alive" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="gSWYZH3rOPVy1YwnoG2c-101">
+                <mxCell id="48" value="bool is_alive" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="gSWYZH3rOPVy1YwnoG2c-101" vertex="1">
                     <mxGeometry y="104" width="300" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="gSWYZH3rOPVy1YwnoG2c-109" value="process_t" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
