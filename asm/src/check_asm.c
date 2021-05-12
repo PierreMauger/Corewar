@@ -20,7 +20,8 @@ list_t *check_asm(char *buffer)
         list = get_command(buffer, adv);
         if (!list)
             return NULL;
-        adv = check_command(list);
+        if (!check_command(list))
+            return NULL;
     }
     return list;
 }

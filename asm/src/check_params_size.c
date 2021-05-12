@@ -36,7 +36,7 @@ int is_var(char *str, list_t *list)
     return 0;
 }
 
-int is_ind(char *str, list_t *list)
+int is_dir(char *str, list_t *list)
 {
     if (str[0] == '%' && (is_num(str + 1) || is_var(str + 1, list))) {
         return 1;
@@ -49,11 +49,11 @@ int check_size(char **params, args_type_t *type, list_t *list)
     bool check = false;
 
     for (size_t i = 0; i < barray_len(params); i++, check = false) {
-        if (is_reg(params[i]) && type[i] % 2 != REG_SIZE)
+        if (is_reg(params[i]) && type[i] % 2 == T_REG)
             check = true;
-        if (is_ind(params[i], list) && type[i] % 4 >= IND_SIZE)
+        if (is_dir(params[i], list) && type[i] % 4 >= T_DIR)
             check = true;
-        if (is_num(params[i]) && type[i] >= DIR_SIZE)
+        if (is_num(params[i]) && type[i] >= T_IND)
             check = true;
         if (check == false)
             return 0;
