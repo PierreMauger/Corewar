@@ -48,11 +48,11 @@ int parse_champ_args(char **av)
             champ_count++;
         }
         if (is_valid == false)
-            return 84;
+            return -1;
     }
     bfree_array(flags);
     if (champ_count == 0)
-        return 84;
+        return -1;
     return champ_count;
 }
 
@@ -78,9 +78,10 @@ list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count)
     champion_t *tempchamp = NULL;
     list_node_t *tempnode = NULL;
 
-    if ((temp = get_arguments_index(av, "-dump", 1)) != 0)
+    temp = get_arguments_index(av, "-dump", 1);
+    if (temp != 0)
         vm->dump = batoi(av[temp + 1]);
-    if (create_all_champs(champs, av, champ_count) == 84)
+    if (!champs || create_all_champs(champs, av, champ_count) == 84)
         return NULL;
     foreach(champs->head, tempnode) {
         tempchamp = (champion_t *)tempnode->data;
