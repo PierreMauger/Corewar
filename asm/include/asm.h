@@ -48,6 +48,9 @@ size_t check_command(list_t *list);
 int is_num(char *str);
 int check_size(char **params, args_type_t *type, list_t *list);
 
+    // destroy_command.c
+void destroy_command(void *com);
+
     // get_command_name.c
 char *get_command_name(char *buffer, size_t *adv);
 

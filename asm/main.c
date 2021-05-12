@@ -22,5 +22,6 @@ int main(int argc, char **argv)
         return 84;
     // write in file
     free(buffer);
+    destroy_list(list, destroy_command);
     return 0;
 }
