@@ -24,13 +24,13 @@ int is_reg(char *str)
     return 0;
 }
 
-int is_var(char *str, list_t *list)
+int is_label(char *str, list_t *list)
 {
     list_node_t *temp = NULL;
 
     foreach(list->head, temp) {
-        if (str[0] == ':' && ((command_t *)temp->data)->var &&
-        !bstrcmp(((command_t *)temp->data)->var, str + 1))
+        if (str[0] == ':' && ((command_t *)temp->data)->label &&
+        !bstrcmp(((command_t *)temp->data)->label, str + 1))
             return 1;
     }
     return 0;
@@ -38,7 +38,7 @@ int is_var(char *str, list_t *list)
 
 int is_dir(char *str, list_t *list)
 {
-    if (str[0] == '%' && (is_num(str + 1) || is_var(str + 1, list))) {
+    if (str[0] == '%' && (is_num(str + 1) || is_label(str + 1, list))) {
         return 1;
     }
     return 0;

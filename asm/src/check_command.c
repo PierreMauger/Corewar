@@ -15,6 +15,20 @@ size_t get_id(char *name)
     return 0;
 }
 
+int check_label(char *label)
+{
+    size_t j = 0;
+
+    for (size_t i = 0; label[i]; i++) {
+        for (j = 0; j < bstrlen(LABEL_CHARS); j++)
+            if (label[i] == LABEL_CHARS[j])
+                break;
+        if (j == bstrlen(LABEL_CHARS))
+            return 1;
+    }
+    return 0;
+}
+
 size_t check_command(list_t *list)
 {
     list_node_t *temp = NULL;

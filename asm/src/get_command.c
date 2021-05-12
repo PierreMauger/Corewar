@@ -7,33 +7,37 @@
 
 #include "asm.h"
 
-char *variable_name(char *buffer, size_t *adv)
+char *get_label(char *buffer, size_t *adv)
 {
-    char *var = NULL;
+    char *label = NULL;
 
-    for (size_t temp = 0; buffer[*adv + temp] && buffer[*adv + temp] != '\n' &&
+    for (; buffer[*adv] && buffer[*adv] == ' '; (*adv)++);
+    for (size_t temp = 0; buffer[*adv + temp] &&
     buffer[*adv + temp] != ' '; temp++)
     if (buffer[*adv + temp] == ':') {
-        var = bstrndup(buffer + *adv, temp);
+        label = bstrndup(buffer + *adv, temp);
         for (; buffer[*adv] && buffer[*adv - 1] != ':'; (*adv)++);
         for (; buffer[*adv] && buffer[*adv] == ' '; (*adv)++);
+        for (; buffer[*adv] && buffer[*adv] == '\n'; (*adv)++);
     }
-    return var;
+    return label;
 }
 
-command_t *create_com(char *buffer, size_t adv)
+command_t *create_com(char *buffer, size_t *adv)
 {
     command_t *com = malloc(sizeof(command_t));
 
     if (!com)
         return NULL;
-    com->var = variable_name(buffer, &adv);
-    com->name = get_command_name(buffer, &adv);
+    com->label = get_label(buffer, adv);
+    if (com->label && check_label(com->label))
+        return NULL;
+    com->name = get_command_name(buffer, adv);
     if (!com->name)
         return NULL;
-    adv += bstrlen(com->name);
-    for (; buffer[adv] && (buffer[adv] == ' ' || buffer[adv] == ':'); adv++);
-    com->params = get_command_params(buffer, adv);
+    *adv += bstrlen(com->name);
+    for (; buffer[*adv] && (buffer[*adv] == ' ' || buffer[*adv] == ':'); (*adv)++);
+    com->params = get_command_params(buffer, *adv);
     if (com->params == NULL)
         return NULL;
     return com;
@@ -45,7 +49,7 @@ void print_elem(command_t *elem)
     for (size_t i = 0; i < barray_len(elem->params); i++) {
         bprintf("\e[35m%s \e[0m", elem->params[i]);
     }
-    bprintf("\e[31m%s\e[0m", elem->var);
+    bprintf("\e[31m%s\e[0m", elem->label);
     bprintf("\n");
 }
 
@@ -58,7 +62,7 @@ list_t *get_command(char *buffer, size_t adv)
     if (!list)
         return NULL;
     while (buffer[adv]) {
-        elem = create_com(buffer, adv);
+        elem = create_com(buffer, &adv);
         node = create_node((void *)elem);
         if (!elem || !node)
             return NULL;

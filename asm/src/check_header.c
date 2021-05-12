@@ -41,8 +41,6 @@ size_t check_header(char *buffer, size_t adv)
     adv = check_name(buffer, adv, COMMENT_CMD_STRING, COMMENT_LENGTH);
     if (adv) {
         for (; buffer[adv] && buffer[adv] == '\n'; adv++);
-        for (; buffer[adv] && buffer[adv] != '\n'; adv++);
-        for (; buffer[adv] && buffer[adv] == '\n'; adv++);
     }
     return adv;
 }

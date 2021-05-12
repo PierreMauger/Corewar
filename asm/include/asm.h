@@ -28,7 +28,7 @@
 typedef struct {
     char *name;
     char **params;
-    char *var;
+    char *label;
 } command_t;
 
     // check_asm.c
@@ -41,6 +41,7 @@ size_t check_header(char *buffer, size_t adv);
 
     // check_command.c
 size_t get_id(char *name);
+int check_label(char *label);
 size_t check_command(list_t *list);
 
     // check_params_size.c
@@ -56,7 +57,7 @@ char *get_one_param(char *buffer, size_t *adv);
 char **get_command_params(char *buffer, size_t adv);
 
     // get_command.c
-command_t *create_com(char *buffer, size_t adv);
+command_t *create_com(char *buffer, size_t *adv);
 list_t *get_command(char *buffer, size_t adv);
 
 #endif // ASM_H
