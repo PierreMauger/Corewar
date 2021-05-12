@@ -8,12 +8,15 @@
 ##################### SRC #######################
 SRC				=	src/parsing.c								\
 					src/parsing_utils.c							\
-					src/init_struct/create_process.c			\
-					src/init_struct/create_champion.c			\
-					src/init_struct/destroy_champion.c			\
+					src/create_struct/create_process.c			\
+					src/create_struct/create_vm.c				\
+					src/create_struct/create_champion.c			\
+					src/init_struct/init_champion.c				\
 					src/init_struct/mem_loading.c				\
-					src/init_struct/create_vm.c					\
-					src/init_struct/destroy_vm.c				\
+					src/init_struct/init_all.c					\
+					src/destroy_struct/destroy_champion.c		\
+					src/destroy_struct/destroy_vm.c				\
+					src/destroy_struct/destroy_all.c			\
 					src/main_loop.c								\
 					src/check_champion.c						\
 					src/exec_instruc.c							\

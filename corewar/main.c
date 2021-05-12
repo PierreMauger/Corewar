@@ -7,6 +7,13 @@
 
 #include "corewar.h"
 
+void print_usage(void)
+{
+    bdprintf(STDERR_FILENO, "Bad arguments.\nUSAGE\n");
+    bprintf("./corewar [-dump nbr_cycle] [[-n prog_number] ");
+    bprintf("[-a load_address] prog_name] ...\n");
+}
+
 int main(int argc, char **argv)
 {
     int status = 0;
@@ -15,18 +22,14 @@ int main(int argc, char **argv)
 
     if (argc == 1)
         return 84;
-    if ((champ_count = parse_champ_args(argv)) == 84) {
-        bdprintf(2, "Bad arguments.\nUSAGE\n");
-        bprintf("./corewar [-dump nbr_cycle] [[-n prog_number] ");
-        bprintf("[-a load_address] prog_name] ...\n");
+    champ_count = parse_champ_args(argv);
+    if (champ_count == -1) {
+        print_usage();
         return 84;
     }
-    vm = create_vm();
-    vm->champion_list = store_champ_arguments(argv, vm, champ_count);
-    if (vm->champion_list == NULL)
+    vm = init_vm(champ_count, argv);
+    if (vm == NULL)
         status = 84;
-    if (vm->champion_list)
-        destroy_list(vm->champion_list, destroy_champion);
-    destroy_vm(vm);
+    destroy_all(vm);
     return status;
 }

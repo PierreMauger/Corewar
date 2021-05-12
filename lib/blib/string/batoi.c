@@ -11,6 +11,8 @@ static int batoi_sign(char **str)
 {
     int sign = 1;
 
+    if (!str || !*str)
+        return 0;
     for (; **str == '-' || **str == '+'; *str += sizeof(char)) {
         if (**str == '-')
             sign *= -1;
@@ -23,6 +25,8 @@ int batoi(char *str)
     int result = 0;
     int sign = batoi_sign(&str);
 
+    if (!str)
+        return 0;
     for (int i = 0; str[i] && (str[i] >= '0' && str[i] <= '9'); i++) {
         result *= 10;
         result += str[i] - '0';

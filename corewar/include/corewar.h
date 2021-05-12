@@ -47,9 +47,13 @@ typedef struct {
     size_t dump;
 } vm_t;
 
+void print_usage(void);
+
 // VM
 vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
+
+vm_t *init_vm(int champ_count, char **argv);
 
 // Args parsing funcs
 char **init_checking_flags(void);
@@ -70,5 +74,8 @@ void process_loop(vm_t *vm, champion_t *champion);
 void champion_loop(vm_t *vm);
 
 int vm_loop(vm_t *vm);
+
+// DESTROY ALL
+void destroy_all(vm_t *vm);
 
 #endif // COREWAR_H

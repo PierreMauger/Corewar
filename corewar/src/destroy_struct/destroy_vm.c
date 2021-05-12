@@ -9,6 +9,7 @@
 
 void destroy_vm(vm_t *vm)
 {
-    bfree_array((char **)vm->memory);
+    if (vm->memory)
+        bfree_array((char **)vm->memory);
     free(vm);
 }
