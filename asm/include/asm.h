@@ -46,6 +46,9 @@ size_t check_command(list_t *list);
 
     // check_params_size.c
 int is_num(char *str);
+int is_reg(char *str);
+int is_label(char *str, list_t *list);
+int is_dir(char *str, list_t *list);
 int check_size(char **params, args_type_t *type, list_t *list);
 
     // destroy_command.c
@@ -66,6 +69,9 @@ list_t *get_command(char *buffer, size_t adv);
     //write_asm.c
 char *get_chmp_filename(char *filename);
 void write_asm(char *filename, char *buffer, list_t *list);
+
+    //write_instructions.c
+void write_instructions(int fd, list_t *list);
 
     //write_name.c
 char *get_name(char *buffer, size_t *adv, size_t size);
