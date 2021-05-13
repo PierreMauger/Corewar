@@ -38,6 +38,25 @@ typedef char args_type_t;
 
 #define T_LAB    8     /* LABEL */
 
+typedef enum {
+    I_LIVE = 1,
+    I_LD,
+    I_ST,
+    I_ADD,
+    I_SUB,
+    I_AND,
+    I_OR,
+    I_XOR,
+    I_ZJMP,
+    I_LDI,
+    I_STI,
+    I_FORK,
+    I_LLD,
+    I_LLDI,
+    I_LFORK,
+    I_AFF,
+} instruct_e;
+
 typedef struct {
     char         *mnemonique;
     char         nbr_args;
