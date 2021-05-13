@@ -14,7 +14,7 @@ void update_it(vm_t *vm)
     vm->cycle.current_it++;
     vm->cycle.it_total++;
     if (vm->cycle.current_it == vm->cycle.it_max) {
-        // reset_cycle(vm);
+        vm->cycle.current_it = 0;
         vm->cycle.cycle_total++;
     }
 }
