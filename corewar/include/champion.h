@@ -20,6 +20,7 @@ typedef struct {
     size_t id;
     char *name;
     bool is_alive;
+    size_t alive_it;
     list_t *process_list;
 } champion_t;
 

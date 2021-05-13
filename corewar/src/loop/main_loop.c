@@ -41,6 +41,8 @@ int vm_loop(vm_t *vm)
 
     while (!ret) {
         ret = champion_loop(vm);
+        if (update_it(vm))
+            return 0;
     }
     return ret;
 }

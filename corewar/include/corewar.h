@@ -84,14 +84,19 @@ int i_aff(vm_t *vm, champion_t *champion, process_t *process);
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 
 // VM LOOP
-void move_process(vm_t *vm, process_t *process);
+void move_process(process_t *process);
 void check_case(vm_t *vm, process_t *process);
 int check_iteration(vm_t *vm, champion_t *champion, process_t *process);
 
 int process_loop(vm_t *vm, champion_t *champion);
 int champion_loop(vm_t *vm);
 
+int delete_dead(vm_t *vm);
+int update_it(vm_t *vm);
+
 int vm_loop(vm_t *vm);
+
+void print_memory(vm_t *vm);
 
 // DESTROY ALL
 void destroy_all(vm_t *vm);

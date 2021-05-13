@@ -25,3 +25,4 @@ int i_live(vm_t *vm, champion_t *champion, process_t *process)
     handle_nbr_live(vm, champion, process);
     return 1;
 }
+// DONT FORGET TO SET LIVE IT
