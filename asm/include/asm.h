@@ -46,6 +46,9 @@ size_t check_command(list_t *list);
 
     // check_params_size.c
 int is_num(char *str);
+int is_reg(char *str);
+int is_label(char *str, list_t *list);
+int is_dir(char *str, list_t *list);
 int check_size(char **params, args_type_t *type, list_t *list);
 
     // destroy_command.c
