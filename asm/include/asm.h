@@ -63,4 +63,12 @@ char **get_command_params(char *buffer, size_t adv);
 command_t *create_com(char *buffer, size_t *adv);
 list_t *get_command(char *buffer, size_t adv);
 
+    //write_asm.c
+char *get_chmp_filename(char *filename);
+void write_asm(char *filename, char *buffer, list_t *list);
+
+    //write_name.c
+char *get_name(char *buffer, size_t *adv, size_t size);
+void write_header(int fd, char *buffer);
+
 #endif // ASM_H

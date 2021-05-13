@@ -24,7 +24,7 @@ size_t check_name(char *buffer, size_t adv, char *param_name, int param_len)
     if (!bstrncmp(buffer + adv, param_name, bstrlen(param_name) + 1))
         return 0;
     for (size_t len = 0; buffer[adv] && buffer[adv] != '\n'; adv++, len++) {
-        if (buffer[adv] == '\"')
+        if (buffer[adv] == '"')
             quote_nbr++;
         if (len > (size_t)param_len + (bstrlen(param_name)) + 2)
             return 0;
