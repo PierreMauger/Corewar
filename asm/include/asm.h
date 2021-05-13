@@ -67,6 +67,9 @@ list_t *get_command(char *buffer, size_t adv);
 char *get_chmp_filename(char *filename);
 void write_asm(char *filename, char *buffer, list_t *list);
 
+    //write_instructions.c
+void write_instructions(int fd, list_t *list);
+
     //write_name.c
 char *get_name(char *buffer, size_t *adv, size_t size);
 void write_header(int fd, char *buffer);

@@ -9,7 +9,7 @@
 
 char *get_chmp_filename(char *filename)
 {
-    char *chmp = malloc(sizeof(char) * bstrlen(filename) + 2);
+    char *chmp = bcalloc(sizeof(char),  bstrlen(filename) + 4);
     size_t len = 0;
 
     if (!chmp)
@@ -32,7 +32,7 @@ void write_asm(char *filename, char *buffer, list_t *list)
         return;
     //write_magic_number
     write_header(fd, buffer);
-    //write_code
+    write_instructions(fd, list);
     close(fd);
-    free(filename);
+    free(chmp_filename);
 }
