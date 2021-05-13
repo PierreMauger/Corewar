@@ -20,6 +20,8 @@ SRC				=	src/parsing/parsing.c						\
 					src/loop/main_loop.c						\
 					src/loop/move_process.c						\
 					src/loop/check_process.c					\
+					src/loop/update_it.c						\
+					src/loop/print_memory.c						\
 					src/exec_instruct/exec_instruc.c			\
 					src/exec_instruct/instruct/i_live.c			\
 					src/exec_instruct/instruct/i_ld.c			\
