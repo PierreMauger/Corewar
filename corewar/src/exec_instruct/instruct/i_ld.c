@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void i_ld(vm_t *vm, champion_t *champion, process_t *process)
+int i_ld(vm_t *vm, champion_t *champion, process_t *process)
 {
 
 }

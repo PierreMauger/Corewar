@@ -64,32 +64,32 @@ bool is_id_valid(list_t *champs, size_t curr);
 int get_champ_index(char **av, int iterations);
 int get_arguments_index(char **av, char *str, int iterations);
 
+// ALL INSTRUCT
+int i_live(vm_t *vm, champion_t *champion, process_t *process);
+int i_ld(vm_t *vm, champion_t *champion, process_t *process);
+int i_st(vm_t *vm, champion_t *champion, process_t *process);
+int i_add(vm_t *vm, champion_t *champion, process_t *process);
+int i_sub(vm_t *vm, champion_t *champion, process_t *process);
+int i_and(vm_t *vm, champion_t *champion, process_t *process);
+int i_or(vm_t *vm, champion_t *champion, process_t *process);
+int i_xor(vm_t *vm, champion_t *champion, process_t *process);
+int i_zjmp(vm_t *vm, champion_t *champion, process_t *process);
+int i_ldi(vm_t *vm, champion_t *champion, process_t *process);
+int i_sti(vm_t *vm, champion_t *champion, process_t *process);
+int i_fork(vm_t *vm, champion_t *champion, process_t *process);
+int i_lld(vm_t *vm, champion_t *champion, process_t *process);
+int i_lldi(vm_t *vm, champion_t *champion, process_t *process);
+int i_lfork(vm_t *vm, champion_t *champion, process_t *process);
+int i_aff(vm_t *vm, champion_t *champion, process_t *process);
+int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
+
 // VM LOOP
 void move_process(vm_t *vm, process_t *process);
 void check_case(vm_t *vm, process_t *process);
-void check_iteration(vm_t *vm, champion_t *champion, process_t *process);
+int check_iteration(vm_t *vm, champion_t *champion, process_t *process);
 
-// ALL INSTRUCT
-void i_live(vm_t *vm, champion_t *champion, process_t *process);
-void i_ld(vm_t *vm, champion_t *champion, process_t *process);
-void i_st(vm_t *vm, champion_t *champion, process_t *process);
-void i_add(vm_t *vm, champion_t *champion, process_t *process);
-void i_sub(vm_t *vm, champion_t *champion, process_t *process);
-void i_and(vm_t *vm, champion_t *champion, process_t *process);
-void i_or(vm_t *vm, champion_t *champion, process_t *process);
-void i_xor(vm_t *vm, champion_t *champion, process_t *process);
-void i_zjmp(vm_t *vm, champion_t *champion, process_t *process);
-void i_ldi(vm_t *vm, champion_t *champion, process_t *process);
-void i_sti(vm_t *vm, champion_t *champion, process_t *process);
-void i_fork(vm_t *vm, champion_t *champion, process_t *process);
-void i_lld(vm_t *vm, champion_t *champion, process_t *process);
-void i_lldi(vm_t *vm, champion_t *champion, process_t *process);
-void i_lfork(vm_t *vm, champion_t *champion, process_t *process);
-void i_aff(vm_t *vm, champion_t *champion, process_t *process);
-void exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
-
-void process_loop(vm_t *vm, champion_t *champion);
-void champion_loop(vm_t *vm);
+int process_loop(vm_t *vm, champion_t *champion);
+int champion_loop(vm_t *vm);
 
 int vm_loop(vm_t *vm);
 

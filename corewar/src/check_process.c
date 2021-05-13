@@ -29,17 +29,20 @@ void check_case(vm_t *vm, process_t *process)
     else move_process(vm, process);
 }
 
-void check_iteration(vm_t *vm, champion_t *champion, process_t *process)
+int check_iteration(vm_t *vm, champion_t *champion, process_t *process)
 {
+    int ret = 0;
+
     if (process->goal_it == 0) {
         check_case(vm, process);
     }
     else if (process->current_it == process->goal_it) {
         process->current_it = 0;
         process->goal_it = 0;
-        exec_instruct(vm, champion, process);
+        ret = exec_instruct(vm, champion, process);
     }
     else {
         process->current_it++;
     }
+    return ret;
 }

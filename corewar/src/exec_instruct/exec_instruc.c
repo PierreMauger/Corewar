@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-static const void(*instruct[])(vm_t *, champion_t *, process_t *) = {
+static int (*instruct[])(vm_t *, champion_t *, process_t *) = {
     i_live,
     i_ld,
     i_st,
@@ -26,7 +26,7 @@ static const void(*instruct[])(vm_t *, champion_t *, process_t *) = {
     i_aff,
 };
 
-void exec_instruct(vm_t *vm, champion_t *champion, process_t *process)
+int exec_instruct(vm_t *vm, champion_t *champion, process_t *process)
 {
-    instruct[process->id_instruct](vm, champion, process);
+    return instruct[process->id_instruct](vm, champion, process);
 }

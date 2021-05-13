@@ -7,27 +7,40 @@
 
 #include "corewar.h"
 
-void process_loop(vm_t *vm, champion_t *champion)
+int process_loop(vm_t *vm, champion_t *champion)
 {
     list_t *process_list = champion->process_list;
     list_node_t *temp = NULL;
+    int ret = 0;
 
     foreach(process_list->head, temp) {
-        check_iteration(vm, champion, (process_t *)temp->data);
+        ret = check_iteration(vm, champion, (process_t *)temp->data);
+        if (ret)
+            return ret;
     }
+    return 0;
 }
 
-void champion_loop(vm_t *vm)
+int champion_loop(vm_t *vm)
 {
     list_t *champion_list = vm->champion_list;
     list_node_t *temp = NULL;
+    int ret = 0;
 
     foreach(champion_list->head, temp) {
-        process_loop(vm, (champion_t *)temp->data);
+        ret = process_loop(vm, (champion_t *)temp->data);
+        if (ret)
+            return ret;
     }
+    return 0;
 }
 
 int vm_loop(vm_t *vm)
 {
-    return 0;
+    int ret = 0;
+
+    while (!ret) {
+        ret = champion_loop(vm);
+    }
+    return ret;
 }

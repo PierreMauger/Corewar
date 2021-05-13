@@ -11,7 +11,8 @@ bool check_read_accessibility(char *str)
 {
     char *temp = NULL;
 
-    if ((temp = bread_file(str, READ_SIZE)) == NULL)
+    temp = bread_file(str, READ_SIZE);
+    if (temp == NULL)
         return false;
     else {
         free(temp);

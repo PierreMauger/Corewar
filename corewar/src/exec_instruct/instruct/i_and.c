@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void i_and(vm_t *vm, champion_t *champion, process_t *process)
+int i_and(vm_t *vm, champion_t *champion, process_t *process)
 {
 
 }
