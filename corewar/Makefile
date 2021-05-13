@@ -18,7 +18,8 @@ SRC				=	src/parsing.c								\
 					src/destroy_struct/destroy_vm.c				\
 					src/destroy_struct/destroy_all.c			\
 					src/main_loop.c								\
-					src/check_champion.c						\
+					src/move_process.c							\
+					src/check_process.c							\
 					src/exec_instruct/exec_instruc.c			\
 					src/exec_instruct/instruct/i_live.c			\
 					src/exec_instruct/instruct/i_ld.c			\
