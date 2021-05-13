@@ -20,8 +20,8 @@ void init_champs_process(list_t *champs, char **av)
         champ_cast->process_list = create_list();
         first_process = create_process(NULL);
         res = ((float)i / (float)champs->lenght);
-        first_process->coord_pc.x = (IDX_NBR * IDX_MOD) * res;
-        first_process->coord_pc.y = 0;
+        first_process->coord_pc.y = IDX_NBR * res;
+        first_process->coord_pc.x = 0;
         bprintf("LOAD_ADRESS:%d\n", first_process->coord_pc.x);
         add_node(champ_cast->process_list, create_node(first_process));
         first_process = NULL;
