@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-static const void(*instruct[])(vm_t *, champion_t *, process_t *) = {
+static void(*instruct[])(vm_t *, champion_t *, process_t *) = {
     i_live,
     i_ld,
     i_st,
