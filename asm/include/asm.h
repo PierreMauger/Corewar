@@ -63,4 +63,7 @@ char **get_command_params(char *buffer, size_t adv);
 command_t *create_com(char *buffer, size_t *adv);
 list_t *get_command(char *buffer, size_t adv);
 
+    //write_asm.c
+void write_asm(char *filename, char *buffer, list_t *list);
+
 #endif // ASM_H

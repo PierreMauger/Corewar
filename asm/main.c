@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     list = check_asm(buffer);
     if (!list)
         return 84;
-    // write in file
+    write_asm(argv[1], buffer, list);
     free(buffer);
     destroy_list(list, destroy_command);
     return 0;

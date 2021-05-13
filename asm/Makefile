@@ -14,6 +14,7 @@ SRC				=	src/check_asm.c					\
 					src/get_command_name.c			\
 					src/get_command_params.c		\
 					src/get_command.c				\
+					src/write_asm.c					\
 
 SRC				+=	main.c
 
