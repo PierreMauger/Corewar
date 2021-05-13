@@ -32,7 +32,7 @@ void check_case(vm_t *vm, process_t *process)
     }
 }
 
-void check_iteration(vm_t *vm, process_t *process)
+void check_iteration(vm_t *vm, champion_t *champion, process_t *process)
 {
     if (process->goal_it == 0) {
         check_case(vm, process);
@@ -40,7 +40,7 @@ void check_iteration(vm_t *vm, process_t *process)
     else if (process->current_it == process->goal_it) {
         process->current_it = 0;
         process->goal_it = 0;
-        exec_instruct(vm ,process);
+        exec_instruct(vm, champion, process);
     }
     else {
         process->current_it++;

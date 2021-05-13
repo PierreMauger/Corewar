@@ -19,7 +19,23 @@ SRC				=	src/parsing.c								\
 					src/destroy_struct/destroy_all.c			\
 					src/main_loop.c								\
 					src/check_champion.c						\
-					src/exec_instruc.c							\
+					src/exec_instruct/exec_instruc.c			\
+					src/exec_instruct/instruct/i_live.c			\
+					src/exec_instruct/instruct/i_ld.c			\
+					src/exec_instruct/instruct/i_st.c			\
+					src/exec_instruct/instruct/i_add.c			\
+					src/exec_instruct/instruct/i_sub.c			\
+					src/exec_instruct/instruct/i_and.c			\
+					src/exec_instruct/instruct/i_or.c			\
+					src/exec_instruct/instruct/i_xor.c			\
+					src/exec_instruct/instruct/i_zjmp.c			\
+					src/exec_instruct/instruct/i_ldi.c			\
+					src/exec_instruct/instruct/i_sti.c			\
+					src/exec_instruct/instruct/i_fork.c			\
+					src/exec_instruct/instruct/i_lld.c			\
+					src/exec_instruct/instruct/i_lldi.c			\
+					src/exec_instruct/instruct/i_lfork.c		\
+					src/exec_instruct/instruct/i_aff.c			\
 
 SRC				+=	main.c
 
