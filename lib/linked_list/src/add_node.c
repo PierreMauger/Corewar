@@ -11,6 +11,7 @@ void add_node(list_t *list, list_node_t *node)
 {
     if (!node || !list)
         return;
+    list->lenght++;
     if (!list->tail) {
         list->head = node;
         list->tail = node;

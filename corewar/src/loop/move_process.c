@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void move_process(vm_t *vm, process_t *process)
+void move_process(process_t *process)
 {
     process->coord_pc.y++;
     process->coord_pc.y %= IDX_MOD;

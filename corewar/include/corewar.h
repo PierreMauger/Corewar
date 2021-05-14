@@ -32,6 +32,8 @@
 #define GET_CASE(vm, process) \
     vm->memory[process->coord_pc.x][process->coord_pc.y]
 
+#define GET_ACT_CASE(vm, x, y) vm->memory[x][y]
+
 // VM
 typedef struct {
     size_t current_it;
@@ -45,6 +47,7 @@ typedef struct {
     list_t *champion_list;
     cycle_t cycle;
     size_t dump;
+    bool carry;
 } vm_t;
 
 void print_usage(void);
@@ -83,15 +86,23 @@ int i_lfork(vm_t *vm, champion_t *champion, process_t *process);
 int i_aff(vm_t *vm, champion_t *champion, process_t *process);
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 
+unsigned int get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
+void increase_coord(process_t *process, size_t increase);
+
 // VM LOOP
-void move_process(vm_t *vm, process_t *process);
+void move_process(process_t *process);
 void check_case(vm_t *vm, process_t *process);
 int check_iteration(vm_t *vm, champion_t *champion, process_t *process);
 
 int process_loop(vm_t *vm, champion_t *champion);
 int champion_loop(vm_t *vm);
 
+int delete_dead(vm_t *vm);
+int update_it(vm_t *vm);
+
 int vm_loop(vm_t *vm);
+
+void print_memory(vm_t *vm);
 
 // DESTROY ALL
 void destroy_all(vm_t *vm);

@@ -26,7 +26,7 @@ void check_case(vm_t *vm, process_t *process)
         process->id_instruct = instruct_nbr;
         process->goal_it = op_tab[instruct_nbr].nbr_cycles;
     }
-    else move_process(vm, process);
+    else move_process(process);
 }
 
 int check_iteration(vm_t *vm, champion_t *champion, process_t *process)

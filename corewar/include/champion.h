@@ -17,9 +17,10 @@
 
 // CHAMPION LIST
 typedef struct {
-    size_t id;
+    unsigned int id;
     char *name;
     bool is_alive;
+    size_t alive_it;
     list_t *process_list;
 } champion_t;
 

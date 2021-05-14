@@ -11,6 +11,7 @@ void remove_node(list_t *list, list_node_t *node)
 {
     if (!node || !list)
         return;
+    list->lenght--;
     if (node->last)
         node->last->next = node->next;
     else list->head = node->next;
