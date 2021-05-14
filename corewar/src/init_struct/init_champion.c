@@ -57,6 +57,7 @@ int create_all_champs(list_t *champs, char **av, int champ_count)
         tempchamp = NULL;
     }
     champs->lenght = champ_count;
-    init_champs_process(champs, av);
+    if (init_champs_process(champs, av) == 84)
+        return 84;
     return 0;
 }

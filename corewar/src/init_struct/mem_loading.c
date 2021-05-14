@@ -7,7 +7,23 @@
 
 #include "corewar.h"
 
-void init_champs_process(list_t *champs, char **av)
+static size_t set_y_axis(char **av, int i, float res)
+{
+    int temp = 0;
+    int index = 0;
+    index = get_champ_index(av, i + 1);
+    if (bstrcmp("-a", av[index - 2]) == 0) {
+        temp = batoi(av[index - 1]);
+        if (temp > 6144)
+            return -1;
+        else
+            return temp / 512;
+    }
+    else
+        return IDX_NBR * res;
+}
+
+int init_champs_process(list_t *champs, char **av)
 {
     int i = 0;
     float res = 0.f;
@@ -20,11 +36,14 @@ void init_champs_process(list_t *champs, char **av)
         champ_cast->process_list = create_list();
         first_process = create_process(NULL);
         res = ((float)i / (float)champs->lenght);
-        first_process->coord_pc.y = IDX_NBR * res;
+        first_process->coord_pc.y = set_y_axis(av, i, res);
+        if (first_process->coord_pc.y == -1)
+            return 84;
         first_process->coord_pc.x = 0;
         bprintf("LOAD_ADRESS:%d\n", first_process->coord_pc.x);
         add_node(champ_cast->process_list, create_node(first_process));
         first_process = NULL;
         i++;
     }
+    return 0;
 }
