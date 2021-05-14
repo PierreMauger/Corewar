@@ -7,21 +7,6 @@
 
 #include "asm.h"
 
-int swap_endian_4(int val)
-{
-    return (((val) & 0xff000000) >> 24) |
-           (((val) & 0x00ff0000) >>  8) |
-           (((val) & 0x0000ff00) <<  8) |
-           (((val) & 0x000000ff) << 24);
-}
-
-int swap_endian_2(int val)
-{
-    return (((val) & 0xff00) >>  8) |
-           (((val) & 0x00ff) <<  8);
-}
-
-
 void write_dir(int fd, char *param, size_t name_id, list_t *list)
 {
     int res = batoi(param);
@@ -44,6 +29,8 @@ void write_params(int fd, command_t *com, list_t *list)
 {
     int res = 0;
 
+    if (barray_len(com->params) == 1)
+        write_info(com);
     for (size_t i = 0; i < barray_len(com->params); i++) {
         if (is_reg(com->params[i]))
             bdprintf(fd, "%c", (char)batoi(com->params[i] + 1));
