@@ -39,6 +39,7 @@ SRC				=	src/parsing/parsing.c						\
 					src/exec_instruct/instruct/i_lldi.c			\
 					src/exec_instruct/instruct/i_lfork.c		\
 					src/exec_instruct/instruct/i_aff.c			\
+					src/exec_instruct/get_param.c				\
 
 SRC				+=	main.c
 

@@ -32,6 +32,8 @@
 #define GET_CASE(vm, process) \
     vm->memory[process->coord_pc.x][process->coord_pc.y]
 
+#define GET_ACT_CASE(vm, x, y) vm->memory[x][y]
+
 // VM
 typedef struct {
     size_t current_it;
@@ -82,6 +84,9 @@ int i_lldi(vm_t *vm, champion_t *champion, process_t *process);
 int i_lfork(vm_t *vm, champion_t *champion, process_t *process);
 int i_aff(vm_t *vm, champion_t *champion, process_t *process);
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
+
+unsigned int get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
+void increase_coord(process_t *process, size_t increase);
 
 // VM LOOP
 void move_process(process_t *process);
