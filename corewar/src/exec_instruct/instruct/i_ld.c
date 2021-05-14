@@ -35,6 +35,3 @@ int i_ld(vm_t *vm, champion_t *champion, process_t *process)
         ind_ld(vm, champion, process);
     }
 }
-
-11 01 00 00
-10 01 00 00
