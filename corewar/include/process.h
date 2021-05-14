@@ -42,7 +42,6 @@ typedef struct {
     size_t goal_it;
     size_t current_it;
     int id_instruct;
-    bool carry;
 } process_t;
 
 // CREATE STRUCTURE

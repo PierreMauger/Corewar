@@ -14,9 +14,10 @@ unsigned int get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get)
 
     for (size_t i = 0; i < size_to_get; i++) {
         coord_act++;
-        if (coord_act == IDX_MOD) {
-            coord_act = 0;
+        if (coord_act >= IDX_MOD) {
+            coord_act %= IDX_MOD;
             x++;
+            x %= IDX_NBR;
         }
         nbr_mem |= GET_ACT_CASE(vm, x, coord_act);
     }
