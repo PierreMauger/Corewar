@@ -31,6 +31,9 @@
 
 typedef char args_type_t;
 
+#define T_ID     1
+#define T_INFO   1
+
 #define T_REG    1     /* register */
 #define T_DIR    2     /* direct  (ld  #1,r1  put 1 into r1) */
 #define T_IND    4     /* indirect always relative */
@@ -71,10 +74,6 @@ typedef struct {
 #define IND_SIZE    2
 #define DIR_SIZE    4
 #define REG_SIZE    DIR_SIZE
-
-#define BIT_REG     0b01
-#define BIT_DIR     0b10
-#define BIT_IND     0b11
 
 /* op_tab */
 extern op_t op_tab[];
