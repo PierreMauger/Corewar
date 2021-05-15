@@ -29,8 +29,8 @@ void write_params(int fd, command_t *com, list_t *list)
 {
     int res = 0;
 
-    if (barray_len(com->params) == 1)
-        write_info(com);
+    if (barray_len(com->params) != 1)
+        write_info(fd, com, list);
     for (size_t i = 0; i < barray_len(com->params); i++) {
         if (is_reg(com->params[i]))
             bdprintf(fd, "%c", (char)batoi(com->params[i] + 1));

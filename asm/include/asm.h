@@ -75,7 +75,7 @@ char *get_chmp_filename(char *filename);
 void write_asm(char *filename, char *buffer, list_t *list);
 
     // write_info.c
-void write_info(command_t *com);
+void write_info(int fd, command_t *com, list_t *list);
 
     // write_instructions.c
 void write_instructions(int fd, list_t *list);
