@@ -83,5 +83,6 @@ void write_instructions(int fd, list_t *list);
     // write_name.c
 char *get_name(char *buffer, size_t *adv, size_t size);
 void write_header(int fd, char *buffer);
+void write_magic_number(int fd);
 
 #endif // ASM_H
