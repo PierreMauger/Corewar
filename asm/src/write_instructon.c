@@ -7,11 +7,12 @@
 
 #include "asm.h"
 
-void write_dir(int fd, char *param, size_t name_id, list_t *list)
+void write_dir(int fd, command_t *com, size_t i, list_t *list)
 {
-    int res = batoi(param);
+    int res = batoi(com->params[i] + 1);
+    int name_id = get_id(com->name);
 
-    if (is_num(param)) {
+    if (is_num(com->params[i] + 1)) {
         if (name_id > 9 && name_id < 13) {
             res = swap_endian_2(res);
             write(fd, &res, 2);
@@ -21,8 +22,8 @@ void write_dir(int fd, char *param, size_t name_id, list_t *list)
             write(fd, &res, 4);
         }
     }
-    if (is_label(param, list))
-        write(fd, "\0\0", 2);
+    if (is_label(com->params[i] + 1, list))
+        write_label(fd, com, i, list);
 }
 
 void write_params(int fd, command_t *com, list_t *list)
@@ -32,15 +33,17 @@ void write_params(int fd, command_t *com, list_t *list)
     if (barray_len(com->params) != 1)
         write_info(fd, com, list);
     for (size_t i = 0; i < barray_len(com->params); i++) {
-        if (is_reg(com->params[i]))
-            bdprintf(fd, "%c", (char)batoi(com->params[i] + 1));
+        if (is_reg(com->params[i])) {
+            res = batoi(com->params[i] + 1);
+            write(fd, &res, 1);
+        }
         if (is_num(com->params[i])) {
             res = batoi(com->params[i]);
             res = swap_endian_2(res);
             write(fd, &res, 2);
         }
         if (is_dir(com->params[i], list))
-            write_dir(fd, com->params[i] + 1, get_id(com->name), list);
+            write_dir(fd, com, i, list);
     }
 }
 

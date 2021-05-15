@@ -18,7 +18,9 @@ SRC				=	src/check_asm.c					\
 					src/write_asm.c					\
 					src/write_info.c				\
 					src/write_instructon.c			\
+					src/write_label.c				\
 					src/write_name.c				\
+					src/get_size.c					\
 
 SRC				+=	main.c
 

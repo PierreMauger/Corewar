@@ -78,10 +78,21 @@ void write_asm(char *filename, char *buffer, list_t *list);
 void write_info(int fd, command_t *com, list_t *list);
 
     // write_instructions.c
+void write_dir(int fd, command_t *com, size_t i, list_t *list);
+void write_params(int fd, command_t *com, list_t *list);
 void write_instructions(int fd, list_t *list);
+
+    // write_label.c
+int get_com_pos(command_t *com, size_t id, list_t *list);
+int get_label_pos(char *label, list_t *list);
+void write_label(int fd, command_t *com, size_t i, list_t *list);
 
     // write_name.c
 char *get_name(char *buffer, size_t *adv, size_t size);
 void write_header(int fd, char *buffer);
+
+    // get_size.c
+int get_size_dir(char *param, list_t *list, size_t name_id);
+int get_size(char *param, list_t *list, size_t name_id);
 
 #endif // ASM_H
