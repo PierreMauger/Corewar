@@ -67,7 +67,6 @@ list_t *get_command(char *buffer, size_t adv)
         if (!elem || !node)
             return NULL;
         add_node(list, node);
-        print_elem(elem);
         for (; buffer[adv] && buffer[adv] != '\n'; adv++);
         for (; buffer[adv] && buffer[adv] == '\n'; adv++);
     }
