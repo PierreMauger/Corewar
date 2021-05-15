@@ -8,9 +8,10 @@
 #ifndef _OP_H_
 #define _OP_H_
 
-#define MEM_SIZE                (6*1024)
-#define IDX_MOD                 512   /* modulo of the index < */
-#define IDX_NBR                 12    /* nbr of index < */
+#define MEM_SIZE                (52*32)
+#define MEM_SIZE_LOL                (6*1024)
+#define IDX_MOD                 32   /* modulo of the index < */
+#define IDX_NBR                 52    /* nbr of index < */
 #define MAX_ARGS_NUMBER         4     /* this may not be changed 2^*IND_SIZE */
 
 #define COMMENT_CHAR            '#'
@@ -30,6 +31,9 @@
 /* ** */
 
 typedef char args_type_t;
+
+#define T_ID     1
+#define T_INFO   1
 
 #define T_REG    1     /* register */
 #define T_DIR    2     /* direct  (ld  #1,r1  put 1 into r1) */
@@ -71,10 +75,6 @@ typedef struct {
 #define IND_SIZE    2
 #define DIR_SIZE    4
 #define REG_SIZE    DIR_SIZE
-
-#define BIT_REG     0b01
-#define BIT_DIR     0b10
-#define BIT_IND     0b11
 
 /* op_tab */
 extern op_t op_tab[];

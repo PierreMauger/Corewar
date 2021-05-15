@@ -29,6 +29,10 @@
 #define READ_SIZE 1024
 #define FLAGS_NBR 3
 
+#define HEXA_BASE "0123456789abcdef"
+
+#define BYTES_MOD 32
+
 #define GET_CASE(vm, process) \
     vm->memory[process->coord_pc.x][process->coord_pc.y]
 
@@ -102,6 +106,7 @@ int update_it(vm_t *vm);
 
 int vm_loop(vm_t *vm);
 
+void print_all(vm_t *vm);
 void print_memory(vm_t *vm);
 
 // DESTROY ALL
