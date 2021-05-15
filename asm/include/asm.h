@@ -66,15 +66,23 @@ char **get_command_params(char *buffer, size_t adv);
 command_t *create_com(char *buffer, size_t *adv);
 list_t *get_command(char *buffer, size_t adv);
 
-    //write_asm.c
+    // swap_endian.c
+int swap_endian_4(int val);
+int swap_endian_2(int val);
+
+    // write_asm.c
 char *get_chmp_filename(char *filename);
 void write_asm(char *filename, char *buffer, list_t *list);
 
-    //write_instructions.c
+    // write_info.c
+void write_info(int fd, command_t *com, list_t *list);
+
+    // write_instructions.c
 void write_instructions(int fd, list_t *list);
 
-    //write_name.c
+    // write_name.c
 char *get_name(char *buffer, size_t *adv, size_t size);
 void write_header(int fd, char *buffer);
+void write_magic_number(int fd);
 
 #endif // ASM_H

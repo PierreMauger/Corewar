@@ -7,6 +7,19 @@
 
 #include "asm.h"
 
+void write_magic_number(int fd)
+{
+    char a = 234;
+    char b = 131;
+    char c = 243;
+    char d = 0;
+
+    write(fd, &d, 1);
+    write(fd, &a, 1);
+    write(fd, &b, 1);
+    write(fd, &c, 1);
+}
+
 char *get_name(char *buffer, size_t *adv, size_t size)
 {
     char *name = bcalloc(sizeof(char), size);
