@@ -43,6 +43,7 @@ int vm_loop(vm_t *vm)
         ret = champion_loop(vm);
         if (update_it(vm))
             return 0;
+        print_memory(vm);
     }
     return ret;
 }

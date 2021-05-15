@@ -29,6 +29,7 @@ SRC		=	print/bfprintf/bfprint_char.c			\
 			string/bstrncpy.c						\
 			string/brevstr.c						\
 			string/bitoa.c							\
+			string/bitoa_base.c						\
 			string/batoi.c							\
 			array/binit_array.c						\
 			array/bstr_array.c						\

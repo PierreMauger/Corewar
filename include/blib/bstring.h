@@ -31,6 +31,7 @@ char *bstrncpy(char *dest, char *src, size_t n);
 char *brevstr(char *src);
 
 char *bitoa(int nbr);
+char *bitoa_base(int nbr, char *base);
 int batoi(char *str);
 
 #endif // BSTRING_H

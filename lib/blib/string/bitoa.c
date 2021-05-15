@@ -23,7 +23,7 @@ static int get_int_size(int nbr)
 char *bitoa(int nbr)
 {
     int len = get_int_size(nbr);
-    char *str = malloc(sizeof(char) * len + 1);
+    char *str = bcalloc(sizeof(char), len + 1);
     int i = 0;
 
     if (!str)
@@ -37,6 +37,5 @@ char *bitoa(int nbr)
         nbr /= 10;
         str[i] = j + '0';
     }
-    str[len] = '\0';
     return brevstr(str);
 }
