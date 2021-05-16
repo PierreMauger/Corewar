@@ -17,17 +17,10 @@ void print_usage(void)
 int main(int argc, char **argv)
 {
     int status = 0;
-    int champ_count = 0;
     vm_t *vm = NULL;
 
     if (argc == 1)
         return 84;
-    champ_count = parse_champ_args(argv);
-    if (champ_count == -1) {
-        print_usage();
-        return 84;
-    }
-    vm = init_vm(champ_count, argv);
     if (vm == NULL)
         status = 84;
     else status = vm_loop(vm);
