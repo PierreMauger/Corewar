@@ -11,13 +11,15 @@ char *get_label(char *buffer, size_t *adv)
 {
     char *label = NULL;
 
-    for (; buffer[*adv] && buffer[*adv] == ' '; (*adv)++);
+    for (; buffer[*adv] == ' ' || buffer[*adv] == ','
+        || buffer[*adv] == '\t'; (*adv)++);
     for (size_t temp = 0; buffer[*adv + temp] &&
     buffer[*adv + temp] != ' '; temp++)
     if (buffer[*adv + temp] == ':') {
         label = bstrndup(buffer + *adv, temp);
         for (; buffer[*adv] && buffer[*adv - 1] != ':'; (*adv)++);
-        for (; buffer[*adv] && buffer[*adv] == ' '; (*adv)++);
+        for (; buffer[*adv] == ',' || buffer[*adv] == ' '
+            || buffer[*adv] == '\t'; (*adv)++);
         for (; buffer[*adv] && buffer[*adv] == '\n'; (*adv)++);
     }
     return label;
@@ -36,7 +38,8 @@ command_t *create_com(char *buffer, size_t *adv)
     if (!com->name)
         return NULL;
     *adv += bstrlen(com->name);
-    for (; buffer[*adv] && (buffer[*adv] == ' ' || buffer[*adv] == ':'); (*adv)++);
+    for (; buffer[*adv] && (buffer[*adv] == ' '
+        || buffer[*adv] == ':' || buffer[*adv] == '\t'); (*adv)++);
     com->params = get_command_params(buffer, *adv);
     if (com->params == NULL)
         return NULL;

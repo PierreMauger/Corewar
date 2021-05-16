@@ -12,9 +12,10 @@ size_t get_param_len(char *buffer, size_t *adv)
     size_t compt = 0;
     size_t len = 0;
 
-    for (; buffer[*adv] == ' ' || buffer[*adv] == ','; (*adv)++);
+    for (; buffer[*adv] == ' ' || buffer[*adv] == ','
+        || buffer[*adv] == '\t'; (*adv)++);
     compt = *adv;
-    while (buffer[compt] && buffer[compt] != ' '
+    while (buffer[compt] && buffer[compt] != ' ' && buffer[compt] != '\t'
         && buffer[compt] != ',' && buffer[compt] != '\n') {
         compt++;
         len++;
@@ -34,10 +35,9 @@ char *get_one_param(char *buffer, size_t *adv, bool *err)
     if (!param)
         return (NULL);
     for (; buffer[*adv] && buffer[*adv] != ' ' && buffer[*adv] != ','
-        && buffer[*adv] != '\n'; (*adv)++, fill_tab++) {
+        && buffer[*adv] != '\n' && buffer[*adv] != '\t'; (*adv)++, fill_tab++) {
         param[fill_tab] = buffer[*adv];
     }
-    for (; buffer[*adv] == ' ' && buffer[*adv] == ','; (*adv)++);
     param[fill_tab] = '\0';
     return param;
 }
