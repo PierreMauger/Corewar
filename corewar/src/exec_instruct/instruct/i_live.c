@@ -18,7 +18,7 @@ static void handle_nbr_live(vm_t *vm)
     }
 }
 
-static champion_t *verif_id(unsigned int id, vm_t *vm)
+static champion_t *verif_id_live(unsigned int id, vm_t *vm)
 {
     list_node_t *temp_node = NULL;
     champion_t *temp_champ = NULL;
@@ -40,7 +40,7 @@ int i_live(vm_t *vm, __attribute__((unused))champion_t *champion,
     champion_t *champ_id = NULL;
 
     increase_coord(process, 4);
-    champ_id = verif_id(id_mem, vm);
+    champ_id = verif_id_live(id_mem, vm);
     if (!champ_id) {
         return 0;
     }

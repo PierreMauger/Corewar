@@ -17,10 +17,11 @@ void print_usage(void)
 int main(int argc, char **argv)
 {
     int status = 0;
+    size_t dump = get_dump(argc, argv);
+    list_t *coord = get_info_champion(argv, (bool)dump);
     vm_t *vm = NULL;
 
-    if (argc <= 2)
-        return 84;
+    vm = init_all(coord, dump);
     if (vm == NULL)
         status = 84;
     else status = vm_loop(vm);

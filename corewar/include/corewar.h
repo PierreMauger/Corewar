@@ -28,7 +28,6 @@
 
 // DEFINES
 #define READ_SIZE 1024
-#define FLAGS_NBR 3
 
 #define HEXA_BASE "0123456789abcdef"
 
@@ -55,9 +54,12 @@ typedef struct {
     bool carry;
 } vm_t;
 
-// VM
 vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
+
+// INIT ALL
+void init_champion(vm_t *vm, list_t *coord);
+vm_t *init_all(list_t *coord, size_t dump);
 
 // ALL INSTRUCT
 int i_live(vm_t *vm, champion_t *champion, process_t *process);

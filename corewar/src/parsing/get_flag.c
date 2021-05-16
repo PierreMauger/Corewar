@@ -46,3 +46,10 @@ bool get_a(char **argv, size_t adv, parsing_t *pars)
     pars->arg_a = result;
     return 0;
 }
+
+size_t get_dump(int argc, char **argv)
+{
+    if (argc <= 1 || bstrcmp(argv[1], "-dump"))
+        return 0;
+    return batoi(argv[2]);
+}

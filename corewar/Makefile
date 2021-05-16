@@ -16,6 +16,8 @@ SRC				=	src/create_struct/create_process.c			\
 					src/destroy_struct/destroy_all.c			\
 					src/parsing/get_info_champion.c				\
 					src/parsing/get_flag.c						\
+					src/init_struct/init_all.c					\
+					src/init_struct/set_id.c					\
 					src/loop/main_loop.c						\
 					src/loop/move_process.c						\
 					src/loop/check_process.c					\
