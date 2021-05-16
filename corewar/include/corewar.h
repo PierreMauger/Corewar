@@ -22,6 +22,7 @@
 #include "linked_list.h"
 #include "op.h"
 
+#include "parsing.h"
 #include "process.h"
 #include "champion.h"
 
@@ -54,22 +55,9 @@ typedef struct {
     bool carry;
 } vm_t;
 
-// PARSING
-typedef struct {
-    char *name;
-    ssize_t arg_n;
-    ssize_t arg_a;
-} parsing_t;
-
 // VM
-parsing_t *create_parsing(char *name, ssize_t arg_n, ssize_t arg_a);
 vm_t *create_vm(void);
-
-void destroy_parsing(void *parsing);;
 void destroy_vm(vm_t *vm);
-
-// PARSING FUNCT
-void print_usage(void);
 
 // ALL INSTRUCT
 int i_live(vm_t *vm, champion_t *champion, process_t *process);

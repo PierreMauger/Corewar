@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     int status = 0;
     vm_t *vm = NULL;
 
-    if (argc == 1)
+    if (argc <= 2)
         return 84;
 
     if (vm == NULL)
