@@ -42,7 +42,7 @@ size_t fill_parseur(char **argv, size_t adv, parsing_t *pars_temp)
             adv += 2;
         }
     }
-    if (!pars_temp)
+    if (!pars_temp->name)
         return 0;
     return adv;
 }
@@ -52,7 +52,7 @@ list_t *get_info_champion(char **argv, bool dump)
     list_t *result = create_list();
     parsing_t *pars_temp = NULL;
 
-    for (size_t adv = 1; argv[adv]; adv++) {
+    for (size_t adv = 1 + dump; argv[adv]; adv++) {
         pars_temp = create_parsing(NULL, -1, -1);
         adv = fill_parseur(argv, adv, pars_temp);
         if (!adv)

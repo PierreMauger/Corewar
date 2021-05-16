@@ -21,7 +21,6 @@ int main(int argc, char **argv)
 
     if (argc <= 2)
         return 84;
-
     if (vm == NULL)
         status = 84;
     else status = vm_loop(vm);
