@@ -42,7 +42,7 @@ void set_id(list_t *coord)
 
     foreach(coord->head, node_temp) {
         pars_temp = (parsing_t *)node_temp->data;
-        if (pars_temp->arg_n != -1) {
+        if (pars_temp->arg_n == -1) {
             for (; verif_id(coord, act_id); act_id++);
             pars_temp->arg_n = act_id;
             act_id++;

@@ -12,6 +12,7 @@
 
 typedef struct {
     char *name;
+    char *file;
     ssize_t arg_n;
     ssize_t arg_a;
 } parsing_t;
@@ -39,6 +40,7 @@ void destroy_parsing(void *parsing);
 
 // ID MANAGE
 void set_id(list_t *coord);
+bool set_file(list_t *coord);
 size_t verif_id(list_t *coord, ssize_t id);
 bool verif_all_id(list_t *coord);
 

@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     vm = init_all(coord, dump);
     if (vm == NULL)
         status = 84;
-    else status = vm_loop(vm);
+    // else status = vm_loop(vm);
     destroy_all(vm);
     return status;
 }
