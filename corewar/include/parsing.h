@@ -18,12 +18,17 @@ typedef struct {
 
 typedef struct {
     char *flag;
+    size_t len_flag;
     ssize_t (*get_flag)(char **, size_t);
 } flag_t;
 
 // PARSING FUNCT
 ssize_t get_n(char **argv, size_t adv);
 ssize_t get_a(char **argv, size_t adv);
+bool verif_flag(char *flag);
+
+int check_flag(char *act_case);
+list_t *get_info_champion(char **argv);
 
 void print_usage(void);
 

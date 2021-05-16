@@ -8,11 +8,23 @@
 #include "corewar.h"
 
 static const flag_t flag[] = {
-    {"-n", get_n},
-    {"-a", get_a},
+    {"-n", 2, get_n},
+    {"-a", 2, get_a},
 
-    {NULL, NULL}
+    {NULL, 0, NULL}
 };
+
+int check_flag(char *act_case)
+{
+    int result = 0;
+
+    for (; flag[result].flag; result++) {
+        if (!bstrncmp(flag[result].flag, act_case, flag[result].len_flag)) {
+            return result;
+        }
+    }
+    return -1;
+}
 
 list_t *get_info_champion(char **argv)
 {
