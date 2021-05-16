@@ -62,7 +62,10 @@ typedef struct {
 } parsing_t;
 
 // VM
+parsing_t *create_parsing(char *name, ssize_t arg_n, ssize_t arg_a);
 vm_t *create_vm(void);
+
+void destroy_parsing(void *parsing);;
 void destroy_vm(vm_t *vm);
 
 // PARSING FUNCT
@@ -108,7 +111,6 @@ void print_all(vm_t *vm);
 void print_memory(vm_t *vm);
 
 // DESTROY ALL
-void destroy_parsing(void *parsing);
 void destroy_all(vm_t *vm);
 
 #endif // COREWAR_H

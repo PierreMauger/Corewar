@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-parsing_t *create_champion(char *name, ssize_t arg_n, ssize_t arg_a)
+parsing_t *create_parsing(char *name, ssize_t arg_n, ssize_t arg_a)
 {
     parsing_t *result = bcalloc(sizeof(parsing_t), 1);
 
