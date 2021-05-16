@@ -26,13 +26,38 @@ int check_flag(char *act_case)
     return -1;
 }
 
-list_t *get_info_champion(char **argv)
+size_t fill_parseur(char **argv, size_t adv, parsing_t *pars_temp)
+{
+    int act_flag = 0;
+
+    for (int max = 0; argv[adv] && max < 3; max++) {
+        act_flag = check_flag(argv[adv]);
+        if (act_flag == -1) {
+            pars_temp->name = bstrdup(argv[adv]);
+            return adv;
+        }
+        else {
+            if (flag[act_flag].get_flag(argv, adv, pars_temp))
+                return 0;
+            adv += 2;
+        }
+    }
+    if (!pars_temp)
+        return 0;
+    return adv;
+}
+
+list_t *get_info_champion(char **argv, bool dump)
 {
     list_t *result = create_list();
-    list_node_t *node_temp = NULL;
     parsing_t *pars_temp = NULL;
 
-    for (size_t adv = 0; argv[adv]; adv++) {
-
+    for (size_t adv = 1; argv[adv]; adv++) {
+        pars_temp = create_parsing(NULL, -1, -1);
+        adv = fill_parseur(argv, adv, pars_temp);
+        if (!adv)
+            return NULL;
+        add_node(result, create_node((void *)pars_temp));
     }
+    return result;
 }

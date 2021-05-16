@@ -19,16 +19,16 @@ typedef struct {
 typedef struct {
     char *flag;
     size_t len_flag;
-    ssize_t (*get_flag)(char **, size_t);
+    bool (*get_flag)(char **, size_t, parsing_t *);
 } flag_t;
 
 // PARSING FUNCT
-ssize_t get_n(char **argv, size_t adv);
-ssize_t get_a(char **argv, size_t adv);
+bool get_n(char **argv, size_t adv, parsing_t *pars);
+bool get_a(char **argv, size_t adv, parsing_t *pars);
 bool verif_flag(char *flag);
 
 int check_flag(char *act_case);
-list_t *get_info_champion(char **argv);
+list_t *get_info_champion(char **argv, bool dump);
 
 void print_usage(void);
 
