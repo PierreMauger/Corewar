@@ -37,13 +37,15 @@ char *get_name(char *buffer, size_t *adv, size_t size)
 void write_header(int fd, char *buffer)
 {
     size_t adv = skip_head(buffer);
-    char *name = get_name(buffer, &adv, PROG_NAME_LENGTH);
-    char *comment = get_name(buffer, &adv, COMMENT_LENGTH);
+    char *name = get_name(buffer, &adv, PROG_NAME_LENGTH + 7);
+    char *comment = get_name(buffer, &adv, COMMENT_LENGTH + 4);
+    int separator = 28;
 
     if (!name || !comment)
         return;
-    write(fd, name, PROG_NAME_LENGTH);
-    write(fd, comment, COMMENT_LENGTH);
+    write(fd, name, PROG_NAME_LENGTH + 7);
+    write(fd, &separator, 1);
+    write(fd, comment, COMMENT_LENGTH + 4);
     free(name);
     free(comment);
 }
