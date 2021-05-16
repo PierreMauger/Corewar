@@ -54,15 +54,19 @@ typedef struct {
     bool carry;
 } vm_t;
 
-void print_usage(void);
+// PARSING
+typedef struct {
+    char *name;
+    ssize_t arg_n;
+    ssize_t arg_a;
+} parsing_t;
 
 // VM
 vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
 
-vm_t *init_vm(int champ_count, char **argv);
-
-// Args parsing funcs
+// PARSING FUNCT
+void print_usage(void);
 
 // ALL INSTRUCT
 int i_live(vm_t *vm, champion_t *champion, process_t *process);
@@ -83,6 +87,7 @@ int i_lfork(vm_t *vm, champion_t *champion, process_t *process);
 int i_aff(vm_t *vm, champion_t *champion, process_t *process);
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 
+// UTILS INSTRUCT
 unsigned int get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 void increase_coord(process_t *process, size_t increase);
 
@@ -103,6 +108,7 @@ void print_all(vm_t *vm);
 void print_memory(vm_t *vm);
 
 // DESTROY ALL
+void destroy_parsing(void *parsing);
 void destroy_all(vm_t *vm);
 
 #endif // COREWAR_H

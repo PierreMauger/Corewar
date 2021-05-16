@@ -9,8 +9,10 @@
 SRC				=	src/create_struct/create_process.c			\
 					src/create_struct/create_vm.c				\
 					src/create_struct/create_champion.c			\
+					src/create_struct/create_parsing.c			\
 					src/destroy_struct/destroy_champion.c		\
 					src/destroy_struct/destroy_vm.c				\
+					src/destroy_struct/destroy_parsing.c		\
 					src/destroy_struct/destroy_all.c			\
 					src/loop/main_loop.c						\
 					src/loop/move_process.c						\
