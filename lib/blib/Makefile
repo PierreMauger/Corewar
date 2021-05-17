@@ -22,8 +22,10 @@ SRC		=	print/bfprintf/bfprint_char.c			\
 			string/bstrncmp.c						\
 			string/bstrdup.c						\
 			string/bstrndup.c						\
+			string/bstrndup_forced.c				\
 			string/bstrcat.c						\
 			string/bstrncat.c						\
+			string/bstrncat_forced.c				\
 			string/bmemset.c						\
 			string/bstrcpy.c						\
 			string/bstrncpy.c						\

@@ -21,9 +21,12 @@ int bstrncmp(char *s1, char *s2, size_t n);
 
 char *bstrdup(char *src);
 char *bstrndup(char *src, size_t n);
+char *bstrndup_forced(char *src, size_t n);
 
 char *bstrcat(char *dest, char *src);
 char *bstrncat(char *dest, char *src, size_t n);
+char *bstrncat_forced(char *dest, char *src, size_t size_base,
+    size_t plus_size);
 
 char *bstrcpy(char *dest, char *src);
 char *bstrncpy(char *dest, char *src, size_t n);
