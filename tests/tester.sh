@@ -10,6 +10,11 @@ do
     extension="${filename##*.}"
     filename="${filename%.*}"
 
+    if [ $extension != "s" ]
+    then
+        continue
+    fi
+
     ./asm/asm champion/$filename.s
     ./tests/asm champion/$filename.s
 
