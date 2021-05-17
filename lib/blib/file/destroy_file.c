@@ -9,6 +9,9 @@
 
 void destroy_file(file_t *file)
 {
-    free(file->file);
+    if (!file)
+        return;
+    if (file->file)
+        free(file->file);
     free(file);
 }

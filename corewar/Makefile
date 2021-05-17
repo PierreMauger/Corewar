@@ -18,7 +18,8 @@ SRC				=	src/create_struct/create_process.c			\
 					src/parsing/get_flag.c						\
 					src/init_struct/init_all.c					\
 					src/init_struct/set_all.c					\
-					src/init_struct/verif.c						\
+					src/init_struct/verif_file.c				\
+					src/init_struct/verif_all.c					\
 					src/init_struct/operation.c					\
 					src/loop/main_loop.c						\
 					src/loop/move_process.c						\

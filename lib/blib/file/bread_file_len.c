@@ -16,20 +16,6 @@ static char *create_str(char *str, size_t size_base, size_t plus_size)
     return str;
 }
 
-static char *bstrncat_forced(char *dest, char *src, size_t size_base,
-    size_t plus_size)
-{
-    size_t j = 0;
-
-    if (!dest || !src)
-        return NULL;
-    for (; j < plus_size; j++)
-        dest[size_base + j] = src[j];
-    dest[size_base + j] = '\0';
-    return dest;
-}
-
-
 static file_t *bloop_read(int fd, char *temp, file_t *buffer, size_t size_read)
 {
     size_t ret = 1;

@@ -21,32 +21,6 @@ size_t verif_id(list_t *coord, ssize_t id)
     return nbr_time;
 }
 
-bool verif_file(parsing_t *pars_temp)
-{
-    unsigned char *file = (unsigned char *)pars_temp->file->file;
-    size_t len = pars_temp->file->len;
-    size_t adv = 0;
-    int id = 0;
-    char *temp = NULL;
-
-    if (len <= sizeof(header_t))
-        return 1;
-    id = (int)get_n_bytes(adv, file, len, sizeof(COREWAR_EXEC_MAGIC));
-    if (id != COREWAR_EXEC_MAGIC)
-        return 1;
-    adv += sizeof(int);
-    pars_temp->name = bstrndup((char *)(file + adv), adv_to_next(adv, file, len) - adv);
-    if (!pars_temp->name)
-        return 1;
-    // temp = bstrndup(pars_temp->file->file, pars_temp->file - sizeof(header_t));
-    // free(pars_temp->file->file);
-    // pars_temp->file->file = temp;
-    if (!temp)
-        return 1;
-    return 0;
-}
-// DO STRNDUP FORCED
-
 bool verif_file_name(parsing_t *pars_temp)
 {
     size_t end = 0;
@@ -60,7 +34,6 @@ bool verif_file_name(parsing_t *pars_temp)
     if (end == 0)  {
         return 1;
     }
-    free(pars_temp->name);
     return 0;
 }
 

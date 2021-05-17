@@ -25,7 +25,7 @@ bool get_n(char **argv, size_t adv, parsing_t *pars)
         return 1;
     if (verif_flag(argv[adv + 1]))
         return 1;
-    result = atoi(argv[adv + 1]);
+    result = batoi(argv[adv + 1]);
     if (result <= 0)
         return 1;
     pars->arg_n = result;
@@ -40,7 +40,7 @@ bool get_a(char **argv, size_t adv, parsing_t *pars)
         return 1;
     if (verif_flag(argv[adv + 1]))
         return 1;
-    result = atoi(argv[adv + 1]);
+    result = batoi(argv[adv + 1]);
     if (result < 0)
         return 1;
     pars->arg_a = result;
