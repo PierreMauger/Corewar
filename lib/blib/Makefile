@@ -46,7 +46,7 @@ SRC		=	print/bfprintf/bfprint_char.c			\
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS	=	-I include -W
+CFLAGS	=	-I include -W -g
 
 NAME	=	libblib.a
 

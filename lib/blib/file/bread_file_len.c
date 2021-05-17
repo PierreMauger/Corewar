@@ -42,7 +42,7 @@ static file_t *bloop_read(int fd, char *temp, file_t *buffer, size_t size_read)
         bmemset(temp, '\0', size_read + 1);
         ret = read(fd, temp, size_read);
         buffer->file = bstrncat_forced(create_str(buffer->file,
-            buffer->len, len), temp, buffer->len, len);
+            buffer->len, len), temp, buffer->len, size_read);
         buffer->len += ret;
         if (!buffer->file)
             return NULL;

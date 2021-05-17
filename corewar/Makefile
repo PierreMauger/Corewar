@@ -19,6 +19,7 @@ SRC				=	src/create_struct/create_process.c			\
 					src/init_struct/init_all.c					\
 					src/init_struct/set_all.c					\
 					src/init_struct/verif.c						\
+					src/init_struct/operation.c					\
 					src/loop/main_loop.c						\
 					src/loop/move_process.c						\
 					src/loop/check_process.c					\

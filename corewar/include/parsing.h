@@ -42,8 +42,14 @@ void destroy_parsing(void *parsing);
 void set_id(list_t *coord, parsing_t *pars_temp);
 bool set_file(parsing_t *pars_temp);
 bool set_name(parsing_t *pars_temp);
+void set_coord_champion(parsing_t *pars_temp, size_t espacement);
 bool set_all(list_t *coord);
 size_t verif_id(list_t *coord, ssize_t id);
-bool verif_all_id(list_t *coord);
+bool verif_file(parsing_t *pars_temp);
+bool verif_all(list_t *coord);
+
+// OPERATIONS
+size_t adv_to_next(size_t adv, unsigned char *buffer, size_t max);
+size_t get_n_bytes(size_t adv, unsigned char *buffer, size_t max, int n);
 
 #endif // PARSING_H

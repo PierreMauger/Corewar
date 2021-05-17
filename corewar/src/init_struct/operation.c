@@ -1,0 +1,46 @@
+/*
+** EPITECH PROJECT, 2021
+** utils for args parsing
+** File description:
+** parsing_utils
+*/
+
+#include "corewar.h"
+
+size_t adv_to_next(size_t adv, unsigned char *buffer, size_t max)
+{
+    for (; adv < max && buffer[adv] == '\0'; adv++);
+    if (adv == max)
+        return 0;
+    return adv;
+}
+
+size_t get_n_bytes(size_t adv, unsigned char *buffer, size_t max, int n)
+{
+    size_t result = 0;
+
+    if (adv + n > max || n > 8)
+        return 0;
+    for (int act = 0; act < n; act++) {
+        result |= buffer[adv + act];
+        if (act + 1 != n)
+            result <<= 8;
+    }
+    return result;
+}
+
+// bool verif_champion_size(list_t *coord)
+// {
+//     list_node_t *node_temp = NULL;
+//     parsing_t *pars_temp1 = NULL;
+//     parsing_t *pars_temp2 = NULL;
+
+//     foreach(coord->head, node_temp) {
+//         pars_temp1 = (parsing_t *)node_temp->data;
+//         if (node_temp->next) {
+//             pars_temp2 = (parsing_t *)node_temp->next->data;
+//             if (pars_temp1->arg_a + )
+//         }
+//     }
+//     return 0;
+// }

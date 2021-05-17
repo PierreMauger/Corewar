@@ -21,15 +21,46 @@ size_t verif_id(list_t *coord, ssize_t id)
     return nbr_time;
 }
 
-bool verif_all_id(list_t *coord)
+bool verif_file(parsing_t *pars_temp)
+{
+    unsigned char *file = (unsigned char *)pars_temp->file->file;
+    size_t len = pars_temp->file->len;
+    size_t adv = 0;
+    int id = 0;
+
+    if (len < sizeof(COREWAR_EXEC_MAGIC))
+        return 1;
+    id = (int)get_n_bytes(adv, file, len, sizeof(int));
+    if (id != COREWAR_EXEC_MAGIC)
+        return 1;
+    return 0;
+}
+
+bool verif_all(list_t *coord)
 {
     list_node_t *node_temp = NULL;
     parsing_t *pars_temp = NULL;
 
     foreach(coord->head, node_temp) {
         pars_temp = (parsing_t *)node_temp->data;
-        if (verif_id(coord, pars_temp->arg_n) > 1)
+        if (verif_id(coord, pars_temp->arg_n) > 1 || verif_file(pars_temp))
             return 1;
     }
     return 0;
 }
+
+// bool verif_champion_size(list_t *coord)
+// {
+//     list_node_t *node_temp = NULL;
+//     parsing_t *pars_temp1 = NULL;
+//     parsing_t *pars_temp2 = NULL;
+
+//     foreach(coord->head, node_temp) {
+//         pars_temp1 = (parsing_t *)node_temp->data;
+//         if (node_temp->next) {
+//             pars_temp2 = (parsing_t *)node_temp->next->data;
+//             if (pars_temp1->arg_a + )
+//         }
+//     }
+//     return 0;
+// }
