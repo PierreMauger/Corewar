@@ -28,11 +28,32 @@ bool verif_file(parsing_t *pars_temp)
     size_t adv = 0;
     int id = 0;
 
-    if (len < sizeof(COREWAR_EXEC_MAGIC))
+    if (len <= sizeof(header_t))
         return 1;
-    id = (int)get_n_bytes(adv, file, len, sizeof(int));
+    id = (int)get_n_bytes(adv, file, len, sizeof(COREWAR_EXEC_MAGIC));
     if (id != COREWAR_EXEC_MAGIC)
         return 1;
+    adv += sizeof(int);
+    pars_temp->name = bstrndup((char *)(file + adv), adv_to_next(adv, file, len) - adv);
+    if (!pars_temp->name)
+        return 1;
+    return 0;
+}
+
+bool verif_file_name(parsing_t *pars_temp)
+{
+    size_t end = 0;
+
+    for (size_t adv = 0; pars_temp && pars_temp->name[adv]; adv++) {
+        if (!bstrncmp(pars_temp->name + adv,
+            EXTENTION_FILE,
+            bstrlen(EXTENTION_FILE)))
+            end = adv;
+    }
+    if (end == 0)  {
+        return 1;
+    }
+    free(pars_temp->name);
     return 0;
 }
 
@@ -43,7 +64,9 @@ bool verif_all(list_t *coord)
 
     foreach(coord->head, node_temp) {
         pars_temp = (parsing_t *)node_temp->data;
-        if (verif_id(coord, pars_temp->arg_n) > 1 || verif_file(pars_temp))
+        if (verif_id(coord, pars_temp->arg_n) > 1 ||
+            verif_file_name(pars_temp) ||
+            verif_file(pars_temp))
             return 1;
     }
     return 0;

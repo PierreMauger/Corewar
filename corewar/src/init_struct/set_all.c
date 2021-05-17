@@ -29,29 +29,6 @@ bool set_file(parsing_t *pars_temp)
     return 0;
 }
 
-bool set_name(parsing_t *pars_temp)
-{
-    char *temp = NULL;
-    size_t start = 0;
-    size_t end = 0;
-
-    for (size_t adv = 0; pars_temp && pars_temp->name[adv]; adv++) {
-        if (pars_temp->name[adv] == '/')
-            start = adv;
-        if (!bstrncmp(pars_temp->name + adv, ".cor", bstrlen(".cor")))
-            end = adv;
-    }
-    temp = bstrndup(pars_temp->name + start + 1, end - (start + 1));
-    free(pars_temp->name);
-    pars_temp->name = temp;
-    if (end == 0)  {
-        if (temp)
-            free(temp);
-        return 1;
-    }
-    return 0;
-}
-
 // bool set_file(parsing_t *pars_temp)
 // {
 //     pars_temp->file = bread_file_len(pars_temp->name, READ_SIZE);
@@ -85,7 +62,7 @@ bool set_all(list_t *coord)
         pars_temp = (parsing_t *)node_temp->data;
         set_id(coord, pars_temp);
         set_coord_champion(pars_temp, espacement);
-        if (set_file(pars_temp) || set_name(pars_temp))
+        if (set_file(pars_temp))
             return 1;
     }
     return 0;

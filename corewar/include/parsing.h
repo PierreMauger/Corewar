@@ -10,6 +10,8 @@
 
 #include "blib.h"
 
+#define EXTENTION_FILE ".cor"
+
 typedef struct {
     char *name;
     file_t *file;
@@ -41,10 +43,10 @@ void destroy_parsing(void *parsing);
 // ID MANAGE
 void set_id(list_t *coord, parsing_t *pars_temp);
 bool set_file(parsing_t *pars_temp);
-bool set_name(parsing_t *pars_temp);
 void set_coord_champion(parsing_t *pars_temp, size_t espacement);
 bool set_all(list_t *coord);
 size_t verif_id(list_t *coord, ssize_t id);
+bool verif_file_name(parsing_t *pars_temp);
 bool verif_file(parsing_t *pars_temp);
 bool verif_all(list_t *coord);
 
