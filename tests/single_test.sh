@@ -15,7 +15,7 @@ fi
 
 if [ $? -ne 0 ]
     then
-        echo -e "${RED}Couldn't find binaries / champion${WHITE}"
+        echo -e "${RED}Couldn't find binaries / $1${WHITE}"
         exit 1
 fi
 
