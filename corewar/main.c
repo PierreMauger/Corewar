@@ -17,20 +17,14 @@ void print_usage(void)
 int main(int argc, char **argv)
 {
     int status = 0;
-    int champ_count = 0;
+    size_t dump = get_dump(argc, argv);
+    list_t *coord = get_info_champion(argv, (bool)dump);
     vm_t *vm = NULL;
 
-    if (argc == 1)
-        return 84;
-    champ_count = parse_champ_args(argv);
-    if (champ_count == -1) {
-        print_usage();
-        return 84;
-    }
-    vm = init_vm(champ_count, argv);
+    vm = init_all(coord, dump);
     if (vm == NULL)
         status = 84;
-    else status = vm_loop(vm);
+    // else status = vm_loop(vm);
     destroy_all(vm);
     return status;
 }

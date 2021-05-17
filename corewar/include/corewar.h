@@ -22,13 +22,13 @@
 #include "linked_list.h"
 #include "op.h"
 
+#include "parsing.h"
 #include "process.h"
 #include "champion.h"
 
 // DEFINES
 #define RETURN_ERROR 84
 #define READ_SIZE 1024
-#define FLAGS_NBR 3
 
 #define HEXA_BASE "0123456789abcdef"
 
@@ -55,22 +55,12 @@ typedef struct {
     bool carry;
 } vm_t;
 
-void print_usage(void);
-
-// VM
 vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
 
-vm_t *init_vm(int champ_count, char **argv);
-
-// Args parsing funcs
-char **init_checking_flags(void);
-bool check_read_accessibility(char *str);
-int parse_champ_args(char **av);
-list_t *store_champ_arguments(char **av, vm_t *vm, int champ_count);
-bool is_id_valid(list_t *champs, size_t curr);
-int get_champ_index(char **av, int iterations);
-int get_arguments_index(char **av, char *str, int iterations);
+// INIT ALL
+void init_champion(vm_t *vm, list_t *coord);
+vm_t *init_all(list_t *coord, size_t dump);
 
 // ALL INSTRUCT
 int i_live(vm_t *vm, champion_t *champion, process_t *process);
@@ -91,6 +81,7 @@ int i_lfork(vm_t *vm, champion_t *champion, process_t *process);
 int i_aff(vm_t *vm, champion_t *champion, process_t *process);
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 
+// UTILS INSTRUCT
 unsigned int get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 void increase_coord(process_t *process, size_t increase);
 
