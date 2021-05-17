@@ -30,8 +30,7 @@ void write_asm(char *filename, char *buffer, list_t *list)
     fd = open(chmp_filename, O_CREAT | O_WRONLY, 0644);
     if (fd == -1)
         return;
-    write_magic_number(fd);
-    write_header(fd, buffer);
+    write_header(fd, buffer, list);
     write_instructions(fd, list);
     close(fd);
     free(chmp_filename);

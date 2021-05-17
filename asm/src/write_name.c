@@ -7,19 +7,6 @@
 
 #include "asm.h"
 
-void write_magic_number(int fd)
-{
-    char a = 234;
-    char b = 131;
-    char c = 243;
-    char d = 0;
-
-    write(fd, &d, 1);
-    write(fd, &a, 1);
-    write(fd, &b, 1);
-    write(fd, &c, 1);
-}
-
 char *get_name(char *buffer, size_t *adv, size_t size)
 {
     char *name = bcalloc(sizeof(char), size);
@@ -35,18 +22,38 @@ char *get_name(char *buffer, size_t *adv, size_t size)
     return name;
 }
 
-void write_header(int fd, char *buffer)
+int get_total_size(list_t *list)
+{
+    list_node_t *temp = NULL;
+    command_t *temp_com = NULL;
+    int res = 0;
+
+    foreach(list->head, temp) {
+        temp_com = temp->data;
+        res++;
+        if (barray_len(temp_com->params) != 1)
+            res++;
+        for (size_t i = 0; i < barray_len(temp_com->params); i++)
+            res += get_size(temp_com->params[i], list, get_id(temp_com->name));
+    }
+    return res;
+}
+
+void write_header(int fd, char *buffer, list_t *list)
 {
     size_t adv = skip_head(buffer);
-    char *name = get_name(buffer, &adv, PROG_NAME_LENGTH + 7);
-    char *comment = get_name(buffer, &adv, COMMENT_LENGTH + 4);
-    int separator = 28;
+    header_t *header = malloc(sizeof(header_t));
+    char *name = get_name(buffer, &adv, PROG_NAME_LENGTH + 1);
+    char *comment = get_name(buffer, &adv, COMMENT_LENGTH + 1);
 
     if (!name || !comment)
         return;
-    write(fd, name, PROG_NAME_LENGTH + 7);
-    write(fd, &separator, 1);
-    write(fd, comment, COMMENT_LENGTH + 4);
+    header->magic = swap_endian_4(COREWAR_EXEC_MAGIC);
+    bstrcpy(header->prog_name, name);
+    header->prog_size = swap_endian_4(get_total_size(list));
+    bstrcpy(header->comment, comment);
+    write(fd, header, sizeof(header_t));
     free(name);
     free(comment);
+    free(header);
 }
