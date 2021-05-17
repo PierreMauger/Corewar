@@ -28,3 +28,16 @@ size_t get_n_bytes(size_t adv, unsigned char *buffer, size_t max, int n)
     }
     return result;
 }
+
+void write_mem(unsigned char **memory, unsigned char *champion,
+    size_t adress, size_t len_champion)
+{
+    size_t x = 0;
+    size_t y = 0;
+
+    for (size_t adv = 0; adv < len_champion; adv++) {
+        x = adress / IDX_MOD;
+        y = adress % IDX_MOD;
+        memory[x][y] = champion[adv];
+    }
+}

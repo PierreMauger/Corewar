@@ -59,7 +59,9 @@ vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
 
 // INIT ALL
-void init_champion(vm_t *vm, list_t *coord);
+void write_mem(unsigned char **memory, unsigned char *champion,
+    size_t adress, size_t len_champion);
+bool init_champion(vm_t *vm, list_t *coord);
 vm_t *init_all(list_t *coord, size_t dump);
 
 // ALL INSTRUCT
