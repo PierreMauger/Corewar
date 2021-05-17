@@ -89,8 +89,7 @@ void write_label(int fd, command_t *com, size_t i, list_t *list);
 
     // write_name.c
 char *get_name(char *buffer, size_t *adv, size_t size);
-void write_header(int fd, char *buffer);
-void write_magic_number(int fd);
+void write_header(int fd, char *buffer, list_t *list);
 
     // get_size.c
 int get_size_dir(char *param, list_t *list, size_t name_id);

@@ -11,7 +11,8 @@ char *get_command_name(char *buffer, size_t *adv)
 {
     size_t len = 0;
 
-    for (; buffer[*adv] == ' ' || buffer[*adv] == ',' || buffer[*adv] == '\t'; (*adv)++);
+    for (; buffer[*adv] == ' ' || buffer[*adv] == ',' ||
+    buffer[*adv] == '\t'; (*adv)++);
     for (; buffer[*adv + len] && buffer[*adv + len] != ' ' &&
     buffer[*adv + len] != '\t' && buffer[*adv + len] != ',' &&
     buffer[*adv + len] != ':'; len++);

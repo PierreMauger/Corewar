@@ -33,9 +33,14 @@ char *get_one_param(char *buffer, size_t *adv, bool *err)
         *err = true;
     param = malloc(sizeof(char) * (len + 1));
     if (!param)
-        return (NULL);
+        return NULL;
     for (; buffer[*adv] && buffer[*adv] != ' ' && buffer[*adv] != ','
         && buffer[*adv] != '\n' && buffer[*adv] != '\t'; (*adv)++, fill_tab++) {
+        if (buffer[*adv] == '#') {
+            if (fill_tab == 0)
+                return NULL;
+            return param;
+        }
         param[fill_tab] = buffer[*adv];
     }
     param[fill_tab] = '\0';
@@ -58,11 +63,11 @@ char **get_command_params(char *buffer, size_t adv)
     bool err = false;
 
     if (!params_tab)
-        return (NULL);
+        return NULL;
     for (; buffer[adv] && buffer[adv] != '\n'; i++, adv++) {
         params_tab[i] = get_one_param(buffer, &adv, &err);
-        if (params_tab[i] == NULL)
-            return (NULL);
+        if (!params_tab[i])
+            break;
         check_bool_err(&err, params_tab, &i);
         if (buffer[adv] == '\n') {
             i++;

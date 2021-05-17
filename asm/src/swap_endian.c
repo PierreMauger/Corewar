@@ -17,6 +17,6 @@ int swap_endian_4(int val)
 
 int swap_endian_2(int val)
 {
-    return ((val & 0xff00) >>  8) |
-           ((val & 0x00ff) <<  8);
+    return ((val & 0xff00) >> 8) |
+            ((val & 0x00ff) << 8);
 }

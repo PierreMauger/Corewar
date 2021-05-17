@@ -1,21 +1,34 @@
 /*
 ** EPITECH PROJECT, 2021
-** corewar
+** utils for args parsing
 ** File description:
-** main
+** parsing_utils
 */
 
 #include "corewar.h"
 
-vm_t *init_vm(int champ_count, char **argv)
+void init_champion(vm_t *vm, list_t *coord)
 {
-    vm_t *vm = NULL;
+    list_node_t *node_temp = NULL;
+    parsing_t *pars_temp = NULL;
+    champion_t *champ_temp = NULL;
 
-    vm = create_vm();
-    if (!vm)
+    foreach(coord->head, node_temp) {
+        pars_temp = (parsing_t *)node_temp->data;
+        champ_temp = create_champion(pars_temp->arg_n,
+            bstrdup(pars_temp->name));
+    }
+}
+
+vm_t *init_all(list_t *coord, size_t dump)
+{
+    vm_t *vm = create_vm();
+
+    if (!vm || !coord || coord->lenght <= 1)
         return NULL;
-    vm->champion_list = store_champ_arguments(argv, vm, champ_count);
-    if (vm->champion_list == NULL)
-        return NULL;
+    vm->dump = dump;
+    if (!set_all(coord) && !verif_all(coord))
+        init_champion(vm, coord);
+    destroy_list(coord, destroy_parsing);
     return vm;
 }

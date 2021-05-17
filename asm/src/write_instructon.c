@@ -13,7 +13,7 @@ void write_dir(int fd, command_t *com, size_t i, list_t *list)
     int name_id = get_id(com->name);
 
     if (is_num(com->params[i] + 1)) {
-        if (name_id > 9 && name_id < 13) {
+        if (name_id >= 8 && name_id < 12) {
             res = swap_endian_2(res);
             write(fd, &res, 2);
         }
@@ -56,7 +56,7 @@ void write_instructions(int fd, list_t *list)
     foreach(list->head, temp) {
         com = (command_t *)temp->data;
         id = get_id(com->name);
-        bdprintf(fd, "%c", op_tab[id].code);
+        write(fd, &op_tab[id].code, 1);
         write_params(fd, com, list);
     }
 }
