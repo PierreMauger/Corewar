@@ -44,7 +44,6 @@ int init_champs_process(list_t *champs, char **av)
         if (first_process->coord_pc.y == 84)
             return 84;
         first_process->coord_pc.x = 0;
-        bprintf("LOAD_ADRESS:%d\n", first_process->coord_pc.x);
         add_node(champ_cast->process_list, create_node(first_process));
         first_process = NULL;
         i++;
