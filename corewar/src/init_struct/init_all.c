@@ -24,11 +24,11 @@ vm_t *init_all(list_t *coord, size_t dump)
 {
     vm_t *vm = create_vm();
 
-    if (!vm || !coord)
+    if (!vm || !coord || coord->lenght <= 1)
         return NULL;
     vm->dump = dump;
     set_id(coord);
-    if (verif_all_id(coord) || set_file(coord))
+    if (verif_all_id(coord) || set_file(coord) || set_name(coord))
         return NULL;
     init_champion(vm, coord);
     destroy_list(coord, destroy_parsing);

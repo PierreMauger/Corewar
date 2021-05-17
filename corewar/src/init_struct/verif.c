@@ -33,19 +33,3 @@ bool verif_all_id(list_t *coord)
     }
     return 0;
 }
-
-void set_id(list_t *coord)
-{
-    list_node_t *node_temp = NULL;
-    parsing_t *pars_temp = NULL;
-    ssize_t act_id = 1;
-
-    foreach(coord->head, node_temp) {
-        pars_temp = (parsing_t *)node_temp->data;
-        if (pars_temp->arg_n == -1) {
-            for (; verif_id(coord, act_id); act_id++);
-            pars_temp->arg_n = act_id;
-            act_id++;
-        }
-    }
-}
