@@ -27,7 +27,8 @@ char *get_name(char *buffer, size_t *adv, size_t size)
 
     if (!name)
         return NULL;
-    for (; buffer[*adv - 1] && buffer[*adv - 1] != '"'; (*adv)++);
+    for (; buffer[*adv] && buffer[*adv] != '"'; (*adv)++);
+    (*adv)++;
     for (; buffer[*adv + len] && buffer[*adv + len] != '"'; len++);
     bstrncpy(name, buffer + *adv, len);
     *adv += len + 2;

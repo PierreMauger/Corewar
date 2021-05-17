@@ -14,14 +14,14 @@ char *get_label(char *buffer, size_t *adv)
     for (; buffer[*adv] == ' ' || buffer[*adv] == ','
         || buffer[*adv] == '\t'; (*adv)++);
     for (size_t temp = 0; buffer[*adv + temp] &&
-    buffer[*adv + temp] != ' '; temp++)
-    if (buffer[*adv + temp] == ':') {
-        label = bstrndup(buffer + *adv, temp);
-        for (; buffer[*adv] && buffer[*adv - 1] != ':'; (*adv)++);
-        for (; buffer[*adv] == ',' || buffer[*adv] == ' '
-            || buffer[*adv] == '\t'; (*adv)++);
-        for (; buffer[*adv] && buffer[*adv] == '\n'; (*adv)++);
-    }
+    buffer[*adv + temp] != ' ' && buffer[*adv + temp] != '\t'; temp++)
+        if (buffer[*adv + temp] == ':') {
+            label = bstrndup(buffer + *adv, temp);
+            for (; buffer[*adv] && buffer[*adv - 1] != ':'; (*adv)++);
+            for (; buffer[*adv] == ',' || buffer[*adv] == ' '
+                || buffer[*adv] == '\t'; (*adv)++);
+            for (; buffer[*adv] && buffer[*adv] == '\n'; (*adv)++);
+        }
     return label;
 }
 
