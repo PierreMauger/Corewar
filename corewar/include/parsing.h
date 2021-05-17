@@ -39,9 +39,10 @@ parsing_t *create_parsing(char *name, ssize_t arg_n, ssize_t arg_a);
 void destroy_parsing(void *parsing);
 
 // ID MANAGE
-void set_id(list_t *coord);
-bool set_file(list_t *coord);
-bool set_name(list_t *coord);
+void set_id(list_t *coord, parsing_t *pars_temp);
+bool set_file(parsing_t *pars_temp);
+bool set_name(parsing_t *pars_temp);
+bool set_all(list_t *coord);
 size_t verif_id(list_t *coord, ssize_t id);
 bool verif_all_id(list_t *coord);
 
