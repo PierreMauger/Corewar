@@ -15,6 +15,11 @@
 #include "blib.h"
 #include "blib.h"
 
+typedef struct {
+    char *file;
+    size_t len;
+} file_t;
+
 char *bread_file(char *path, size_t size_read);
 
 #endif // BFILE_H
