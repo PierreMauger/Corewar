@@ -11,9 +11,11 @@ size_t skip_head(char *buffer)
 {
     size_t adv = 0;
 
-    for (; buffer[adv] && buffer[adv] == COMMENT_CHAR; adv++)
-        for (; buffer[adv] && buffer[adv] != '\n'; adv++);
-    for (; buffer[adv] && buffer[adv] == '\n'; adv++);
+    if (buffer[adv] == COMMENT_CHAR) {
+        for (; buffer[adv] && buffer[adv] == COMMENT_CHAR; adv++)
+            for (; buffer[adv] && buffer[adv] != '\n'; adv++);
+        for (; buffer[adv] && buffer[adv] == '\n'; adv++);
+    }
     return adv;
 }
 
