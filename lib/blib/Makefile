@@ -39,6 +39,9 @@ SRC		=	print/bfprintf/bfprint_char.c			\
 			array/bremove_array.c					\
 			array/bfree_array.c						\
 			file/bread_file.c						\
+			file/bread_file_len.c					\
+			file/create_file.c						\
+			file/destroy_file.c						\
 			memory/calloc.c							\
 
 OBJ		=	$(SRC:.c=.o)

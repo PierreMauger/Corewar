@@ -30,9 +30,11 @@ bool set_file(list_t *coord)
 
     foreach(coord->head, node_temp) {
         pars_temp = (parsing_t *)node_temp->data;
-        pars_temp->file = bread_file(pars_temp->name, READ_SIZE);
-        if (!pars_temp->file)
+        pars_temp->file = bread_file_len(pars_temp->name, READ_SIZE);
+        if (!pars_temp->file || !pars_temp->file->file ||
+            !pars_temp->file->len)
             return 1;
+        // printf("%ld\n", pars_temp->file->len);
     }
     return 0;
 }

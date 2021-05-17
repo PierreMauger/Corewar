@@ -12,7 +12,7 @@
 
 typedef struct {
     char *name;
-    char *file;
+    file_t *file;
     ssize_t arg_n;
     ssize_t arg_a;
 } parsing_t;
