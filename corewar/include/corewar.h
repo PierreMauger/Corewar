@@ -26,6 +26,7 @@
 #include "champion.h"
 
 // DEFINES
+#define RETURN_ERROR 84
 #define READ_SIZE 1024
 #define FLAGS_NBR 3
 
