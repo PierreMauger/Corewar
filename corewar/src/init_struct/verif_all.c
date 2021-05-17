@@ -54,16 +54,19 @@ bool verif_all(list_t *coord)
 
 bool verif_champion_size(list_t *coord)
 {
-    // list_node_t *node_temp = NULL;
-    // parsing_t *pars_temp1 = NULL;
-    // parsing_t *pars_temp2 = NULL;
+    list_node_t *node_temp = NULL;
+    parsing_t *pars_temp1 = NULL;
+    parsing_t *pars_temp2 = NULL;
 
-    // foreach(coord->head, node_temp) {
-    //     pars_temp1 = (parsing_t *)node_temp->data;
-    //     if (node_temp->next) {
-    //         pars_temp2 = (parsing_t *)node_temp->next->data;
-    //         if (pars_temp1->arg_a + pars_temp1->file->len )
-    //     }
-    // }
-    // return 0;
+    foreach(coord->head, node_temp) {
+        pars_temp1 = (parsing_t *)node_temp->data;
+        if (node_temp->next) {
+            pars_temp2 = (parsing_t *)node_temp->next->data;
+        }
+        else pars_temp2 = (parsing_t *)coord->head->data;
+        if ((pars_temp1->arg_a + pars_temp1->file->len) % MEM_SIZE >=
+            pars_temp2->arg_a)
+            return 1;
+    }
+    return 0;
 }

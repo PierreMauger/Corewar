@@ -27,7 +27,7 @@ vm_t *init_all(list_t *coord, size_t dump)
     if (!vm || !coord || coord->lenght <= 1)
         return NULL;
     vm->dump = dump;
-    if (!set_all(coord) && !verif_all(coord))
+    if (!set_all(coord) && !verif_all(coord) && !verif_champion_size(coord))
         init_champion(vm, coord);
     else {
         destroy_all(vm);
