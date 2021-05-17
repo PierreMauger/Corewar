@@ -48,6 +48,7 @@ bool set_all(list_t *coord);
 size_t verif_id(list_t *coord, ssize_t id);
 bool verif_file_name(parsing_t *pars_temp);
 bool verif_file(parsing_t *pars_temp);
+bool verif_champion_size(list_t *coord);
 bool verif_all(list_t *coord);
 
 // OPERATIONS
