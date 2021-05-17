@@ -21,5 +21,8 @@ typedef struct {
 } file_t;
 
 char *bread_file(char *path, size_t size_read);
+file_t *bread_file_len(char *path, size_t size_read);
+file_t *create_file(size_t len);
+void destroy_file(file_t *file);
 
 #endif // BFILE_H
