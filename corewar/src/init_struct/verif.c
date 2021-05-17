@@ -27,6 +27,7 @@ bool verif_file(parsing_t *pars_temp)
     size_t len = pars_temp->file->len;
     size_t adv = 0;
     int id = 0;
+    char *temp = NULL;
 
     if (len <= sizeof(header_t))
         return 1;
@@ -37,8 +38,14 @@ bool verif_file(parsing_t *pars_temp)
     pars_temp->name = bstrndup((char *)(file + adv), adv_to_next(adv, file, len) - adv);
     if (!pars_temp->name)
         return 1;
+    temp = bstrndup(pars_temp->file->file, pars_temp->file - sizeof(header_t));
+    free(pars_temp->file->file);
+    pars_temp->file->file = temp;
+    if (!temp)
+        return 1;
     return 0;
 }
+// DO STRNDUP FORCED
 
 bool verif_file_name(parsing_t *pars_temp)
 {
@@ -72,18 +79,18 @@ bool verif_all(list_t *coord)
     return 0;
 }
 
-// bool verif_champion_size(list_t *coord)
-// {
-//     list_node_t *node_temp = NULL;
-//     parsing_t *pars_temp1 = NULL;
-//     parsing_t *pars_temp2 = NULL;
+bool verif_champion_size(list_t *coord)
+{
+    list_node_t *node_temp = NULL;
+    parsing_t *pars_temp1 = NULL;
+    parsing_t *pars_temp2 = NULL;
 
-//     foreach(coord->head, node_temp) {
-//         pars_temp1 = (parsing_t *)node_temp->data;
-//         if (node_temp->next) {
-//             pars_temp2 = (parsing_t *)node_temp->next->data;
-//             if (pars_temp1->arg_a + )
-//         }
-//     }
-//     return 0;
-// }
+    foreach(coord->head, node_temp) {
+        pars_temp1 = (parsing_t *)node_temp->data;
+        if (node_temp->next) {
+            pars_temp2 = (parsing_t *)node_temp->next->data;
+            if (pars_temp1->arg_a + pars_temp1->file->len )
+        }
+    }
+    return 0;
+}
