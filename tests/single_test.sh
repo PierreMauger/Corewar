@@ -10,8 +10,9 @@ if [ $# -ne 1 ]
         exit 1
 fi
 
-./asm/asm champion/$1.s
 ./tests/asm champion/$1.s
+mv $1.cor t$1.cor
+./asm/asm champion/$1.s
 
 if [ $? -ne 0 ]
     then
@@ -19,14 +20,14 @@ if [ $? -ne 0 ]
         exit 1
 fi
 
-xxd -p $1.cor > file1
-xxd -p champion/$1.cor > file2
+xxd -p t$1.cor > file1
+xxd -p $1.cor > file2
 
 diff file1 file2
 
 if [ $? -eq 0 ]
     then
-        echo -e $filename "-> ${GREEN}Success${WHITE}"
+        echo -e $1 "-> ${GREEN}Success${WHITE}"
     else
-        echo -e $filename "-> ${RED}Failure${WHITE}"
+        echo -e $1 "-> ${RED}Failure${WHITE}"
 fi

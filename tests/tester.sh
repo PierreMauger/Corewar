@@ -15,8 +15,9 @@ do
         continue
     fi
 
-    ./asm/asm champion/$filename.s
     ./tests/asm champion/$filename.s
+    mv $filename.cor t$filename.cor
+    ./asm/asm champion/$filename.s
 
     if [ $? -ne 0 ]
         then
@@ -24,8 +25,8 @@ do
             exit 1
     fi
 
-    xxd -p $filename.cor > file1
-    xxd -p champion/$filename.cor > file2
+    xxd -p t$filename.cor > file1
+    xxd -p $filename.cor > file2
 
     if [ $# -eq 1 ]
     then
@@ -46,6 +47,6 @@ do
             echo -e $filename "-> ${RED}Failure${WHITE}"
     fi
 
-    rm $filename.cor champion/$filename.cor
+    rm t$filename.cor $filename.cor
     rm file1 file2
 done

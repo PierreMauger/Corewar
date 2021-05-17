@@ -7,15 +7,29 @@
 
 #include "asm.h"
 
+static int check_path(char *buffer)
+{
+    for (int i = 0; buffer[i]; i++)
+        if (buffer[i] == '/')
+            return 1;
+    return 0;
+}
+
 char *get_chmp_filename(char *filename)
 {
-    char *chmp = bcalloc(sizeof(char),  bstrlen(filename) + 4);
+    char *chmp = NULL;
     size_t len = 0;
+    size_t adv = 0;
 
+    if (check_path(filename)) {
+        for (; filename[adv] && filename[adv] != '/'; adv++);
+        adv++;
+    }
+    chmp = bcalloc(sizeof(char),  bstrlen(filename + adv) + 4);
     if (!chmp)
         return NULL;
-    for (; filename[len] && filename[len] != '.'; len++);
-    bstrncpy(chmp, filename, len);
+    for (; filename[len + adv] && filename[len + adv] != '.'; len++);
+    bstrncpy(chmp, filename + adv, len);
     bstrcat(chmp, ".cor");
     return chmp;
 }
