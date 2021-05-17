@@ -28,19 +28,3 @@ size_t get_n_bytes(size_t adv, unsigned char *buffer, size_t max, int n)
     }
     return result;
 }
-
-// bool verif_champion_size(list_t *coord)
-// {
-//     list_node_t *node_temp = NULL;
-//     parsing_t *pars_temp1 = NULL;
-//     parsing_t *pars_temp2 = NULL;
-
-//     foreach(coord->head, node_temp) {
-//         pars_temp1 = (parsing_t *)node_temp->data;
-//         if (node_temp->next) {
-//             pars_temp2 = (parsing_t *)node_temp->next->data;
-//             if (pars_temp1->arg_a + )
-//         }
-//     }
-//     return 0;
-// }
