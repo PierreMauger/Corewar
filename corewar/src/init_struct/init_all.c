@@ -29,7 +29,10 @@ vm_t *init_all(list_t *coord, size_t dump)
     vm->dump = dump;
     if (!set_all(coord) && !verif_all(coord))
         init_champion(vm, coord);
-    else vm = NULL;
+    else {
+        destroy_all(vm);
+        vm = NULL;
+    }
     destroy_list(coord, destroy_parsing);
     return vm;
 }

@@ -15,4 +15,6 @@ void destroy_parsing(void *parsing)
         return;
     if (parsing_cast->name)
         free(parsing_cast->name);
+    if (parsing_cast->file)
+        destroy_file(parsing_cast->file);
 }
