@@ -52,6 +52,17 @@ bool set_name(parsing_t *pars_temp)
     return 0;
 }
 
+bool set_file(parsing_t *pars_temp)
+{
+    pars_temp->file = bread_file_len(pars_temp->name, READ_SIZE);
+    if (!pars_temp->file || !pars_temp->file->file || !pars_temp->file->len) {
+        if (pars_temp->file)
+            free(pars_temp->file);
+        return 1;
+    }
+    return 0;
+}
+
 bool set_all(list_t *coord)
 {
     list_node_t *node_temp = NULL;
