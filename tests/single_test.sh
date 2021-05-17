@@ -11,7 +11,7 @@ if [ $# -ne 1 ]
 fi
 
 ./tests/asm champion/$1.s
-mv $1.cor t$1.cor
+mv $1.cor res_$1.cor
 ./asm/asm champion/$1.s
 
 if [ $? -ne 0 ]
@@ -20,7 +20,7 @@ if [ $? -ne 0 ]
         exit 1
 fi
 
-xxd -p t$1.cor > file1
+xxd -p res_$1.cor > file1
 xxd -p $1.cor > file2
 
 diff file1 file2

@@ -16,7 +16,7 @@ do
     fi
 
     ./tests/asm champion/$filename.s
-    mv $filename.cor t$filename.cor
+    mv $filename.cor res_$filename.cor
     ./asm/asm champion/$filename.s
 
     if [ $? -ne 0 ]
@@ -25,7 +25,7 @@ do
             exit 1
     fi
 
-    xxd -p t$filename.cor > file1
+    xxd -p res_$filename.cor > file1
     xxd -p $filename.cor > file2
 
     if [ $# -eq 1 ]
@@ -47,6 +47,6 @@ do
             echo -e $filename "-> ${RED}Failure${WHITE}"
     fi
 
-    rm t$filename.cor $filename.cor
+    rm res_$filename.cor $filename.cor
     rm file1 file2
 done
