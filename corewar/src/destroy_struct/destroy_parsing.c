@@ -13,5 +13,6 @@ void destroy_parsing(void *parsing)
 
     if (!parsing_cast)
         return;
-    free(parsing_cast->name);
+    if (parsing_cast->name)
+        free(parsing_cast->name);
 }
