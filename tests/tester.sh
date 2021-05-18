@@ -5,6 +5,8 @@ GREEN='\e[32m'
 YELLOW='\e[33m'
 WHITE='\e[0m'
 
+echo -e "${GREEN}##############################   TESTS   ##############################${WHITE}"
+
 for entry in "champion"/*
 do
     filename=$(basename -- "$entry")
