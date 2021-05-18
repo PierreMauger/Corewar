@@ -89,7 +89,7 @@ void write_params(int fd, command_t *com, list_t *list);
 void write_instructions(int fd, list_t *list);
 
     // write_label.c
-int get_com_pos(command_t *com, size_t id, list_t *list);
+int get_com_pos(command_t *com, list_t *list);
 int get_label_pos(char *label, list_t *list);
 void write_label(int fd, command_t *com, size_t i, list_t *list);
 

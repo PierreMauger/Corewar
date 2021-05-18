@@ -35,22 +35,18 @@ command_t *create_com(char *buffer, size_t *adv)
         for (; buffer[*adv] && buffer[*adv] != '\n'; (*adv)++);
         (*adv)++;
     }
-    // printf("\e[31m%s\n", buffer + *adv);
     com->label = get_label(buffer, adv);
     if (com->label && check_label(com->label))
         return NULL;
-    // printf("\e[32m%s\n", buffer + *adv);
     com->name = get_command_name(buffer, adv);
     if (!com->name)
         return NULL;
     *adv += bstrlen(com->name);
     for (; buffer[*adv] && (buffer[*adv] == ' '
         || buffer[*adv] == ':' || buffer[*adv] == '\t'); (*adv)++);
-    // printf("\e[33m%s\n", buffer + *adv);
     com->params = get_command_params(buffer, *adv);
     if (com->params == NULL)
         return NULL;
-    // printf("\e[34m%s\n", buffer + *adv);
     return com;
 }
 

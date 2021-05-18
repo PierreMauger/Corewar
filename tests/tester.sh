@@ -2,6 +2,7 @@
 
 RED='\e[31m'
 GREEN='\e[32m'
+YELLOW='\e[33m'
 WHITE='\e[0m'
 
 for entry in "champion"/*
@@ -21,8 +22,8 @@ do
 
     if [ $? -ne 0 ]
         then
-            echo -e "${RED}Couldn't find binaries${WHITE}"
-            exit 1
+            echo -e "$filename -> ${YELLOW}Couldn't find binaries${WHITE}"
+            continue
     fi
 
     xxd -p res_$filename.cor > file1
