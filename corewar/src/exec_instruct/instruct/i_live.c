@@ -40,7 +40,7 @@ int i_live(vm_t *vm, __attribute__((unused))champion_t *champion,
     champion_t *champ_id = NULL;
 
     reset_it(process);
-    increase_coord(process, 4);
+    increase_coord(process, sizeof(int));
     champ_id = verif_id_live(id_mem, vm);
     if (!champ_id) {
         return 0;
