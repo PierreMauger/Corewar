@@ -65,7 +65,7 @@ bool verif_champion_size(list_t *coord)
         }
         else pars_temp2 = (parsing_t *)coord->head->data;
         if ((pars_temp1->arg_a + pars_temp1->file->len) % MEM_SIZE >=
-            pars_temp2->arg_a)
+            (size_t)pars_temp2->arg_a)
             return 1;
     }
     return 0;

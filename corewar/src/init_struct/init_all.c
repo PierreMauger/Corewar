@@ -19,10 +19,11 @@ bool init_champion(vm_t *vm, list_t *coord)
             bstrdup(pars_temp->name));
         if (!champ_temp)
             return 1;
-        write_mem(vm->memory, pars_temp->file->file,
+        write_mem(vm->memory, (unsigned char *)pars_temp->file->file,
             pars_temp->arg_a, pars_temp->file->len);
         champ_temp->process_list = create_list();
     }
+    return 0;
 }
 // NEED SOME SPLIT
 
@@ -33,12 +34,9 @@ vm_t *init_all(list_t *coord, size_t dump)
     if (!vm || !coord || coord->lenght <= 1)
         return NULL;
     vm->dump = dump;
-    if (!set_all(coord) && !verif_all(coord) && !verif_champion_size(coord))
-        if (init_champion(vm, coord)) {
-            destroy_all(vm);
-            vm = NULL;
-        }
-    else {
+    if (set_all(coord) || verif_all(coord) ||
+        verif_champion_size(coord) ||
+        init_champion(vm, coord)) {
         destroy_all(vm);
         vm = NULL;
     }
