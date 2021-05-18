@@ -43,7 +43,7 @@ bool set_all(list_t *coord)
 {
     list_node_t *node_temp = NULL;
     parsing_t *pars_temp = NULL;
-    size_t espacement = IDX_NBR / coord->lenght;
+    size_t espacement = MEM_SIZE / coord->lenght;
 
     if (!espacement)
         return 1;

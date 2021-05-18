@@ -61,7 +61,8 @@ void destroy_vm(vm_t *vm);
 // INIT ALL
 void write_mem(unsigned char **memory, unsigned char *champion,
     size_t adress, size_t len_champion);
-bool init_champion(vm_t *vm, list_t *coord);
+bool init_champion(vm_t *vm, parsing_t *pars_temp, champion_t *champ_temp);
+bool get_coord(vm_t *vm, list_t *coord);
 vm_t *init_all(list_t *coord, size_t dump);
 
 // ALL INSTRUCT
@@ -84,7 +85,7 @@ int i_aff(vm_t *vm, champion_t *champion, process_t *process);
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 
 // UTILS INSTRUCT
-unsigned int get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
+size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 void increase_coord(process_t *process, size_t increase);
 
 // VM LOOP

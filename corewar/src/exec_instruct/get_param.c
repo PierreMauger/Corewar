@@ -7,19 +7,20 @@
 
 #include "corewar.h"
 
-unsigned int get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get)
+size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get)
 {
-    unsigned int nbr_mem = 0;
-    size_t coord_act = y;
+    size_t result = 0;
 
-    for (size_t i = 0; i < size_to_get; i++) {
-        if (coord_act >= IDX_MOD) {
-            coord_act %= IDX_MOD;
+    for (size_t adv = 0; adv < size_to_get; adv++) {
+        if (y >= IDX_MOD) {
+            y %= IDX_MOD;
             x++;
             x %= IDX_NBR;
         }
-        nbr_mem |= GET_ACT_CASE(vm, x, coord_act);
-        coord_act++;
+        result |= GET_ACT_CASE(vm, x, y);
+        if (adv + 1 != size_to_get)
+            result <<= 8;
+        y++;
     }
-    return nbr_mem;
+    return result;
 }
