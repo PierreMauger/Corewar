@@ -10,6 +10,7 @@ SRC				=	src/check_asm.c					\
 					src/check_command.c				\
 					src/check_header.c				\
 					src/check_params_size.c			\
+					src/check_synthaxe.c 			\
 					src/destroy_command.c			\
 					src/get_command_name.c			\
 					src/get_command_params.c		\

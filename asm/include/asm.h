@@ -34,6 +34,10 @@ typedef struct {
     // check_asm.c
 list_t *check_asm(char *buffer);
 
+    // check_syntaxe.c
+int check_new_line(char *buffer, size_t *adv);
+void skip_comment(char *buffer, size_t *adv);
+
     // check_header.c
 size_t skip_head(char *buffer);
 size_t check_name(char *buffer, size_t adv, char *param_name, int param_len);

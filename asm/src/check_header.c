@@ -42,7 +42,7 @@ size_t check_header(char *buffer, size_t adv)
     adv = check_name(buffer, adv, NAME_CMD_STRING, PROG_NAME_LENGTH);
     adv = check_name(buffer, adv, COMMENT_CMD_STRING, COMMENT_LENGTH);
     if (adv) {
-        for (; buffer[adv] && buffer[adv] == '\n'; adv++);
+        check_new_line(buffer, &adv);
     }
     return adv;
 }
