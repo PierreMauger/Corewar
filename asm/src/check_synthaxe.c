@@ -22,6 +22,7 @@ int check_after_name(char *buffer, size_t *adv, char *param_name)
             return (1);
         }
     }
+    (*adv)++;
     return (0);
 }
 
