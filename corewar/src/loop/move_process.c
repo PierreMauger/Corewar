@@ -7,10 +7,12 @@
 
 #include "corewar.h"
 
-void move_process(process_t *process)
+void increase_coord(process_t *process, size_t increase)
 {
-    process->coord_pc.y++;
-    process->coord_pc.y %= IDX_MOD;
-    !process->coord_pc.y ? process->coord_pc.x++ : 0;
-    process->coord_pc.x %= IDX_NBR;
+    process->coord_pc.y += increase;
+    if (process->coord_pc.y >= IDX_MOD) {
+        process->coord_pc.y %= IDX_MOD;
+        process->coord_pc.x++;
+        process->coord_pc.x %= IDX_NBR;
+    }
 }
