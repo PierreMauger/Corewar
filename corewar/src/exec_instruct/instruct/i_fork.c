@@ -14,7 +14,6 @@ int i_fork(vm_t *vm, __attribute__((unused))champion_t *champion,
         process->coord_pc.y + 1, T_DIR);
     process_t *new_process = NULL;
 
-    reset_it(process);
     new_process = create_process(process);
     if (!new_process)
         return 1;

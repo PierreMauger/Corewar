@@ -89,11 +89,9 @@ int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 
 // UTILS INSTRUCT
 void increase_coord(process_t *process, size_t increase);
-void reset_it(process_t *process);
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 
 // VM LOOP
-void move_process(process_t *process);
 void check_case(vm_t *vm, process_t *process);
 int check_iteration(vm_t *vm, champion_t *champion, process_t *process);
 
