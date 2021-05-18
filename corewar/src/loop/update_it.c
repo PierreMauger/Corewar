@@ -29,7 +29,7 @@ static int check_lenght(vm_t *vm)
 
     if (vm->champion_list->lenght == 1) {
         champion = (champion_t *)vm->champion_list->head->data;
-        bprintf("The player %d(%s)has won.\n", champion->id, champion->name);
+        bprintf("The player %d(%s) has won.\n", champion->id, champion->name);
         return 1;
     }
     return 0;
@@ -48,7 +48,7 @@ int delete_dead(vm_t *vm)
             destroy_champion(champion);
         }
         else if (!champion->is_alive && champion->alive_it == last_live) {
-            bprintf("The player %d(%s)has won.\n",
+            bprintf("The player %d(%s) has won.\n",
                 champion->id, champion->name);
             return 1;
         }
