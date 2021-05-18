@@ -30,7 +30,7 @@ void print_memory(vm_t *vm)
 {
     static size_t it_require = 0;
 
-    if (it_require < vm->dump) {
+    if (it_require < vm->dump || vm->dump <= 0) {
         it_require++;
         return;
     }
