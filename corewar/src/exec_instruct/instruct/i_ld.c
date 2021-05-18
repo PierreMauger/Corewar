@@ -28,15 +28,13 @@ static int ind_ld(vm_t *vm, champion_t *champion, process_t *process)
 
 int i_ld(vm_t *vm, champion_t *champion, process_t *process)
 {
-    // unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
-    //     process->coord_pc.y + ID_SIZE, 1);
-    // unsigned char temp = indicator >> 4;
+    unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
+        process->coord_pc.y + T_ID, T_INFO);
 
-    // if (temp & BIT_REG != BIT_REG) {
-    //     vm->carry = 0;
-    //     return 0;
-    // }
-    // temp = indicator >> 6;
+    if (indicator << 2 != 1) {
+        vm->carry = 0;
+        return 0;
+    }
     // if (temp & BIT_DIR == BIT_DIR) {
     //     return dir_ld(vm, champion, process);
     // }

@@ -36,7 +36,7 @@ int i_live(vm_t *vm, __attribute__((unused))champion_t *champion,
     process_t *process)
 {
     unsigned int id_mem = get_param(vm, process->coord_pc.x,
-        process->coord_pc.y + 1, sizeof(int));
+        process->coord_pc.y + T_ID, sizeof(int));
     champion_t *champ_id = NULL;
 
     increase_coord(process, sizeof(int));

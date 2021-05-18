@@ -7,6 +7,13 @@
 
 #include "corewar.h"
 
+bool verif_nbr_param(unsigned char indicator, int nbr_param)
+{
+    if (indicator << (nbr_param * 2) != 0)
+        return 1;
+    return 0;
+}
+
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get)
 {
     size_t result = 0;
