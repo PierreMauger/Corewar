@@ -32,7 +32,8 @@ bool verif_file(parsing_t *pars_temp)
         adv_to_next(adv, file, len) - adv);
     if (!pars_temp->name)
         return 1;
-    temp = bstrndup_forced((char *)(file + adv), len - sizeof(header_t));
+    pars_temp->file->len -= sizeof(header_t);
+    temp = bstrndup_forced((char *)(file + sizeof(header_t)), pars_temp->file->len);
     free(pars_temp->file->file);
     pars_temp->file->file = temp;
     if (!temp)
