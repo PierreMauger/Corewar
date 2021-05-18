@@ -29,3 +29,6 @@ fclean:	clean
 debug:
 	@(make debug -C $(PATH_ASM)) > /dev/null
 	@(make debug -C $(PATH_COREWAR)) > /dev/null
+
+unit_tests: all
+	./tests/tester.sh
