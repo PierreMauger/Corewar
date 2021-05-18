@@ -17,26 +17,32 @@ static bool verif_magic(unsigned char *file, size_t len, size_t adv)
     return 0;
 }
 
+static void get_file(parsing_t *pars_temp)
+{
+    char *temp = NULL;
+
+    pars_temp->file->len -= sizeof(header_t);
+    temp = bstrndup_forced((char *)(pars_temp->file + sizeof(header_t)),
+        pars_temp->file->len);
+    free(pars_temp->file->file);
+    pars_temp->file->file = temp;
+}
+
 bool verif_file(parsing_t *pars_temp)
 {
     unsigned char *file = (unsigned char *)pars_temp->file->file;
     size_t len = pars_temp->file->len;
     size_t adv = 0;
-    char *temp = NULL;
 
     if (len <= sizeof(header_t) || verif_magic(file, len, adv))
         return 1;
     adv += sizeof(COREWAR_EXEC_MAGIC);
     free(pars_temp->name);
-    pars_temp->name = bstrndup_forced((char *)(file + adv),
-        adv_to_next(adv, file, len) - adv);
+    pars_temp->name = bstrdup((char *)(file + adv));
     if (!pars_temp->name)
         return 1;
-    pars_temp->file->len -= sizeof(header_t);
-    temp = bstrndup_forced((char *)(file + sizeof(header_t)), pars_temp->file->len);
-    free(pars_temp->file->file);
-    pars_temp->file->file = temp;
-    if (!temp)
+    get_file(pars_temp);
+    if (!pars_temp->file->file)
         return 1;
     return 0;
 }
