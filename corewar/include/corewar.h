@@ -30,6 +30,8 @@
 #define RETURN_ERROR 84
 #define READ_SIZE 1024
 
+#define MAX_CHAMP 4
+
 #define HEXA_BASE "0123456789abcdef"
 
 #define BYTES_MOD 32
