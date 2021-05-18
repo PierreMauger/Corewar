@@ -22,7 +22,7 @@ static void get_file(parsing_t *pars_temp)
     char *temp = NULL;
 
     pars_temp->file->len -= sizeof(header_t);
-    temp = bstrndup_forced((char *)(pars_temp->file + sizeof(header_t)),
+    temp = bstrndup_forced((char *)(pars_temp->file->file + sizeof(header_t)),
         pars_temp->file->len);
     free(pars_temp->file->file);
     pars_temp->file->file = temp;

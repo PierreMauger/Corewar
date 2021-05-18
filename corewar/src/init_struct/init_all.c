@@ -7,6 +7,20 @@
 
 #include "corewar.h"
 
+process_t *init_process(parsing_t *pars_temp, champion_t *champ_temp)
+{
+    process_t *process_temp = create_process(NULL);
+
+    if (!process_temp)
+        return NULL;
+    process_temp->coord_pc = (coord_t){
+        pars_temp->arg_a / IDX_MOD,
+        pars_temp->arg_a % IDX_MOD
+    };
+    process_temp->reg[r1] = champ_temp->id;
+    return process_temp;
+}
+
 bool init_champion(vm_t *vm, parsing_t *pars_temp, champion_t *champ_temp)
 {
     list_node_t *node_temp = NULL;
@@ -17,13 +31,9 @@ bool init_champion(vm_t *vm, parsing_t *pars_temp, champion_t *champ_temp)
     champ_temp->process_list = create_list();
     if (!champ_temp->process_list)
         return 1;
-    process_temp = create_process(NULL);
+    process_temp = init_process(pars_temp, champ_temp);
     if (!process_temp)
         return 1;
-    process_temp->coord_pc = (coord_t){
-        pars_temp->arg_a / IDX_MOD,
-        pars_temp->arg_a % IDX_MOD
-    };
     node_temp = create_node((void *)process_temp);
     if (!node_temp)
         return 1;

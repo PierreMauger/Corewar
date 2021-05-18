@@ -63,6 +63,7 @@ void destroy_vm(vm_t *vm);
 // INIT ALL
 void write_mem(unsigned char **memory, unsigned char *champion,
     size_t adress, size_t len_champion);
+process_t *init_process(parsing_t *pars_temp, champion_t *champ_temp);
 bool init_champion(vm_t *vm, parsing_t *pars_temp, champion_t *champ_temp);
 bool get_coord(vm_t *vm, list_t *coord);
 vm_t *init_all(list_t *coord, size_t dump);
