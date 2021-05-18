@@ -88,8 +88,9 @@ int i_aff(vm_t *vm, champion_t *champion, process_t *process);
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 
 // UTILS INSTRUCT
-size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 void increase_coord(process_t *process, size_t increase);
+void reset_it(process_t *process);
+size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 
 // VM LOOP
 void move_process(process_t *process);

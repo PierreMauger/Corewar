@@ -36,6 +36,13 @@ void increase_coord(process_t *process, size_t increase)
     }
 }
 
+void reset_it(process_t *process)
+{
+    process->goal_it = 0;
+    process->current_it = 0;
+    process->id_instruct = 0;
+}
+
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process)
 {
     return instruct[process->id_instruct](vm, champion, process);

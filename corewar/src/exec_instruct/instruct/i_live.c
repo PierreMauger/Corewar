@@ -36,12 +36,10 @@ int i_live(vm_t *vm, __attribute__((unused))champion_t *champion,
     process_t *process)
 {
     unsigned int id_mem = get_param(vm, process->coord_pc.x,
-        process->coord_pc.y + 1, 4);
+        process->coord_pc.y + 1, sizeof(int));
     champion_t *champ_id = NULL;
 
-    process->goal_it = 0;
-    process->current_it = 0;
-    process->id_instruct = 0;
+    reset_it(process);
     increase_coord(process, 4);
     champ_id = verif_id_live(id_mem, vm);
     if (!champ_id) {
