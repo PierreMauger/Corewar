@@ -10,7 +10,7 @@ if [ $# -ne 1 ]
         exit 1
 fi
 
-./tests/asm champion/$1.s
+./tests/binaries/asm champion/$1.s
 mv $1.cor res_$1.cor
 ./asm/asm champion/$1.s
 

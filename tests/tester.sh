@@ -16,7 +16,7 @@ do
         continue
     fi
 
-    ./tests/asm champion/$filename.s
+    ./tests/binaries/asm champion/$filename.s
     mv $filename.cor res_$filename.cor
     ./asm/asm champion/$filename.s
 
