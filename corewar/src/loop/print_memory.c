@@ -11,10 +11,9 @@ void print_all(vm_t *vm)
 {
     char *hex = NULL;
 
-    // bprintf("\033c");
     for (size_t x = 0; x < IDX_NBR; x++) {
         for (size_t y = 0; y < IDX_MOD; y++) {
-            hex = bitoa_base((int)vm->memory[x][y], HEXA_BASE);
+            hex = bitoa_base((int)GET_ACT_CASE(vm, x, y), HEXA_BASE);
             if (bstrlen(hex) == 1)
                 bprintf("0%s ", hex);
             else bprintf("%s ", hex);
@@ -23,7 +22,6 @@ void print_all(vm_t *vm)
                 bprintf("\n");
         }
     }
-    bprintf("\n");
 }
 
 void print_memory(vm_t *vm)

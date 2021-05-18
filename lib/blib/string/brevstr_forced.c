@@ -13,7 +13,7 @@ char *brevstr_forced(char *src, size_t size_str)
     char c;
 
     size_str--;
-    for (size_t i = 0; i < size_str / 2; i++) {
+    for (size_t i = 0; i < size / 2; i++) {
         c = src[i];
         src[i] = src[size_str];
         src[size_str] = c;
