@@ -79,7 +79,7 @@ list_t *get_command(char *buffer, size_t adv)
             return NULL;
         add_node(list, node);
         for (; buffer[adv] && buffer[adv] != '\n'; adv++);
-        for (; buffer[adv] && buffer[adv] == '\n'; adv++);
+        check_new_line(buffer, &adv);
     }
     return list;
 }

@@ -23,7 +23,11 @@ size_t check_name(char *buffer, size_t adv, char *param_name, int param_len)
 {
     size_t quote_nbr = 0;
 
+    if (go_to_name(buffer, &adv, param_name) == 1)
+        return 0;
     if (!bstrncmp(buffer + adv, param_name, bstrlen(param_name) + 1))
+        return 0;
+    if (check_after_name(buffer, &adv, param_name) == 1)
         return 0;
     for (size_t len = 0; buffer[adv] && buffer[adv] != '\n'; adv++, len++) {
         if (buffer[adv] == '"')
@@ -40,6 +44,8 @@ size_t check_name(char *buffer, size_t adv, char *param_name, int param_len)
 size_t check_header(char *buffer, size_t adv)
 {
     adv = check_name(buffer, adv, NAME_CMD_STRING, PROG_NAME_LENGTH);
+    if (!adv)
+        return (0);
     adv = check_name(buffer, adv, COMMENT_CMD_STRING, COMMENT_LENGTH);
     if (adv) {
         check_new_line(buffer, &adv);
