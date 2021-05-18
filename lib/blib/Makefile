@@ -30,6 +30,7 @@ SRC		=	print/bfprintf/bfprint_char.c			\
 			string/bstrcpy.c						\
 			string/bstrncpy.c						\
 			string/brevstr.c						\
+			string/brevstr_forced.c					\
 			string/bitoa.c							\
 			string/bitoa_base.c						\
 			string/batoi.c							\
@@ -48,7 +49,7 @@ SRC		=	print/bfprintf/bfprint_char.c			\
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS	=	-I include -W
+CFLAGS	=	-I include -W -g
 
 NAME	=	libblib.a
 

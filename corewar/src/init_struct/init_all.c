@@ -59,7 +59,7 @@ vm_t *init_all(list_t *coord, size_t dump)
 {
     vm_t *vm = create_vm();
 
-    if (!vm || !coord || coord->lenght <= 1)
+    if (!vm || !coord || coord->lenght <= 1 || coord->lenght > MAX_CHAMP)
         return NULL;
     vm->dump = dump;
     if (set_all(coord) || verif_all(coord) ||

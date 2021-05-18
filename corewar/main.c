@@ -21,10 +21,12 @@ int main(int argc, char **argv)
     list_t *coord = get_info_champion(argv, (bool)dump);
     vm_t *vm = NULL;
 
+    if (!coord)
+        print_usage();
     vm = init_all(coord, dump);
     if (vm == NULL)
         status = 84;
-    // else status = vm_loop(vm);
+    else status = vm_loop(vm);
     destroy_all(vm);
     return status;
 }

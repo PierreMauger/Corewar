@@ -11,6 +11,8 @@ static int get_base_int_size(int nbr, int base_size)
 {
     int i = 0;
 
+    if (nbr == 0)
+        nbr++;
     if (nbr < 0)
         i++;
     while (nbr != 0) {
@@ -40,5 +42,5 @@ char *bitoa_base(int nbr, char *base)
         str[adv] = base[comm];
         adv++;
     } while (nbr != 0);
-    return brevstr(str);
+    return brevstr_forced(str, len_nbr);
 }

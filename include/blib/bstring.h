@@ -32,6 +32,7 @@ char *bstrcpy(char *dest, char *src);
 char *bstrncpy(char *dest, char *src, size_t n);
 
 char *brevstr(char *src);
+char *brevstr_forced(char *src, size_t size_str);
 
 char *bitoa(int nbr);
 char *bitoa_base(int nbr, char *base);

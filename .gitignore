@@ -5,7 +5,6 @@
 .vscode
 corewar/corewar
 asm/asm
-binaries
 *.cor
 file1
 file2
