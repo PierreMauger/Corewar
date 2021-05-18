@@ -10,7 +10,7 @@
 int get_size_dir(char *param, list_t *list, size_t name_id)
 {
     if (is_num(param + 1)) {
-        if (name_id > 9 && name_id < 13)
+        if (name_id >= 8 && name_id < 12)
             return 2;
         else
             return 4;
