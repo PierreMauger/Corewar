@@ -32,14 +32,16 @@ int check_label(char *label)
 size_t check_command(list_t *list)
 {
     list_node_t *temp = NULL;
+    command_t *temp_com = NULL;
     size_t id = 0;
 
     foreach(list->head, temp) {
-        id = get_id(((command_t *)temp->data)->name);
-        if ((int)barray_len(((command_t *)temp->data)->params) !=
+        temp_com = (command_t *)temp->data;
+        id = get_id(temp_com->name);
+        if ((int)barray_len(temp_com->params) !=
         op_tab[id].nbr_args)
             return 0;
-        if (!check_size(((command_t *)temp->data)->params, op_tab[id].type,
+        if (!check_size(temp_com, op_tab[id].type,
         list))
             return 0;
     }

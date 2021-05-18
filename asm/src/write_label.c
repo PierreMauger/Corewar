@@ -20,9 +20,8 @@ int get_com_pos(command_t *com, list_t *list)
             return res;
         if (barray_len(temp_com->params) != 1)
             res++;
-        for (size_t i = 0; i < barray_len(temp_com->params); i++) {
-            res += get_size(temp_com->params[i], list, get_id(temp_com->name));
-        }
+        for (size_t i = 0; i < barray_len(temp_com->params); i++)
+            res += get_size(temp_com, i, list, get_id(temp_com->name));
     }
     return res;
 }
@@ -38,9 +37,8 @@ int get_label_pos(char *label, list_t *list)
         res++;
         if (temp_com->label && !bstrcmp(temp_com->label, label))
             return res;
-        for (size_t i = 0; i < barray_len(temp_com->params); i++) {
-            res += get_size(temp_com->params[i], list, get_id(temp_com->name));
-        }
+        for (size_t i = 0; i < barray_len(temp_com->params); i++)
+            res += get_size(temp_com, i, list, get_id(temp_com->name));
         if (barray_len(temp_com->params) != 1)
             res++;
     }

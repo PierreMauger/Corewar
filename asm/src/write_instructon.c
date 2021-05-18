@@ -22,7 +22,7 @@ void write_dir(int fd, command_t *com, size_t i, list_t *list)
             write(fd, &res, 4);
         }
     }
-    if (is_label(com->params[i] + 1, list))
+    if (is_label(com, i, list))
         write_label(fd, com, i, list);
 }
 
@@ -42,7 +42,7 @@ void write_params(int fd, command_t *com, list_t *list)
             res = swap_endian_2(res);
             write(fd, &res, 2);
         }
-        if (is_dir(com->params[i], list))
+        if (is_dir(com, i, list))
             write_dir(fd, com, i, list);
     }
 }

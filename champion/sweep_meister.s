@@ -109,7 +109,6 @@ fill:
     lfork %0
 
 
-cpycode:
 setup:
 	live %1337
     add r4, r4, r4

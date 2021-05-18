@@ -24,36 +24,39 @@ int is_reg(char *str)
     return 0;
 }
 
-int is_label(char *str, list_t *list)
+int is_label(command_t *com, size_t i, list_t *list)
 {
     list_node_t *temp = NULL;
+    command_t *temp_com = NULL;
 
     foreach(list->head, temp) {
-        if (str[0] == ':' && ((command_t *)temp->data)->label &&
-        !bstrcmp(((command_t *)temp->data)->label, str + 1))
+        temp_com = (command_t *)temp->data;
+        if (com->params[i][1] == ':' && temp_com->label &&
+        !bstrcmp(temp_com->label, com->params[i] + 2))
             return 1;
     }
     return 0;
 }
 
-int is_dir(char *str, list_t *list)
+int is_dir(command_t *com, size_t i, list_t *list)
 {
-    if (str[0] == '%' && (is_num(str + 1) || is_label(str + 1, list))) {
+    if (com->params[i][0] == '%' && (is_num(com->params[i] + 1) ||
+    is_label(com, i, list))) {
         return 1;
     }
     return 0;
 }
 
-int check_size(char **params, args_type_t *type, list_t *list)
+int check_size(command_t *com, args_type_t *type, list_t *list)
 {
     bool check = false;
 
-    for (size_t i = 0; i < barray_len(params); i++, check = false) {
-        if (is_reg(params[i]) && type[i] % 2 == T_REG)
+    for (size_t i = 0; i < barray_len(com->params); i++, check = false) {
+        if (is_reg(com->params[i]) && type[i] % 2 == T_REG)
             check = true;
-        if (is_dir(params[i], list) && type[i] % 4 >= T_DIR)
+        if (is_dir(com, i, list) && type[i] % 4 >= T_DIR)
             check = true;
-        if (is_num(params[i]) && type[i] >= T_IND)
+        if (is_num(com->params[i]) && type[i] >= T_IND)
             check = true;
         if (check == false)
             return 0;

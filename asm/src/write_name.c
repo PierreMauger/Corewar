@@ -34,7 +34,7 @@ int get_total_size(list_t *list)
         if (barray_len(temp_com->params) != 1)
             res++;
         for (size_t i = 0; i < barray_len(temp_com->params); i++)
-            res += get_size(temp_com->params[i], list, get_id(temp_com->name));
+            res += get_size(temp_com, i, list, get_id(temp_com->name));
     }
     return res;
 }
@@ -42,11 +42,11 @@ int get_total_size(list_t *list)
 void write_header(int fd, char *buffer, list_t *list)
 {
     size_t adv = skip_head(buffer);
-    header_t *header = malloc(sizeof(header_t));
+    header_t *header = bcalloc(1, sizeof(header_t));
     char *name = get_name(buffer, &adv, PROG_NAME_LENGTH + 1);
     char *comment = get_name(buffer, &adv, COMMENT_LENGTH + 1);
 
-    if (!name || !comment)
+    if (!name || !comment || !header)
         return;
     header->magic = swap_endian_4(COREWAR_EXEC_MAGIC);
     bstrcpy(header->prog_name, name);
