@@ -30,7 +30,7 @@ size_t check_name(char *buffer, size_t adv, char *param_name, int param_len)
     for (size_t len = 0; buffer[adv] && buffer[adv] != '"'; adv++, len++) {
         if (buffer[adv] == '\n')
             return 0;
-        if (len > (size_t)param_len + (bstrlen(param_name)) + 2)
+        if (len >= (size_t)param_len)
             return 0;
     }
     adv++;

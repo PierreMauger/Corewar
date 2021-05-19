@@ -4,15 +4,17 @@ RED='\e[31m'
 GREEN='\e[32m'
 WHITE='\e[0m'
 
+path="champion*"
+
 if [ $# -ne 1 ]
     then
         echo -e "${RED}Argument error${WHITE}"
         exit 1
 fi
 
-./tests/binaries/asm champion/$1.s
+./tests/binaries/asm $path/$1.s
 mv $1.cor res_$1.cor
-./asm/asm champion/$1.s
+./asm/asm $path/$1.s
 
 if [ $? -ne 0 ]
     then
