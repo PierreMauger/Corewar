@@ -67,6 +67,7 @@ int i_ld(vm_t *vm, __attribute__((unused))champion_t *champion,
     if (params == NULL)
         return 0;
     ld(vm, process, params);
+    increase_coord(process, T_ID + T_INFO + params[0].type + params[1].type);
     free(params);
     return 0;
 }
