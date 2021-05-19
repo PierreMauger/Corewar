@@ -7,38 +7,39 @@
 
 #include "corewar.h"
 
-static int check_indicator(vm_t *vm, process_t *process)
+static bool verif_args(unsigned char indicator)
 {
-    unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
-        process->coord_pc.y + T_ID, T_INFO);
-
     if (verif_nbr_param(indicator, 2))
-        return 0;
+        return 1;
+    if (!verif_act_param(indicator, 0, T_DIR) &&
+        !verif_act_param(indicator, 0, T_IND))
+        return 1;
     if (!verif_act_param(indicator, 1, I_REG))
-        return 0;
-    if (verif_act_param(indicator, 0, I_DIR))
-        return I_DIR;
-    else if (verif_act_param(indicator, 0, I_IND))
-        return I_IND;
-    else return 0;
+        return 1;
+    return 0;
 }
 
-static bool fill_params(vm_t *vm, process_t *process,
-    params_t *params, int ret)
+static params_t *get_args(vm_t *vm, process_t *process,
+    unsigned char indicator)
 {
-    if (ret == I_DIR) {
-        params[0].param = (unsigned int)get_param(vm, process->coord_pc.x,
-            process->coord_pc.y + T_ID + T_INFO, T_DIR);
-    }
-    else if (ret == I_IND)
-        params[0].param = (unsigned int)get_param(vm, process->coord_pc.x,
+    params_t *params = create_params(MAX_ARGS_NUMBER);
+
+    if (!verif_act_param(indicator, 0, T_DIR)) {
+        params[1].param = (unsigned int)get_param(vm, process->coord_pc.x,
             process->coord_pc.y + T_ID + T_INFO, T_IND);
-    else return 1;
+        params[1].type = T_DIR;
+    }
+    else {
+        params[1].param = (unsigned int)get_param(vm, process->coord_pc.x,
+            process->coord_pc.y + T_ID + T_INFO, T_IND);
+        params[1].type = T_IND;
+    }
     params[1].param = (unsigned int)get_param(vm, process->coord_pc.x,
-        process->coord_pc.y + T_ID + T_INFO + ret, T_REG);
-    params[0].type = ret;
-    params[1].type = I_REG;
-    return 0;
+        process->coord_pc.y + T_ID + T_INFO + params[1].type, T_REG);
+    params[1].type = T_REG;
+    if (params[1].param >= REG_NUMBER)
+        return NULL;
+    return params;
 }
 
 static void ld(vm_t *vm, process_t *process, params_t *params)
@@ -56,14 +57,16 @@ static void ld(vm_t *vm, process_t *process, params_t *params)
 int i_ld(vm_t *vm, __attribute__((unused))champion_t *champion,
     process_t *process)
 {
-    int ret = check_indicator(vm, process);
-    params_t params[MAX_ARGS_NUMBER] = {0};
+    unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
+        process->coord_pc.y + T_ID, T_INFO);
+    params_t *params = NULL;
 
-    if (fill_params(vm, process, params, ret) ||
-        params[1].param >= REG_NUMBER) {
-        process->carry = 0;
+    if (verif_args(indicator))
         return 0;
-    }
+    params = get_args(vm, process, indicator);
+    if (params == NULL)
+        return 0;
     ld(vm, process, params);
+    free(params);
     return 0;
 }
