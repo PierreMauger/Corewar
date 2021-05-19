@@ -5,7 +5,7 @@
 #
 # Sat Nov 10  03:24;30  2081
 #
-.name "qpdiohrfuirhfuiehuifqzenucfnhueicfhzeuiohfpieynfgrnghuirynguirgirnhuirnhfuirfnhryhguieklfjerioghruihfuierhfuirhffeiorfjioerjhfioj"
+.name "zork"
 .comment "just a basic  living  program"
 
 l2:

@@ -5,9 +5,11 @@ GREEN='\e[32m'
 YELLOW='\e[33m'
 WHITE='\e[0m'
 
+path="*champion"
+
 echo -e "${GREEN}##############################   TESTS   ##############################${WHITE}"
 
-for entry in "champion"/*
+for entry in $path/*
 do
     filename=$(basename -- "$entry")
     extension="${filename##*.}"
@@ -18,9 +20,9 @@ do
         continue
     fi
 
-    ./tests/binaries/asm champion/$filename.s
+    ./tests/binaries/asm $path/$filename.s
     mv $filename.cor res_$filename.cor
-    ./asm/asm champion/$filename.s
+    ./asm/asm $path/$filename.s
 
     if [ $? -ne 0 ]
         then
