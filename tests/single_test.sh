@@ -4,7 +4,7 @@ RED='\e[31m'
 GREEN='\e[32m'
 WHITE='\e[0m'
 
-path="*champion"
+path="champion*"
 
 if [ $# -ne 1 ]
     then

@@ -5,7 +5,7 @@ GREEN='\e[32m'
 YELLOW='\e[33m'
 WHITE='\e[0m'
 
-path="*champion"
+path="champion*"
 
 echo -e "${GREEN}##############################   TESTS   ##############################${WHITE}"
 
