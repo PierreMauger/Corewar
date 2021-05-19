@@ -35,10 +35,12 @@ int get_label_pos(char *label, list_t *list)
     foreach(list->head, temp) {
         temp_com = temp->data;
         res++;
-        if (temp_com->label && !bstrcmp(temp_com->label, label))
+        if (temp_com->label && !bstrcmp(temp_com->label, label)) {
             return res;
-        for (size_t i = 0; i < barray_len(temp_com->params); i++)
+        }
+        for (size_t i = 0; i < barray_len(temp_com->params); i++) {
             res += get_size(temp_com, i, list, get_id(temp_com->name));
+        }
         if (barray_len(temp_com->params) != 1)
             res++;
     }

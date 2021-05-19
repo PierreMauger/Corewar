@@ -10,7 +10,7 @@ next_label:
     fork %:forkito
 
 forkito:
-    st r1, :brkp1
+    st r1, 4
 
 end_label:
     live %0

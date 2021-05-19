@@ -12,15 +12,15 @@ char *get_label(char *buffer, size_t *adv)
     char *label = NULL;
 
     for (; buffer[*adv] == ' ' || buffer[*adv] == ','
-        || buffer[*adv] == '\t'; (*adv)++);
-    for (size_t temp = 0; buffer[*adv + temp] &&
-    buffer[*adv + temp] != ' ' && buffer[*adv + temp] != '\t'; temp++)
-        if (buffer[*adv + temp] == ':') {
-            label = bstrndup(buffer + *adv, temp);
-            for (; buffer[*adv] && buffer[*adv - 1] != ':'; (*adv)++);
+        || buffer[*adv] == '\t'|| buffer[*adv] == '\n'; (*adv)++);
+    for (size_t len = 0; buffer[*adv + len] &&
+    buffer[*adv + len] != ' ' && buffer[*adv + len] != '\t'; len++)
+        if (buffer[*adv + len] == ':') {
+            label = bstrndup(buffer + *adv, len);
+            *adv += len + 1;
             for (; buffer[*adv] == ',' || buffer[*adv] == ' '
-                || buffer[*adv] == '\t'; (*adv)++);
-            for (; buffer[*adv] && buffer[*adv] == '\n'; (*adv)++);
+                || buffer[*adv] == '\t' || buffer[*adv] == '\n'; (*adv)++);
+            break;
         }
     return label;
 }
