@@ -65,6 +65,7 @@ vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
 
 // INIT ALL
+params_t *create_params(size_t len);
 void write_mem(unsigned char **memory, unsigned char *champion,
     size_t adress, size_t len_champion);
 process_t *init_process(parsing_t *pars_temp, champion_t *champ_temp);
