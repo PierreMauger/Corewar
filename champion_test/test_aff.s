@@ -1,4 +1,4 @@
-.name "0x10_aff"
+.name ""
 .comment "A valid 0x10_aff s file"
 
 lol:
