@@ -56,6 +56,11 @@ typedef struct {
     size_t dump;
 } vm_t;
 
+typedef struct {
+    unsigned int param;
+    int type;
+} params_t;
+
 vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
 
@@ -89,6 +94,7 @@ int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 // UTILS INSTRUCT
 void increase_coord(process_t *process, size_t increase);
 bool verif_nbr_param(unsigned char indicator, int nbr_param);
+bool verif_act_param(unsigned char indicator, int pos, int info);
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 
 // VM LOOP

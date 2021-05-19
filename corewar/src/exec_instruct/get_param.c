@@ -14,6 +14,13 @@ bool verif_nbr_param(unsigned char indicator, int nbr_param)
     return 0;
 }
 
+bool verif_act_param(unsigned char indicator, int pos, int info)
+{
+    if (((indicator << (pos * 2)) & I_INFO) == info)
+        return 1;
+    return 0;
+}
+
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get)
 {
     size_t result = 0;
