@@ -50,6 +50,7 @@ size_t fill_parseur(char **argv, size_t adv, parsing_t *pars_temp)
 list_t *get_info_champion(char **argv, bool dump)
 {
     list_t *result = create_list();
+    list_node_t *node_temp = NULL;
     parsing_t *pars_temp = NULL;
 
     for (size_t adv = 1 + dump * 2; argv[adv]; adv++) {
@@ -57,7 +58,10 @@ list_t *get_info_champion(char **argv, bool dump)
         adv = fill_parseur(argv, adv, pars_temp);
         if (!adv)
             return NULL;
-        add_node(result, create_node((void *)pars_temp));
+        node_temp = create_node((void *)pars_temp);
+        if (!node_temp)
+            return NULL;
+        add_node(result, node_temp);
     }
     return result;
 }

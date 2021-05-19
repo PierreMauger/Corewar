@@ -75,7 +75,6 @@ vm_t *init_all(list_t *coord, size_t dump)
     if (set_all(coord) || verif_all(coord) ||
         verif_champion_size(coord) ||
         get_coord(vm, coord)) {
-        destroy_all(vm);
         vm = NULL;
     }
     destroy_list(coord, destroy_parsing);

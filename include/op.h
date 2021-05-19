@@ -31,6 +31,12 @@
 
 typedef char args_type_t;
 
+#define I_REG   0b01000000
+#define I_DIR   0b10000000
+#define I_IND   0b11000000
+
+#define I_INFO  0b11000000
+
 #define T_ID     1
 #define T_INFO   1
 

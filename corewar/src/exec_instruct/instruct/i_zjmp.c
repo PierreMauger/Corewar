@@ -7,16 +7,29 @@
 
 #include "corewar.h"
 
-int i_zjmp(__attribute__((unused))vm_t *vm,
-    __attribute__((unused))champion_t *champion, process_t *process)
+static void jump_to(vm_t *vm, process_t *process)
 {
-    unsigned int jump_to = get_param(vm, process->coord_pc.x,
-        process->coord_pc.y + T_ID, T_DIR);
+    unsigned int jump = get_param(vm, process->coord_pc.x,
+        process->coord_pc.y + T_ID + T_INFO, T_DIR);
 
-    if (!jump_to || !vm->carry) {
-        increase_coord(process, T_ID + T_DIR);
+    if (!jump || !process->carry) {
+        increase_coord(process, T_ID + T_INFO + T_DIR);
+        return;
+    }
+    process->carry = 1;
+    increase_coord(process, jump);
+}
+
+int i_zjmp(vm_t *vm, __attribute__((unused))champion_t *champion,
+    process_t *process)
+{
+    unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
+        process->coord_pc.y + T_ID, T_INFO);
+
+    if (verif_nbr_param(indicator, 1) || (indicator & I_INFO) != I_DIR) {
+        increase_coord(process, T_ID);
         return 0;
     }
-    increase_coord(process, jump_to);
+    jump_to(vm, process);
     return 0;
 }

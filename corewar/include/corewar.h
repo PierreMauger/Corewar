@@ -54,7 +54,6 @@ typedef struct {
     list_t *champion_list;
     cycle_t cycle;
     size_t dump;
-    bool carry;
 } vm_t;
 
 vm_t *create_vm(void);
