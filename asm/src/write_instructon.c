@@ -13,7 +13,7 @@ void write_dir(int fd, command_t *com, size_t i, list_t *list)
     int name_id = get_id(com->name);
 
     if (is_num(com->params[i] + 1)) {
-        if ((name_id >= 8 && name_id < 12) || name_id == 14) {
+        if ((name_id >= 8 && name_id < 12) || name_id == 14 || name_id == 13) {
             res = swap_endian_2(res);
             write(fd, &res, 2);
         }
