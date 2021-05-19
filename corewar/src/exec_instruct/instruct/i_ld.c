@@ -42,7 +42,7 @@ static params_t *get_args(vm_t *vm, process_t *process,
     return params;
 }
 
-static void ld(vm_t *vm, process_t *process, params_t *params)
+static void exec_ld(vm_t *vm, process_t *process, params_t *params)
 {
     int value = 0;
 
@@ -66,7 +66,7 @@ int i_ld(vm_t *vm, __attribute__((unused))champion_t *champion,
     params = get_args(vm, process, indicator);
     if (params == NULL)
         return 0;
-    ld(vm, process, params);
+    exec_ld(vm, process, params);
     increase_coord(process, T_ID + T_INFO + params[0].type + params[1].type);
     free(params);
     return 0;
