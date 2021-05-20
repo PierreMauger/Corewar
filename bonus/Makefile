@@ -46,6 +46,8 @@ SRC				=	src/create_struct/create_process.c					\
 					src/exec_instruct/instruct/i_lfork.c				\
 					src/exec_instruct/instruct/i_aff.c					\
 					src/exec_instruct/get_param.c						\
+					src/ncurses_fonc/display_ncurses.c 					\
+					src/ncurses_fonc/init_ncurses.c						\
 
 SRC				+=	main.c
 

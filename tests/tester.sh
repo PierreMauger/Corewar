@@ -6,7 +6,6 @@ YELLOW='\e[33m'
 WHITE='\e[0m'
 
 path="champion*"
-
 echo -e "${GREEN}##############################   TESTS   ##############################${WHITE}"
 
 for entry in $path/*
@@ -20,14 +19,31 @@ do
         continue
     fi
 
-    ./tests/binaries/asm $path/$filename.s
-    mv $filename.cor res_$filename.cor
+    ./tests/binaries/asm $path/$filename.s 2> /dev/null
+    err1=$?
+    if [ $err1 != 84 ]
+    then
+        mv $filename.cor res_$filename.cor
+    fi
     ./asm/asm $path/$filename.s
+    err2=$?
 
-    if [ $? -ne 0 ]
+    if [ $err1 == 84 ]
+    then
+        if [ $err1 == $err2 ]
         then
-            echo -e "$filename -> ${YELLOW}Couldn't find binaries${WHITE}"
-            continue
+            echo -e $filename "-> ${GREEN}Success${WHITE}"
+        else
+            echo -e $filename "-> ${RED}Failure${WHITE}"
+        fi
+        continue
+    fi
+
+
+    if [ $err2 -ne 0 ]
+    then
+        echo -e "$filename -> ${YELLOW}Couldn't find binaries${WHITE}"
+        continue
     fi
 
     xxd -p res_$filename.cor > file1
@@ -46,10 +62,10 @@ do
     fi
 
     if [ $? -eq 0 ]
-        then
-            echo -e $filename "-> ${GREEN}Success${WHITE}"
-        else
-            echo -e $filename "-> ${RED}Failure${WHITE}"
+    then
+        echo -e $filename "-> ${GREEN}Success${WHITE}"
+    else
+        echo -e $filename "-> ${RED}Failure${WHITE}"
     fi
 
     rm res_$filename.cor $filename.cor
