@@ -47,9 +47,9 @@ int get_label_pos(char *label, list_t *list)
     return res;
 }
 
-void write_label(int fd, command_t *com, size_t i, list_t *list)
+void write_label(int fd, command_t *com, char *param, list_t *list)
 {
-    int label_pos = get_label_pos(com->params[i] + 2, list);
+    int label_pos = get_label_pos(param, list);
     int com_pos = get_com_pos(com, list);
     int res = label_pos - com_pos;
 

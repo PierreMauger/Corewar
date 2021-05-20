@@ -51,10 +51,6 @@ int check_label(char *label);
 size_t check_command(list_t *list);
 
     // check_params_size.c
-int is_num(char *str);
-int is_reg(char *str);
-int is_label(command_t *com, size_t i, list_t *list);
-int is_dir(command_t *com, size_t i, list_t *list);
 int check_size(command_t *com, args_type_t *type, list_t *list);
 
     // destroy_command.c
@@ -91,7 +87,7 @@ void write_instructions(int fd, list_t *list);
     // write_label.c
 int get_com_pos(command_t *com, list_t *list);
 int get_label_pos(char *label, list_t *list);
-void write_label(int fd, command_t *com, size_t i, list_t *list);
+void write_label(int fd, command_t *com, char *param, list_t *list);
 
     // write_name.c
 char *get_name(char *buffer, size_t *adv, size_t size);
@@ -100,5 +96,12 @@ void write_header(int fd, char *buffer, list_t *list);
     // get_size.c
 int get_size_dir(command_t *com, size_t i, list_t *list, size_t name_id);
 int get_size(command_t *com, size_t i, list_t *list, size_t name_id);
+
+    // is_type.c
+int is_num(char *str);
+int is_label(command_t *com, size_t i, list_t *list, int offset);
+int is_reg(char *str);
+int is_dir(command_t *com, size_t i, list_t *list);
+int is_ind(command_t *com, size_t i, list_t *list);
 
 #endif // ASM_H

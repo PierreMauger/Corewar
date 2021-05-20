@@ -18,7 +18,7 @@ void write_info(int fd, command_t *com, list_t *list)
             info += 1;
         if (is_dir(com, i, list))
             info += 2;
-        if (is_num(com->params[i]))
+        if (is_ind(com, i, list))
             info += 3;
         info = info << delay;
     }
