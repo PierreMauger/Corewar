@@ -133,4 +133,10 @@ void print_memory(vm_t *vm);
 // DESTROY ALL
 void destroy_all(vm_t *vm);
 
+// NCURSES
+void print_ncurses(vm_t *vm);
+void init_ncurses(void);
+void print_mem_ncurse(vm_t *vm, int nb_cycle);
+mem_t *init_mem(mem_t *mem);
+
 #endif // COREWAR_H
