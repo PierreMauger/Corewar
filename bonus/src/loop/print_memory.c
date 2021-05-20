@@ -18,7 +18,7 @@ void print_all(vm_t *vm)
                 bprintf("0%s ", hex);
             else bprintf("%s ", hex);
             free(hex);
-            if ((y + 1) % 32 == 0)
+            if ((y + 1) % 64 == 0)
                 bprintf("\n");
         }
     }
