@@ -59,6 +59,12 @@ typedef struct {
 } vm_t;
 
 typedef struct {
+    unsigned char *cas;
+    size_t proprio;
+    size_t id_process;
+} mem_t;
+
+typedef struct {
     unsigned int param;
     int type;
 } params_t;

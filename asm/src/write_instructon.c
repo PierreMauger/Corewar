@@ -65,8 +65,10 @@ void write_instructions(int fd, list_t *list)
 
     foreach(list->head, temp) {
         com = (command_t *)temp->data;
-        id = get_id(com->name);
-        write(fd, &op_tab[id].code, 1);
-        write_params(fd, com, list);
+        if (com->name) {
+            id = get_id(com->name);
+            write(fd, &op_tab[id].code, 1);
+            write_params(fd, com, list);
+        }
     }
 }

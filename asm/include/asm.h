@@ -35,7 +35,7 @@ typedef struct {
 list_t *check_asm(char *buffer);
 
     // check_syntaxe.c
-int check_new_line(char *buffer, size_t *adv);
+void check_new_line(char *buffer, size_t *adv);
 void skip_comment(char *buffer, size_t *adv);
 int go_to_name(char *buffer, size_t *adv, char *param_name);
 int check_after_name(char *buffer, size_t *adv, char *param_name);

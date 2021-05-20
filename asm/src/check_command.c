@@ -37,11 +37,13 @@ size_t check_command(list_t *list)
 
     foreach(list->head, temp) {
         temp_com = (command_t *)temp->data;
-        id = get_id(temp_com->name);
-        if ((int)barray_len(temp_com->params) != op_tab[id].nbr_args)
-            return 0;
-        if (!check_size(temp_com, op_tab[id].type, list))
-            return 0;
+        if (temp_com->name) {
+            id = get_id(temp_com->name);
+            if ((int)barray_len(temp_com->params) != op_tab[id].nbr_args)
+                return 0;
+            if (!check_size(temp_com, op_tab[id].type, list))
+                return 0;
+        }
     }
     return 1;
 }

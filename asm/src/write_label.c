@@ -14,7 +14,7 @@ int get_com_pos(command_t *com, list_t *list)
     int res = 0;
 
     foreach(list->head, temp) {
-        temp_com = temp->data;
+        temp_com = (command_t *)temp->data;
         res++;
         if (temp_com == com)
             return res;
