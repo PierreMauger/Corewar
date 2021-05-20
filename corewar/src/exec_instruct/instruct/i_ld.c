@@ -46,7 +46,7 @@ static void exec_ld(vm_t *vm, process_t *process, params_t *params)
 {
     int value = 0;
 
-    if (params[0].type == I_DIR)
+    if (params[0].type == I_IND)
         value = (int)get_param(vm, process->coord_pc.x,
             (process->coord_pc.y + params[0].param) % IDX_MOD, REG_SIZE);
     else value = (int)get_param(vm, process->coord_pc.x,
