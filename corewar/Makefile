@@ -27,14 +27,14 @@ SRC				=	src/create_struct/create_process.c					\
 					src/loop/check_process.c							\
 					src/loop/update_it.c								\
 					src/loop/print_memory.c								\
+					src/exec_instruct/get_args.c						\
 					src/exec_instruct/exec_instruc.c					\
 					src/exec_instruct/instruct/i_live.c					\
 					src/exec_instruct/instruct/i_ld.c					\
 					src/exec_instruct/instruct/i_st.c					\
 					src/exec_instruct/instruct/i_add.c					\
 					src/exec_instruct/instruct/i_sub.c					\
-					src/exec_instruct/instruct/i_and/i_and.c			\
-					src/exec_instruct/instruct/i_and/get_args_add.c		\
+					src/exec_instruct/instruct/i_and.c					\
 					src/exec_instruct/instruct/i_or.c					\
 					src/exec_instruct/instruct/i_xor.c					\
 					src/exec_instruct/instruct/i_zjmp.c					\
