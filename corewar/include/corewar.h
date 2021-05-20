@@ -65,6 +65,7 @@ vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
 
 // INIT ALL
+params_t *create_params(size_t len);
 void write_mem(unsigned char **memory, unsigned char *champion,
     size_t adress, size_t len_champion);
 process_t *init_process(parsing_t *pars_temp, champion_t *champ_temp);
@@ -79,6 +80,14 @@ int i_st(vm_t *vm, champion_t *champion, process_t *process);
 int i_add(vm_t *vm, champion_t *champion, process_t *process);
 int i_sub(vm_t *vm, champion_t *champion, process_t *process);
 int i_and(vm_t *vm, champion_t *champion, process_t *process);
+params_t *get_first_arg_and(vm_t *vm, process_t *process,
+    unsigned char indicator, params_t *params);
+params_t *get_second_arg_and(vm_t *vm, process_t *process,
+    unsigned char indicator, params_t *params);
+params_t *get_third_arg_and(vm_t *vm, process_t *process,
+    params_t *params);
+params_t *get_all_args_and(vm_t *vm, process_t *process,
+    unsigned char indicator, params_t *params);
 int i_or(vm_t *vm, champion_t *champion, process_t *process);
 int i_xor(vm_t *vm, champion_t *champion, process_t *process);
 int i_zjmp(vm_t *vm, champion_t *champion, process_t *process);
@@ -95,6 +104,7 @@ int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 void increase_coord(process_t *process, size_t increase);
 bool verif_nbr_param(unsigned char indicator, int nbr_param);
 bool verif_act_param(unsigned char indicator, int pos, int info);
+void write_int_mem(vm_t *vm, size_t x, size_t y, int to_write);
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 
 // VM LOOP

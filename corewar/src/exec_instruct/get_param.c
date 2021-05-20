@@ -21,6 +21,16 @@ bool verif_act_param(unsigned char indicator, int pos, int info)
     return 0;
 }
 
+void write_int_mem(vm_t *vm, size_t x, size_t y, int to_write)
+{
+    int size = (int)sizeof(to_write);
+
+    for (int adv = 0; adv < size; adv++) {
+        GET_ACT_CASE(vm, x, (y + adv) % IDX_MOD) = (unsigned char)to_write;
+        to_write >>= 8;
+    }
+}
+
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get)
 {
     size_t result = 0;

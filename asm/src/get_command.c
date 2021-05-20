@@ -41,7 +41,6 @@ command_t *create_com(char *buffer, size_t *adv)
     com->name = get_command_name(buffer, adv);
     if (!com->name)
         return NULL;
-    *adv += bstrlen(com->name);
     for (; buffer[*adv] && (buffer[*adv] == ' '
         || buffer[*adv] == ':' || buffer[*adv] == '\t'); (*adv)++);
     com->params = get_command_params(buffer, *adv);
