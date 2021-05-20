@@ -22,8 +22,21 @@ void write_dir(int fd, command_t *com, size_t i, list_t *list)
             write(fd, &res, 4);
         }
     }
-    if (is_label(com, i, list))
-        write_label(fd, com, i, list);
+    if (is_label(com, i, list, 1))
+        write_label(fd, com, com->params[i] + 2, list);
+}
+
+void write_ind(int fd, command_t *com, size_t i, list_t *list)
+{
+    int res = 0;
+
+    if (is_num(com->params[i])) {
+        res = batoi(com->params[i]);
+        res = swap_endian_2(res);
+        write(fd, &res, 2);
+    }
+    if (is_label(com, i, list, 0))
+        write_label(fd, com, com->params[i] + 1, list);
 }
 
 void write_params(int fd, command_t *com, list_t *list)
@@ -37,11 +50,8 @@ void write_params(int fd, command_t *com, list_t *list)
             res = batoi(com->params[i] + 1);
             write(fd, &res, 1);
         }
-        if (is_num(com->params[i])) {
-            res = batoi(com->params[i]);
-            res = swap_endian_2(res);
-            write(fd, &res, 2);
-        }
+        if (is_ind(com, i, list))
+            write_ind(fd, com, i, list);
         if (is_dir(com, i, list))
             write_dir(fd, com, i, list);
     }

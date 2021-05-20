@@ -94,7 +94,7 @@ aff:
 	live	%2
 
 debut:
-	st		r16, -5
+	st		r1, :wall
 	st		r16, -5
 	st		r1, 143
 	st		r16, -5
