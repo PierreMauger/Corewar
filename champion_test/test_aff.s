@@ -1,7 +1,5 @@
-.name ""
-.comment "A valid 0x10_aff s file"
+.name "Label filled champion"
+.comment "Le comment"
 
-lol:
-
-aff r3
-fork %:lol
+brkp1: st r1, :next_label
+next_label:

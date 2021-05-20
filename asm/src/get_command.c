@@ -79,8 +79,6 @@ list_t *get_command(char *buffer, size_t adv)
         node = create_node((void *)elem);
         if (!elem || !node)
             return NULL;
-        if (!elem->name)
-            break;
         add_node(list, node);
         for (; buffer[adv] && buffer[adv] != '\n'; adv++);
         check_new_line(buffer, &adv);
