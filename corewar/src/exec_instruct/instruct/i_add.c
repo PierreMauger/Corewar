@@ -38,8 +38,10 @@ int i_add(vm_t *vm, __attribute__((unused))champion_t *champion,
     params = get_all_args(vm, process, indicator);
     if (params == NULL)
         return 1;
-    if (verif_all_params(params))
+    if (verif_all_params(params)) {
+        free(params);
         return 0;
+    }
     exec_add(process, params);
     increase_coord(process, T_ID + T_INFO +
         params[0].type + params[1].type + params[2].type);

@@ -62,6 +62,7 @@ int i_ldi(vm_t *vm, __attribute__((unused))champion_t *champion,
         return 1;
     if (verif_all_params(params)) {
         process->carry = 0;
+        free(params);
         return 0;
     }
     exec_ldi(vm, process, params);
