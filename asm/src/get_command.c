@@ -25,26 +25,33 @@ char *get_label(char *buffer, size_t *adv)
     return label;
 }
 
-command_t *create_com(char *buffer, size_t *adv)
+static void skip_hash(char *buffer, size_t *adv)
 {
-    command_t *com = malloc(sizeof(command_t));
-
-    if (!com)
-        return NULL;
     while (buffer[*adv] == '#') {
         for (; buffer[*adv] && buffer[*adv] != '\n'; (*adv)++);
         (*adv)++;
     }
+}
+
+command_t *create_com(char *buffer, size_t *adv)
+{
+    command_t *com = bcalloc(sizeof(command_t), 1);
+
+    if (!com)
+        return NULL;
+    skip_hash(buffer, adv);
     com->label = get_label(buffer, adv);
     if (com->label && check_label(com->label))
         return NULL;
     com->name = get_command_name(buffer, adv);
+    if (!com->name && com->label)
+        return com;
     if (!com->name)
         return NULL;
     for (; buffer[*adv] && (buffer[*adv] == ' '
         || buffer[*adv] == ':' || buffer[*adv] == '\t'); (*adv)++);
     com->params = get_command_params(buffer, *adv);
-    if (com->params == NULL)
+    if (!com->params)
         return NULL;
     return com;
 }
@@ -72,6 +79,8 @@ list_t *get_command(char *buffer, size_t adv)
         node = create_node((void *)elem);
         if (!elem || !node)
             return NULL;
+        if (!elem->name)
+            break;
         add_node(list, node);
         for (; buffer[adv] && buffer[adv] != '\n'; adv++);
         check_new_line(buffer, &adv);

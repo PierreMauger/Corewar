@@ -18,7 +18,7 @@ list_t *check_asm(char *buffer)
     adv = check_header(buffer, adv);
     if (adv) {
         list = get_command(buffer, adv);
-        if (!list || !list->head)
+        if (!list)
             return NULL;
         if (!check_command(list))
             return NULL;
