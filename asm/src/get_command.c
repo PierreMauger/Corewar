@@ -25,16 +25,21 @@ char *get_label(char *buffer, size_t *adv)
     return label;
 }
 
+static void skip_hash(char *buffer, size_t *adv)
+{
+    while (buffer[*adv] == '#') {
+        for (; buffer[*adv] && buffer[*adv] != '\n'; (*adv)++);
+        (*adv)++;
+    }
+}
+
 command_t *create_com(char *buffer, size_t *adv)
 {
     command_t *com = bcalloc(sizeof(command_t), 1);
 
     if (!com)
         return NULL;
-    while (buffer[*adv] == '#') {
-        for (; buffer[*adv] && buffer[*adv] != '\n'; (*adv)++);
-        (*adv)++;
-    }
+    skip_hash(buffer, adv);
     com->label = get_label(buffer, adv);
     if (com->label && check_label(com->label))
         return NULL;
