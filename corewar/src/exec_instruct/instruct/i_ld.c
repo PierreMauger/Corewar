@@ -11,8 +11,8 @@ static bool verif_args(unsigned char indicator)
 {
     if (verif_nbr_param(indicator, 2))
         return 1;
-    if (!verif_act_param(indicator, 0, T_DIR) &&
-        !verif_act_param(indicator, 0, T_IND))
+    if (!verif_act_param(indicator, 0, I_DIR) &&
+        !verif_act_param(indicator, 0, I_IND))
         return 1;
     if (!verif_act_param(indicator, 1, I_REG))
         return 1;
@@ -24,7 +24,7 @@ static params_t *get_args(vm_t *vm, process_t *process,
 {
     params_t *params = create_params(MAX_ARGS_NUMBER);
 
-    if (!verif_act_param(indicator, 0, T_DIR)) {
+    if (verif_act_param(indicator, 0, T_DIR)) {
         params[1].param = (unsigned int)get_param(vm, process->coord_pc.x,
             process->coord_pc.y + T_ID + T_INFO, T_IND);
         params[1].type = T_DIR;
@@ -65,7 +65,7 @@ int i_ld(vm_t *vm, __attribute__((unused))champion_t *champion,
         return 0;
     params = get_args(vm, process, indicator);
     if (params == NULL)
-        return 0;
+        return 1;
     exec_ld(vm, process, params);
     increase_coord(process, T_ID + T_INFO + params[0].type + params[1].type);
     free(params);

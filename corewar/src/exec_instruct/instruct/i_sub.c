@@ -40,7 +40,8 @@ static void exec_sub(process_t *process, params_t *params)
         process->reg[params[0].param] - process->reg[params[1].param];
 }
 
-int i_sub(vm_t *vm, champion_t *champion, process_t *process)
+int i_sub(vm_t *vm, __attribute__((unused))champion_t *champion,
+    process_t *process)
 {
     unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID, T_INFO);
@@ -50,7 +51,7 @@ int i_sub(vm_t *vm, champion_t *champion, process_t *process)
         return 0;
     params = get_args(vm, process);
     if (params == NULL)
-        return 0;
+        return 1;
     exec_sub(process, params);
     increase_coord(process, T_ID + T_INFO +
         params[0].type + params[1].type + params[2].type);
