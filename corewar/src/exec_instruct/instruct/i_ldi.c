@@ -54,11 +54,11 @@ static void exec_ldi(vm_t *vm, process_t *process, params_t *params)
 
     if (params[0].type == T_REG)
         value_1 = (unsigned int)process->reg[params[0].param];
-    else if (params[0].type == T_REG)
+    else if (params[0].type == T_DIR)
         value_1 = (int)get_param(vm, process->coord_pc.x,
             (params[0].param % IDX_MOD), IND_SIZE);
     else value_1 = (int)get_param(vm, process->coord_pc.x,
-            (process->coord_pc.y + params[0].param) % IDX_MOD, T_INFO);
+            (process->coord_pc.y + params[0].param) % IDX_MOD, IND_SIZE);
     value_3 = (int)get_param(vm, process->coord_pc.x,
         (process->coord_pc.y + value_1 + value_2) % IDX_MOD, REG_SIZE);
     process->reg[params[2].param] = value_3;

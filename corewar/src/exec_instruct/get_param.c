@@ -37,8 +37,8 @@ size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get)
 
     for (size_t adv = 0; adv < size_to_get; adv++) {
         if (y >= IDX_MOD) {
+            x += ((y / IDX_MOD) - x);
             y %= IDX_MOD;
-            x++;
             x %= IDX_NBR;
         }
         result |= GET_ACT_CASE(vm, x, y);
