@@ -55,6 +55,10 @@ static void exec_ldi(vm_t *vm, process_t *process, params_t *params)
         (process->coord_pc.y + value_1 + value_2) % IDX_MOD, REG_SIZE);
 
     process->reg[params[2].param] = value_3;
+    increase_coord(process, T_ID + T_INFO + params[0].type +
+        params[1].type + params[2].type);
+    process->carry = 1;
+    free(params);
 }
 
 int i_ldi(vm_t *vm, __attribute__((unused))champion_t *champion,
@@ -76,9 +80,5 @@ int i_ldi(vm_t *vm, __attribute__((unused))champion_t *champion,
         return 0;
     }
     exec_ldi(vm, process, params);
-    increase_coord(process, T_ID + T_INFO + params[0].type +
-        params[1].type + params[2].type);
-    process->carry = 1;
-    free(params);
     return 0;
 }
