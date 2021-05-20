@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-params_t *get_first_arg_and(vm_t *vm, process_t *process,
+params_t *get_first_arg(vm_t *vm, process_t *process,
     unsigned char indicator, params_t *params)
 {
     if (verif_act_param(indicator, 0, I_REG)) {
@@ -28,7 +28,7 @@ params_t *get_first_arg_and(vm_t *vm, process_t *process,
     return params;
 }
 
-params_t *get_second_arg_and(vm_t *vm, process_t *process,
+params_t *get_second_arg(vm_t *vm, process_t *process,
     unsigned char indicator, params_t *params)
 {
     if (verif_act_param(indicator, 1, I_REG)) {
@@ -49,7 +49,7 @@ params_t *get_second_arg_and(vm_t *vm, process_t *process,
     return params;
 }
 
-params_t *get_third_arg_and(vm_t *vm, process_t *process, params_t *params)
+params_t *get_third_arg(vm_t *vm, process_t *process, params_t *params)
 {
     params[2].param = (unsigned int)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID + T_INFO + params[0].type +
@@ -58,11 +58,11 @@ params_t *get_third_arg_and(vm_t *vm, process_t *process, params_t *params)
     return params;
 }
 
-params_t *get_all_args_and(vm_t *vm, process_t *process,
+params_t *get_all_args(vm_t *vm, process_t *process,
     unsigned char indicator, params_t *params)
 {
-    params = get_first_arg_and(vm, process, indicator, params);
-    params = get_second_arg_and(vm, process, indicator, params);
-    params = get_third_arg_and(vm, process, params);
+    params = get_first_arg(vm, process, indicator, params);
+    params = get_second_arg(vm, process, indicator, params);
+    params = get_third_arg(vm, process, params);
     return params;
 }

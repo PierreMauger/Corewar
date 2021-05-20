@@ -61,7 +61,7 @@ int i_and(vm_t *vm, __attribute__((unused))champion_t *champion,
         process->carry = 0;
         return 0;
     }
-    params = get_all_args_and(vm, process, indicator, params);
+    params = get_all_args(vm, process, indicator, params);
     if (verif_params(params)) {
         process->carry = 0;
         return 0;

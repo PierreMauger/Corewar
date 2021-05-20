@@ -80,14 +80,6 @@ int i_st(vm_t *vm, champion_t *champion, process_t *process);
 int i_add(vm_t *vm, champion_t *champion, process_t *process);
 int i_sub(vm_t *vm, champion_t *champion, process_t *process);
 int i_and(vm_t *vm, champion_t *champion, process_t *process);
-params_t *get_first_arg_and(vm_t *vm, process_t *process,
-    unsigned char indicator, params_t *params);
-params_t *get_second_arg_and(vm_t *vm, process_t *process,
-    unsigned char indicator, params_t *params);
-params_t *get_third_arg_and(vm_t *vm, process_t *process,
-    params_t *params);
-params_t *get_all_args_and(vm_t *vm, process_t *process,
-    unsigned char indicator, params_t *params);
 int i_or(vm_t *vm, champion_t *champion, process_t *process);
 int i_xor(vm_t *vm, champion_t *champion, process_t *process);
 int i_zjmp(vm_t *vm, champion_t *champion, process_t *process);
@@ -101,6 +93,14 @@ int i_aff(vm_t *vm, champion_t *champion, process_t *process);
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 
 // UTILS INSTRUCT
+params_t *get_first_arg(vm_t *vm, process_t *process,
+    unsigned char indicator, params_t *params);
+params_t *get_second_arg(vm_t *vm, process_t *process,
+    unsigned char indicator, params_t *params);
+params_t *get_third_arg(vm_t *vm, process_t *process,
+    params_t *params);
+params_t *get_all_args(vm_t *vm, process_t *process,
+    unsigned char indicator, params_t *params);
 void increase_coord(process_t *process, size_t increase);
 bool verif_nbr_param(unsigned char indicator, int nbr_param);
 bool verif_act_param(unsigned char indicator, int pos, int info);
