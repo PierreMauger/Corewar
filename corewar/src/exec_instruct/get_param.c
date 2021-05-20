@@ -9,7 +9,7 @@
 
 bool verif_nbr_param(unsigned char indicator, int nbr_param)
 {
-    if (indicator << (nbr_param * 2) != 0)
+    if ((unsigned char)(indicator << (nbr_param * 2)) != 0)
         return 1;
     return 0;
 }
