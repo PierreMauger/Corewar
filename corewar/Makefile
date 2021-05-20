@@ -27,7 +27,6 @@ SRC				=	src/create_struct/create_process.c					\
 					src/loop/check_process.c							\
 					src/loop/update_it.c								\
 					src/loop/print_memory.c								\
-					src/exec_instruct/get_args.c						\
 					src/exec_instruct/exec_instruc.c					\
 					src/exec_instruct/instruct/i_live.c					\
 					src/exec_instruct/instruct/i_ld.c					\
@@ -45,7 +44,9 @@ SRC				=	src/create_struct/create_process.c					\
 					src/exec_instruct/instruct/i_lldi.c					\
 					src/exec_instruct/instruct/i_lfork.c				\
 					src/exec_instruct/instruct/i_aff.c					\
-					src/exec_instruct/get_param.c						\
+					src/exec_instruct/get_all_args.c					\
+					src/exec_instruct/verif_params.c					\
+					src/exec_instruct/write_params.c					\
 
 SRC				+=	main.c
 

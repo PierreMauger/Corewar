@@ -100,10 +100,11 @@ params_t *get_second_arg(vm_t *vm, process_t *process,
 params_t *get_third_arg(vm_t *vm, process_t *process,
     unsigned char indicator, params_t *params);
 params_t *get_all_args(vm_t *vm, process_t *process,
-    unsigned char indicator, params_t *params);
+    unsigned char indicator);
 void increase_coord(process_t *process, size_t increase);
 bool verif_nbr_param(unsigned char indicator, int nbr_param);
 bool verif_act_param(unsigned char indicator, int pos, int info);
+bool verif_all_params(params_t *params);
 void write_int_mem(vm_t *vm, size_t x, size_t y, int to_write);
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 

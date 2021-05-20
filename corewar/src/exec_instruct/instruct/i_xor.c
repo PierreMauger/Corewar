@@ -24,16 +24,6 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static bool verif_params(params_t *params)
-{
-    if ((params[0].type == T_REG && params[0].param >= REG_NUMBER) ||
-        (params[1].type == T_REG && params[1].param >= REG_NUMBER) ||
-        (params[2].param >= REG_NUMBER)) {
-        return 1;
-    }
-    return 0;
-}
-
 static void exec_or(process_t *process, params_t *params)
 {
     int value_1 = params[0].type == T_REG ?
@@ -42,9 +32,6 @@ static void exec_or(process_t *process, params_t *params)
         (unsigned int)process->reg[params[1].param] : params[1].param;
 
     process->reg[params[2].param] = value_1 ^ value_2;
-    increase_coord(process, T_ID + T_INFO + params[0].type +
-        params[1].type + params[2].type);
-    free(params);
 }
 
 int i_xor(vm_t *vm, __attribute__((unused))champion_t *champion,
@@ -52,15 +39,18 @@ int i_xor(vm_t *vm, __attribute__((unused))champion_t *champion,
 {
     unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID, T_INFO);
-    params_t *params = create_params(MAX_ARGS_NUMBER);
+    params_t *params = NULL;
 
-    if (params == NULL)
-        return 1;
     if (verif_args(indicator))
         return 0;
-    params = get_all_args(vm, process, indicator, params);
-    if (verif_params(params))
+    params = get_all_args(vm, process, indicator);
+    if (params == NULL)
+        return 1;
+    if (verif_all_params(params))
         return 0;
     exec_or(process, params);
+    increase_coord(process, T_ID + T_INFO + params[0].type +
+        params[1].type + params[2].type);
+    free(params);
     return 0;
 }
