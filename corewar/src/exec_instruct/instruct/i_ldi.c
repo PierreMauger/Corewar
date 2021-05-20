@@ -47,13 +47,20 @@ static params_t *get_args(vm_t *vm, process_t *process,
 
 static void exec_ldi(vm_t *vm, process_t *process, params_t *params)
 {
-    int value_1 = params[0].type == T_REG ?
-        (unsigned int)process->reg[params[0].param] : params[0].param;
+    int value_1 = 0;
     int value_2 = params[1].type == T_REG ?
         (unsigned int)process->reg[params[1].param] : params[1].param;
-    int value_3 = (int)get_param(vm, process->coord_pc.x,
-        (process->coord_pc.y + value_1 + value_2) % IDX_MOD, REG_SIZE);
+    int value_3 = 0;
 
+    if (params[0].type == T_REG)
+        value_1 = (unsigned int)process->reg[params[0].param];
+    else if (params[0].type == T_REG)
+        value_1 = (int)get_param(vm, process->coord_pc.x,
+            (params[0].param % IDX_MOD), IND_SIZE);
+    else value_1 = (int)get_param(vm, process->coord_pc.x,
+            (process->coord_pc.y + params[0].param) % IDX_MOD, T_INFO);
+    value_3 = (int)get_param(vm, process->coord_pc.x,
+        (process->coord_pc.y + value_1 + value_2) % IDX_MOD, REG_SIZE);
     process->reg[params[2].param] = value_3;
     increase_coord(process, T_ID + T_INFO + params[0].type +
         params[1].type + params[2].type);

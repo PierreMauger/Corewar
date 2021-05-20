@@ -98,7 +98,7 @@ params_t *get_first_arg(vm_t *vm, process_t *process,
 params_t *get_second_arg(vm_t *vm, process_t *process,
     unsigned char indicator, params_t *params);
 params_t *get_third_arg(vm_t *vm, process_t *process,
-    params_t *params);
+    unsigned char indicator, params_t *params);
 params_t *get_all_args(vm_t *vm, process_t *process,
     unsigned char indicator, params_t *params);
 void increase_coord(process_t *process, size_t increase);

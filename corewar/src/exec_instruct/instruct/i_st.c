@@ -47,7 +47,8 @@ static params_t *get_args(vm_t *vm, process_t *process,
 static void exec_st(vm_t *vm, process_t *process, params_t *params)
 {
     if (params[1].type == T_IND) {
-        write_int_mem(vm, process->coord_pc.x, params[1].param,
+        write_int_mem(vm, process->coord_pc.x,
+            (process->coord_pc.x + params[1].param) % IDX_MOD,
             process->reg[params[0].param]);
     }
     else {
