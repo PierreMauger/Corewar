@@ -44,7 +44,6 @@ static void exec_or(process_t *process, params_t *params)
     process->reg[params[2].param] = value_1 | value_2;
     increase_coord(process, T_ID + T_INFO + params[0].type +
         params[1].type + params[2].type);
-    process->carry = 1;
     free(params);
 }
 
@@ -57,15 +56,11 @@ int i_or(vm_t *vm, __attribute__((unused))champion_t *champion,
 
     if (params == NULL)
         return 1;
-    if (verif_args(indicator)) {
-        process->carry = 0;
+    if (verif_args(indicator))
         return 0;
-    }
     params = get_all_args(vm, process, indicator, params);
-    if (verif_params(params)) {
-        process->carry = 0;
+    if (verif_params(params))
         return 0;
-    }
     exec_or(process, params);
     return 0;
 }
