@@ -39,16 +39,14 @@ size_t check_name(char *buffer, size_t adv, char *param_name, int param_len)
 
 size_t check_header(char *buffer, size_t adv)
 {
-    size_t act = check_name(buffer, adv, NAME_CMD_STRING, PROG_NAME_LENGTH);
+    adv = check_name(buffer, adv, NAME_CMD_STRING, PROG_NAME_LENGTH);
 
-    if (!act)
+    if (!adv)
         return 0;
-    adv += act;
     check_new_line(buffer, &adv);
-    act = check_name(buffer, adv, COMMENT_CMD_STRING, COMMENT_LENGTH);
-    if (!act)
+    adv = check_name(buffer, adv, COMMENT_CMD_STRING, COMMENT_LENGTH);
+    if (!adv)
         return 0;
-    adv += act;
     check_new_line(buffer, &adv);
     return adv;
 }
