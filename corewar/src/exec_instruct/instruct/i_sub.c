@@ -22,8 +22,8 @@ static bool verif_args(unsigned char indicator)
 
 static void exec_sub(process_t *process, params_t *params)
 {
-    process->reg[params[2].param] =
-        process->reg[params[0].param] - process->reg[params[1].param];
+    process->reg[params[2].param - 1] =
+        process->reg[params[0].param - 1] - process->reg[params[1].param - 1];
 }
 
 int i_sub(vm_t *vm, __attribute__((unused))champion_t *champion,
@@ -35,7 +35,7 @@ int i_sub(vm_t *vm, __attribute__((unused))champion_t *champion,
 
     if (verif_args(indicator))
         return 0;
-    params = get_all_args(vm, process, indicator);
+    params = get_params(vm, process, indicator, 3);
     if (params == NULL)
         return 1;
     if (verif_all_params(params)) {

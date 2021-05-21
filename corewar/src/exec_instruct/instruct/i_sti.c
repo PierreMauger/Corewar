@@ -25,11 +25,11 @@ static bool verif_args(unsigned char indicator)
 
 static void exec_ldi(vm_t *vm, process_t *process, params_t *params)
 {
-    int value_1 = process->reg[params[0].param];
+    int value_1 = process->reg[params[0].param - 1];
     int value_2 = params[1].type == T_REG ?
-        (unsigned int)process->reg[params[1].param] : params[1].param;
+        (unsigned int)process->reg[params[1].param - 1] : params[1].param;
     int value_3 = params[2].type == T_REG ?
-        (unsigned int)process->reg[params[2].param] : params[2].param;
+        (unsigned int)process->reg[params[2].param - 1] : params[2].param;
 
     write_int_mem(vm, process->coord_pc.x,
         (process->coord_pc.y + value_2 + value_3) % IDX_MOD, value_1);
@@ -44,7 +44,7 @@ int i_sti(vm_t *vm, __attribute__((unused))champion_t *champion,
 
     if (verif_args(indicator))
         return 0;
-    params = get_all_args(vm, process, indicator);
+    params = get_params(vm, process, indicator, 3);
     if (params == NULL)
         return 1;
     if (verif_all_params(params)) {

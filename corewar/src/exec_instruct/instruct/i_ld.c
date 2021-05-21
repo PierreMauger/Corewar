@@ -28,7 +28,7 @@ static void exec_ld(vm_t *vm, process_t *process, params_t *params)
             (process->coord_pc.y + params[0].param) % IDX_MOD, REG_SIZE);
     else value = (int)get_param(vm, process->coord_pc.x,
             (params[0].param) % IDX_MOD, REG_SIZE);
-    process->reg[params[1].param] = value;
+    process->reg[params[1].param - 1] = value;
 }
 
 int i_ld(vm_t *vm, __attribute__((unused))champion_t *champion,
@@ -40,7 +40,7 @@ int i_ld(vm_t *vm, __attribute__((unused))champion_t *champion,
 
     if (verif_args(indicator))
         return 0;
-    params = get_all_args(vm, process, indicator);
+    params = get_params(vm, process, indicator, 2);
     if (params == NULL)
         return 1;
     if (verif_all_params(params)) {

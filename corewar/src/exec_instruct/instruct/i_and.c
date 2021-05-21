@@ -27,11 +27,11 @@ static bool verif_args(unsigned char indicator)
 static void exec_and(process_t *process, params_t *params)
 {
     int value_1 = params[0].type == T_REG ?
-        (unsigned int)process->reg[params[0].param] : params[0].param;
+        (unsigned int)process->reg[params[0].param - 1] : params[0].param;
     int value_2 = params[1].type == T_REG ?
-        (unsigned int)process->reg[params[1].param] : params[1].param;
+        (unsigned int)process->reg[params[1].param - 1] : params[1].param;
 
-    process->reg[params[2].param] = value_1 & value_2;
+    process->reg[params[2].param - 1] = value_1 & value_2;
     increase_coord(process, T_ID + T_INFO + params[0].type +
         params[1].type + params[2].type);
     process->carry = 1;
@@ -49,7 +49,7 @@ int i_and(vm_t *vm, __attribute__((unused))champion_t *champion,
         process->carry = 0;
         return 0;
     }
-    params = get_all_args(vm, process, indicator);
+    params = get_params(vm, process, indicator, 3);
     if (params == NULL)
         return 1;
     if (verif_all_params(params)) {

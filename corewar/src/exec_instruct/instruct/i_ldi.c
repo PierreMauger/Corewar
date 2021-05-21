@@ -27,11 +27,11 @@ static void exec_ldi(vm_t *vm, process_t *process, params_t *params)
 {
     int value_1 = 0;
     int value_2 = params[1].type == T_REG ?
-        (unsigned int)process->reg[params[1].param] : params[1].param;
+        (unsigned int)process->reg[params[1].param - 1] : params[1].param;
     int value_3 = 0;
 
     if (params[0].type == T_REG)
-        value_1 = (unsigned int)process->reg[params[0].param];
+        value_1 = (unsigned int)process->reg[params[0].param - 1];
     else if (params[0].type == T_DIR)
         value_1 = (int)get_param(vm, process->coord_pc.x,
             (params[0].param % IDX_MOD), IND_SIZE);
@@ -39,7 +39,7 @@ static void exec_ldi(vm_t *vm, process_t *process, params_t *params)
             (process->coord_pc.y + params[0].param) % IDX_MOD, IND_SIZE);
     value_3 = (int)get_param(vm, process->coord_pc.x,
         (process->coord_pc.y + value_1 + value_2) % IDX_MOD, REG_SIZE);
-    process->reg[params[2].param] = value_3;
+    process->reg[params[2].param - 1] = value_3;
     increase_coord(process, T_ID + T_INFO + params[0].type +
         params[1].type + params[2].type);
     process->carry = 1;
@@ -57,7 +57,7 @@ int i_ldi(vm_t *vm, __attribute__((unused))champion_t *champion,
         process->carry = 0;
         return 0;
     }
-    params = get_all_args(vm, process, indicator);
+    params = get_params(vm, process, indicator, 3);
     if (params == NULL)
         return 1;
     if (verif_all_params(params)) {

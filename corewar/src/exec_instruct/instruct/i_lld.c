@@ -43,7 +43,7 @@ int i_lld(vm_t *vm, __attribute__((unused))champion_t *champion,
         process->carry = 0;
         return 0;
     }
-    params = get_all_args(vm, process, indicator);
+    params = get_params(vm, process, indicator, 2);
     if (params == NULL)
         return 1;
     if (verif_all_params(params)) {

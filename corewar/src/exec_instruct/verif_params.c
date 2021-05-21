@@ -23,11 +23,14 @@ bool verif_act_param(unsigned char indicator, int pos, int info)
 
 bool verif_all_params(params_t *params)
 {
-    if (params[0].type == T_REG && params[0].param >= REG_NUMBER)
+    if (params[0].type == T_REG &&
+        (params[0].param > REG_NUMBER || params[0].param == 0))
         return 1;
-    if (params[1].type == T_REG && params[1].param >= REG_NUMBER)
+    if (params[1].type == T_REG &&
+        (params[1].param > REG_NUMBER || params[1].param == 0))
         return 1;
-    if ((params[2].type == T_REG && params[2].param >= REG_NUMBER))
+    if ((params[2].type == T_REG &&
+        (params[2].param > REG_NUMBER || params[2].param == 0)))
         return 1;
     return 0;
 }
