@@ -7,47 +7,6 @@
 
 #include "corewar.h"
 
-void print_ncurses(vm_t *vm)
-{
-    char *hex = NULL;
-
-    for (size_t x = 0; x < IDX_NBR; x++) {
-        if (x < 6) attron(COLOR_PAIR(1));
-        else attron(COLOR_PAIR(2));
-        for (size_t y = 0; y < IDX_MOD; y++) {
-            hex = bitoa_base((int)GET_ACT_CASE(vm, x, y), HEXA_BASE);
-            if (bstrlen(hex) == 1)
-                printw("0%s ", hex);
-            else printw("%s ", hex);
-            free(hex);
-            if ((y + 1) % 64 == 0)
-                printw("\n");
-        }
-        if (x < 6) attroff(COLOR_PAIR(1));
-        else attroff(COLOR_PAIR(2));
-    }
-    refresh();
-    usleep(50000);
-    clear();
-}
-
-void print_color_ncurses(int x, int y, mem_t mem)
-{
-    if (mem.proprio == 0 && mem.id_process == 1)
-        attron(COLOR_PAIR(1));
-    if (mem.proprio == 1 && mem.id_process == 1)
-        attron(COLOR_PAIR(2));
-    if (mem.id_process == 1)
-        attron(A_BOLD);
-    mvprintw(y, x, "%c ", mem.cas);
-    if (mem.proprio == 0 && mem.id_process == 1)
-        attroff(COLOR_PAIR(1));
-    if (mem.proprio == 1 && mem.id_process == 1)
-        attroff(COLOR_PAIR(2));
-    if (mem.id_process == 1)
-        attroff(A_BOLD);
-}
-
 void display_info(mem_t **mem, int nb_cycle, int y, int x)
 {
     size_t i = 0;
@@ -59,14 +18,37 @@ void display_info(mem_t **mem, int nb_cycle, int y, int x)
     mvprintw(y, x, bitoa(nb_cycle));
     for (size_t compt = 0; compt < IDX_NBR; compt++) {
         for (i = 0; i < IDX_MOD; i++) {
-            if (mem[compt][i].proprio == 0) red++;
-            if (mem[compt][i].proprio == 1) blue++;
+            if (mem[compt][i].proprio == 1)
+                red++;
+            if (mem[compt][i].proprio == 2)
+                blue++;
         }
     }
     x += 5;
     mvprintw(y, x, "Le joueur 1 a %d cases.", red);
     x += 28;
     mvprintw(y, x, "Le joueur 2 a %d cases.", blue);
+}
+
+void print_color_ncurses(int x, int y, mem_t mem)
+{
+    char *ret = NULL;
+    int hex = mem.cas;
+
+    if (mem.proprio == 1)
+        attron(COLOR_PAIR(1));
+    if (mem.proprio == 2)
+        attron(COLOR_PAIR(2));
+    ret = bitoa_base(hex, HEXA_BASE);
+    if (bstrlen(ret) == 1)
+        mvprintw(y, x, "0%s ", ret);
+    else
+        mvprintw(y, x, "%s ", ret);
+    free(ret);
+    if (mem.proprio == 1)
+        attroff(COLOR_PAIR(1));
+    if (mem.proprio == 2)
+        attroff(COLOR_PAIR(2));
 }
 
 static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
@@ -95,7 +77,7 @@ void print_mem_ncurse(vm_t *vm, int nb_cycle)
     clear();
     display_info(vm->memory, nb_cycle, 0, x);
     for (size_t compt = 0; compt < IDX_NBR; compt++) {
-        for (size_t j = 0; j < IDX_MOD; j++)
+        while (i != IDX_MOD)
             print_mem_ncurse_spl(&x, &y, &i, vm->memory[compt]);
         i = 0;
     }

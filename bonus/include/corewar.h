@@ -138,5 +138,6 @@ void print_ncurses(vm_t *vm);
 void init_ncurses(void);
 void print_mem_ncurse(vm_t *vm, int nb_cycle);
 mem_t **init_mem(size_t x, size_t y);
+void display_info(mem_t **mem, int nb_cycle, int y, int x);
 
 #endif // COREWAR_H
