@@ -32,10 +32,6 @@ static void exec_and(process_t *process, params_t *params)
         (unsigned int)process->reg[params[1].param - 1] : params[1].param;
 
     process->reg[params[2].param - 1] = value_1 & value_2;
-    increase_coord(process, T_ID + T_INFO + params[0].type +
-        params[1].type + params[2].type);
-    process->carry = 1;
-    free(params);
 }
 
 static int init_and(vm_t *vm, process_t *process, unsigned char indicator)
