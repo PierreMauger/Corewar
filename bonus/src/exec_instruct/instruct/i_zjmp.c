@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-static void jump_to(vm_t *vm, process_t *process)
+static void jump_to(process_t *process)
 {
     unsigned int jump = get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID + T_INFO, T_DIR);
@@ -30,6 +30,6 @@ int i_zjmp(vm_t *vm, __attribute__((unused))champion_t *champion,
         increase_coord(process, T_ID);
         return 0;
     }
-    jump_to(vm, process);
+    jump_to(process);
     return 0;
 }
