@@ -32,7 +32,8 @@ int get_total_size(list_t *list)
         temp_com = (command_t *)temp->data;
         if (temp_com->name) {
             res++;
-            if (barray_len(temp_com->params) != 1 || get_id(temp_com->name) == 15)
+            if (barray_len(temp_com->params) != 1 ||
+                get_id(temp_com->name) == 15)
                 res++;
             for (size_t i = 0; i < barray_len(temp_com->params); i++)
                 res += get_size(temp_com, i, list, get_id(temp_com->name));
