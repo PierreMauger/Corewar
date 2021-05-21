@@ -38,10 +38,9 @@ int champion_loop(vm_t *vm)
 int vm_loop(vm_t *vm)
 {
     int ret = 0;
-    int cycle = 0;
 
     init_ncurses();
-    while (!ret) {
+    for (int cycle = 0; !ret; cycle++) {
         print_mem_ncurse(vm, cycle);
         ret = champion_loop(vm);
         if (update_it(vm)) {
@@ -49,7 +48,6 @@ int vm_loop(vm_t *vm)
             return 0;
         }
         print_memory(vm);
-        cycle++;
     }
     endwin();
     return ret;
