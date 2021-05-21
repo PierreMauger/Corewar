@@ -62,7 +62,7 @@ char *get_command_name(char *buffer, size_t *adv);
     // get_command_params.c
 size_t get_param_len(char *buffer, size_t *adv);
 char *get_one_param(char *buffer, size_t *adv, bool *err);
-char **get_command_params(char *buffer, size_t adv);
+char **get_command_params(char *buffer, size_t *adv);
 
     // get_command.c
 command_t *create_com(char *buffer, size_t *adv);

@@ -56,7 +56,7 @@ static void check_bool_err(bool *err, char **params_tab, int *i)
     }
 }
 
-char **get_command_params(char *buffer, size_t adv)
+char **get_command_params(char *buffer, size_t *adv)
 {
     char **params_tab = malloc(sizeof(char *) * MAX_ARGS_NUMBER);
     int i = 0;
@@ -64,12 +64,12 @@ char **get_command_params(char *buffer, size_t adv)
 
     if (!params_tab)
         return NULL;
-    for (; buffer[adv] && buffer[adv] != '\n'; i++, adv++) {
-        params_tab[i] = get_one_param(buffer, &adv, &err);
+    for (; buffer[*adv] && buffer[*adv] != '\n'; i++, (*adv)++) {
+        params_tab[i] = get_one_param(buffer, adv, &err);
         if (!params_tab[i])
             break;
         check_bool_err(&err, params_tab, &i);
-        if (buffer[adv] == '\n') {
+        if (buffer[*adv] == '\n') {
             i++;
             break;
         }
