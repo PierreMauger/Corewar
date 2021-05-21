@@ -7,27 +7,37 @@
 
 #include "corewar.h"
 
+static void count_proprio(mem_t mem, size_t *red, size_t *blue, size_t *green)
+{
+    if (mem.proprio == 1)
+        (*red)++;
+    if (mem.proprio == 2)
+        (*blue)++;
+    if (mem.proprio == 3)
+        (*green)++;
+}
+
 void display_info(mem_t **mem, int nb_cycle, int y, int x)
 {
     size_t i = 0;
     size_t red = 0;
     size_t blue = 0;
+    size_t green = 0;
+    size_t yellow = 0;
 
     mvprintw(y, x, "Nombre de cycle : ");
     x += 18;
     mvprintw(y, x, bitoa(nb_cycle));
     for (size_t compt = 0; compt < IDX_NBR; compt++) {
         for (i = 0; i < IDX_MOD; i++) {
-            if (mem[compt][i].proprio == 1)
-                red++;
-            if (mem[compt][i].proprio == 2)
-                blue++;
+            count_proprio(mem[compt][i], &red, &blue, &green);
+            if (mem[compt][i].proprio == 4)
+                yellow++;
         }
     }
-    x += 5;
-    mvprintw(y, x, "Le joueur 1 a %d cases.", red);
-    x += 28;
-    mvprintw(y, x, "Le joueur 2 a %d cases.", blue);
+    display_count_proprio(&x, red, blue, green);
+    if (yellow != 0)
+        mvprintw(y, x, "Le joueur 2 a %d cases.", yellow);
 }
 
 void print_color_ncurses(int x, int y, mem_t mem)
@@ -35,20 +45,14 @@ void print_color_ncurses(int x, int y, mem_t mem)
     char *ret = NULL;
     int hex = mem.cas;
 
-    if (mem.proprio == 1)
-        attron(COLOR_PAIR(1));
-    if (mem.proprio == 2)
-        attron(COLOR_PAIR(2));
+    find_color(mem);
     ret = bitoa_base(hex, HEXA_BASE);
     if (bstrlen(ret) == 1)
         mvprintw(y, x, "0%s ", ret);
     else
         mvprintw(y, x, "%s ", ret);
     free(ret);
-    if (mem.proprio == 1)
-        attroff(COLOR_PAIR(1));
-    if (mem.proprio == 2)
-        attroff(COLOR_PAIR(2));
+    del_color(mem);
 }
 
 static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
