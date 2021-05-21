@@ -36,6 +36,8 @@ void del_color(mem_t mem)
         attroff(COLOR_PAIR(3));
     if (mem.proprio == 4)
         attroff(COLOR_PAIR(4));
+    if (mem.id_process != 0)
+        attroff(A_BOLD);
 }
 
 void find_color(mem_t mem)
@@ -48,6 +50,8 @@ void find_color(mem_t mem)
         attron(COLOR_PAIR(3));
     if (mem.proprio == 4)
         attron(COLOR_PAIR(4));
+    if (mem.id_process != 0)
+        attron(A_BOLD);
 }
 
 void init_ncurses(void)
