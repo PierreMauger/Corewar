@@ -34,7 +34,6 @@ static void exec_sti(vm_t *vm, process_t *process, params_t *params)
     write_int_mem(vm, process->coord_pc.x,
         (process->coord_pc.y + value_2 + value_3) % IDX_MOD, value_1);
 }
-    // printf("%hhx\n", (unsigned int)get_param(vm, process->coord_pc.x, (process->coord_pc.y + value_2 + value_3) % IDX_MOD, 4));
 
 static int init_sti(vm_t *vm, process_t *process, unsigned char indicator)
 {
