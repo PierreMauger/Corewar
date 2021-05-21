@@ -61,12 +61,12 @@ static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
     (*i)++;
     if (*i == 513) {
         mvprintw(*y, *x, "\n");
-        *x = 20;
+        *x = (COLS / 2) - (64 + 32);
     }
     else if (*i % 64 == 0) {
         mvprintw(*y, *x, "\n");
         *y += 1;
-        *x = 20;
+        *x = COLS / 2 - (64 + 32);
     }
     else
         *x += 3;
@@ -75,7 +75,7 @@ static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
 void print_mem_ncurse(vm_t *vm, int nb_cycle)
 {
     size_t i = 0;
-    int x = 20;
+    int x = (COLS / 2) - (64 + 32);
     int y = 2;
 
     clear();
