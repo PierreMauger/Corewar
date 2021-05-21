@@ -52,17 +52,17 @@ typedef struct {
 } cycle_t;
 
 typedef struct {
+    unsigned char *cas;
+    size_t proprio;
+    size_t id_process;
+} mem_t;
+
+typedef struct {
     unsigned char **memory;
     list_t *champion_list;
     cycle_t cycle;
     size_t dump;
 } vm_t;
-
-typedef struct {
-    unsigned char *cas;
-    size_t proprio;
-    size_t id_process;
-} mem_t;
 
 typedef struct {
     unsigned int param;
@@ -106,12 +106,13 @@ params_t *get_first_arg(vm_t *vm, process_t *process,
 params_t *get_second_arg(vm_t *vm, process_t *process,
     unsigned char indicator, params_t *params);
 params_t *get_third_arg(vm_t *vm, process_t *process,
-    params_t *params);
-params_t *get_all_args(vm_t *vm, process_t *process,
     unsigned char indicator, params_t *params);
+params_t *get_all_args(vm_t *vm, process_t *process,
+    unsigned char indicator);
 void increase_coord(process_t *process, size_t increase);
 bool verif_nbr_param(unsigned char indicator, int nbr_param);
 bool verif_act_param(unsigned char indicator, int pos, int info);
+bool verif_all_params(params_t *params);
 void write_int_mem(vm_t *vm, size_t x, size_t y, int to_write);
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 
@@ -133,10 +134,10 @@ void print_memory(vm_t *vm);
 // DESTROY ALL
 void destroy_all(vm_t *vm);
 
-// NCURSES
+// N_CURSES
 void print_ncurses(vm_t *vm);
 void init_ncurses(void);
 void print_mem_ncurse(vm_t *vm, int nb_cycle);
-mem_t *init_mem(mem_t *mem);
+mem_t **init_mem(mem_t **mem);
 
 #endif // COREWAR_H

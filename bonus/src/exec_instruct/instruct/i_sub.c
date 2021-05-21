@@ -20,20 +20,6 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static params_t *get_args(vm_t *vm, process_t *process)
-{
-    params_t *params = create_params(MAX_ARGS_NUMBER);
-
-    for (int adv = 0; adv < 3; adv++) {
-        params[adv].param = (unsigned int)get_param(vm, process->coord_pc.x,
-            process->coord_pc.y + T_ID + T_INFO + T_REG * adv, T_REG);
-        params[adv].type = T_REG;
-        if (params[adv].param >= REG_NUMBER)
-            return NULL;
-    }
-    return params;
-}
-
 static void exec_sub(process_t *process, params_t *params)
 {
     process->reg[params[2].param] =
@@ -49,9 +35,13 @@ int i_sub(vm_t *vm, __attribute__((unused))champion_t *champion,
 
     if (verif_args(indicator))
         return 0;
-    params = get_args(vm, process);
+    params = get_all_args(vm, process, indicator);
     if (params == NULL)
         return 1;
+    if (verif_all_params(params)) {
+        free(params);
+        return 0;
+    }
     exec_sub(process, params);
     increase_coord(process, T_ID + T_INFO +
         params[0].type + params[1].type + params[2].type);

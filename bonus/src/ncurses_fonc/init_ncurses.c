@@ -7,22 +7,35 @@
 
 #include "corewar.h"
 
-mem_t *init_mem(mem_t *mem)
+static mem_t **split_init_men(mem_t **mem, int compt)
 {
     size_t i = 0;
     unsigned char *s = "00";
 
-    mem = malloc(sizeof(mem_t) * ((6*1024) + 1));
-    while (i != 6144) {
-        if (i < 3072)
-            mem[i].proprio = 0;
+    while (i != 513) {
+        if (compt < 6)
+            mem[compt][i].proprio = 0;
         else
-            mem[i].proprio = 1;
-        mem[i].id_process = 1;
-        mem[i].cas = s;
+            mem[compt][i].proprio = 1;
+        mem[compt][i].id_process = 1;
+        mem[compt][i].cas = s;
         i++;
     }
-    mem[i].cas = NULL;
+    mem[compt][i].cas = NULL;
+    return (mem);
+}
+
+mem_t **init_mem(mem_t **mem)
+{
+    size_t compt = 0;
+
+    mem = malloc(sizeof(mem_t *) * (13));
+    while (compt != 13) {
+        mem[compt] = malloc(sizeof(mem_t) * 514);
+        mem = split_init_men(mem, compt);
+        compt++;
+    }
+    mem[compt] = NULL;
     return (mem);
 }
 
