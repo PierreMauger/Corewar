@@ -24,16 +24,6 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static bool verif_params(params_t *params)
-{
-    if ((params[0].type == T_REG && params[0].param >= REG_NUMBER) ||
-        (params[1].type == T_REG && params[1].param >= REG_NUMBER) ||
-        (params[2].param >= REG_NUMBER)) {
-        return 1;
-    }
-    return 0;
-}
-
 static void exec_and(process_t *process, params_t *params)
 {
     int value_1 = params[0].type == T_REG ?
@@ -53,17 +43,18 @@ int i_and(vm_t *vm, __attribute__((unused))champion_t *champion,
 {
     unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID, T_INFO);
-    params_t *params = create_params(MAX_ARGS_NUMBER);
+    params_t *params = NULL;
 
-    if (params == NULL)
-        return 1;
     if (verif_args(indicator)) {
         process->carry = 0;
         return 0;
     }
-    params = get_all_args(vm, process, indicator, params);
-    if (verif_params(params)) {
+    params = get_all_args(vm, process, indicator);
+    if (params == NULL)
+        return 1;
+    if (verif_all_params(params)) {
         process->carry = 0;
+        free(params);
         return 0;
     }
     exec_and(process, params);
