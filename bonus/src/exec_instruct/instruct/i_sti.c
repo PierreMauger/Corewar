@@ -23,16 +23,35 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static void exec_ldi(vm_t *vm, process_t *process, params_t *params)
+static void exec_sti(vm_t *vm, process_t *process, params_t *params)
 {
-    int value_1 = process->reg[params[0].param];
+    int value_1 = process->reg[params[0].param - 1];
     int value_2 = params[1].type == T_REG ?
-        (unsigned int)process->reg[params[1].param] : params[1].param;
+        (unsigned int)process->reg[params[1].param - 1] : params[1].param;
     int value_3 = params[2].type == T_REG ?
-        (unsigned int)process->reg[params[2].param] : params[2].param;
+        (unsigned int)process->reg[params[2].param - 1] : params[2].param;
 
     write_int_mem(vm, process->coord_pc.x,
         (process->coord_pc.y + value_2 + value_3) % IDX_MOD, value_1);
+}
+
+static int init_sti(vm_t *vm, process_t *process, unsigned char indicator)
+{
+    params_t *params = NULL;
+    int size_skip = 0;
+
+    if (verif_args(indicator))
+        return T_ID;
+    size_skip += T_ID + T_INFO;
+    params = get_params(vm, process, indicator, 3);
+    if (params == NULL)
+        return -1;
+    size_skip += params[0].type + params[1].type + params[2].type;
+    if (verif_all_params(params))
+        return size_skip;
+    exec_sti(vm, process, params);
+    free(params);
+    return size_skip;
 }
 
 int i_sti(vm_t *vm, __attribute__((unused))champion_t *champion,
@@ -40,20 +59,10 @@ int i_sti(vm_t *vm, __attribute__((unused))champion_t *champion,
 {
     unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID, T_INFO);
-    params_t *params = NULL;
+    int size_skip = init_sti(vm, process, indicator);
 
-    if (verif_args(indicator))
-        return 0;
-    params = get_all_args(vm, process, indicator);
-    if (params == NULL)
+    if (size_skip == -1)
         return 1;
-    if (verif_all_params(params)) {
-        free(params);
-        return 0;
-    }
-    exec_ldi(vm, process, params);
-    increase_coord(process, T_ID + T_INFO + params[0].type +
-        params[1].type + params[2].type);
-    free(params);
+    increase_coord(process, size_skip);
     return 0;
 }

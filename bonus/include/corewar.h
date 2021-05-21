@@ -69,6 +69,11 @@ typedef struct {
     int type;
 } params_t;
 
+typedef struct {
+    size_t size_read;
+    size_t adv;
+} info_size_t;
+
 vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
 
@@ -100,14 +105,10 @@ int i_aff(vm_t *vm, champion_t *champion, process_t *process);
 int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 
 // UTILS INSTRUCT
-params_t *get_first_arg(vm_t *vm, process_t *process,
-    unsigned char indicator, params_t *params);
-params_t *get_second_arg(vm_t *vm, process_t *process,
-    unsigned char indicator, params_t *params);
-params_t *get_third_arg(vm_t *vm, process_t *process,
-    unsigned char indicator, params_t *params);
-params_t *get_all_args(vm_t *vm, process_t *process,
-    unsigned char indicator);
+void get_one_param(vm_t *vm,  params_t *params, coord_t coord,
+    info_size_t info);
+params_t *get_params(vm_t *vm, process_t *process,
+    unsigned char indicator, size_t nbr_args);
 void increase_coord(process_t *process, size_t increase);
 bool verif_nbr_param(unsigned char indicator, int nbr_param);
 bool verif_act_param(unsigned char indicator, int pos, int info);
