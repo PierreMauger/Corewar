@@ -26,8 +26,7 @@ bool init_champion(vm_t *vm, parsing_t *pars_temp, champion_t *champ_temp)
     list_node_t *node_temp = NULL;
     process_t *process_temp = NULL;
 
-    write_mem(vm->memory, (unsigned char *)pars_temp->file->file,
-        pars_temp->arg_a, pars_temp->file->len);
+    write_mem(vm->memory, pars_temp);
     champ_temp->process_list = create_list();
     if (!champ_temp->process_list)
         return 1;

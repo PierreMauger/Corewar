@@ -39,7 +39,7 @@ void print_color_ncurses(int x, int y, mem_t mem)
         attron(COLOR_PAIR(2));
     if (mem.id_process == 1)
         attron(A_BOLD);
-    mvprintw(y, x, "%s ", mem.cas);
+    mvprintw(y, x, "%c ", mem.cas);
     if (mem.proprio == 0 && mem.id_process == 1)
         attroff(COLOR_PAIR(1));
     if (mem.proprio == 1 && mem.id_process == 1)
@@ -51,19 +51,17 @@ void print_color_ncurses(int x, int y, mem_t mem)
 void display_info(mem_t **mem, int nb_cycle, int y, int x)
 {
     size_t i = 0;
-    size_t compt = 0;
     size_t red = 0;
     size_t blue = 0;
 
     mvprintw(y, x, "Nombre de cycle : ");
     x += 18;
     mvprintw(y, x, bitoa(nb_cycle));
-    for (; mem[compt] != NULL; compt++) {
-        for (; mem[compt][i].cas != NULL; i++) {
+    for (size_t compt = 0; compt < IDX_NBR; compt++) {
+        for (i = 0; i < IDX_MOD; i++) {
             if (mem[compt][i].proprio == 0) red++;
             if (mem[compt][i].proprio == 1) blue++;
         }
-        i = 0;
     }
     x += 5;
     mvprintw(y, x, "Le joueur 1 a %d cases.", red);
@@ -90,20 +88,16 @@ static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
 
 void print_mem_ncurse(vm_t *vm, int nb_cycle)
 {
-    mem_t **mem = NULL;
     size_t i = 0;
-    size_t compt = 0;
     int x = 20;
     int y = 2;
 
-    mem = init_mem(mem);
     clear();
-    display_info(mem, nb_cycle, 0, x);
-    while (mem[compt] != NULL) {
-        while (mem[compt][i].cas != NULL)
-            print_mem_ncurse_spl(&x, &y, &i, mem[compt]);
+    display_info(vm->memory, nb_cycle, 0, x);
+    for (size_t compt = 0; compt < IDX_NBR; compt++) {
+        for (size_t j = 0; j < IDX_MOD; j++)
+            print_mem_ncurse_spl(&x, &y, &i, vm->memory[compt]);
         i = 0;
-        compt++;
     }
     refresh();
     usleep(70000);

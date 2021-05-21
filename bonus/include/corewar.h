@@ -39,9 +39,9 @@
 #define BYTES_MOD 32
 
 #define GET_CASE(vm, process) \
-    vm->memory[process->coord_pc.x][process->coord_pc.y]
+    vm->memory[process->coord_pc.x][process->coord_pc.y].cas
 
-#define GET_ACT_CASE(vm, x, y) vm->memory[x][y]
+#define GET_ACT_CASE(vm, x, y) vm->memory[x][y].cas
 
 // VM
 typedef struct {
@@ -52,13 +52,13 @@ typedef struct {
 } cycle_t;
 
 typedef struct {
-    unsigned char *cas;
+    unsigned char cas;
     size_t proprio;
     size_t id_process;
 } mem_t;
 
 typedef struct {
-    unsigned char **memory;
+    mem_t **memory;
     list_t *champion_list;
     cycle_t cycle;
     size_t dump;
@@ -74,8 +74,7 @@ void destroy_vm(vm_t *vm);
 
 // INIT ALL
 params_t *create_params(size_t len);
-void write_mem(unsigned char **memory, unsigned char *champion,
-    size_t adress, size_t len_champion);
+void write_mem(mem_t **memory, parsing_t *pars_temp);
 process_t *init_process(parsing_t *pars_temp, champion_t *champ_temp);
 bool init_champion(vm_t *vm, parsing_t *pars_temp, champion_t *champ_temp);
 bool get_coord(vm_t *vm, list_t *coord);
@@ -138,6 +137,6 @@ void destroy_all(vm_t *vm);
 void print_ncurses(vm_t *vm);
 void init_ncurses(void);
 void print_mem_ncurse(vm_t *vm, int nb_cycle);
-mem_t **init_mem(mem_t **mem);
+mem_t **init_mem(size_t x, size_t y);
 
 #endif // COREWAR_H

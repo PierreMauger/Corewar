@@ -29,14 +29,16 @@ size_t get_n_bytes(size_t adv, unsigned char *buffer, size_t max, int n)
     return result;
 }
 
-void write_mem(unsigned char **memory, unsigned char *champion,
-    size_t adress, size_t len_champion)
+void write_mem(mem_t **memory, parsing_t *pars_temp)
 {
     size_t x = 0;
     size_t y = 0;
-    for (size_t adv = 0; adv < len_champion; adv++) {
-        x = (adress + adv) / IDX_MOD;
-        y = (adress + adv) % IDX_MOD;
-        memory[x][y] = champion[adv];
+    for (size_t adv = 0; adv < pars_temp->file->len; adv++) {
+        x = (pars_temp->arg_a + adv) / IDX_MOD;
+        y = (pars_temp->arg_a + adv) % IDX_MOD;
+        memory[x][y].cas = (unsigned char)pars_temp->file->file[adv];
+        memory[x][y].proprio = pars_temp->arg_n;
+        if (adv == 0)
+            memory[x][y].id_process = pars_temp->arg_n;
     }
 }
