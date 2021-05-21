@@ -4,6 +4,7 @@
 *.gcno
 .vscode
 corewar/corewar
+bonus/corewar
 asm/asm
 *.cor
 file1
