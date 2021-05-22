@@ -42,7 +42,7 @@ params_t *get_params(vm_t *vm, process_t *process,
             if (is_index(process))
                 info.size_read = DIR_SIZE_INDEX;
             else info.size_read = DIR_SIZE;
-        else if (verif_act_param(indicator, 3, I_IND))
+        else if (verif_act_param(indicator, info.adv, I_IND))
             info.size_read = IND_SIZE;
         get_one_param(vm, params, coord, info);
     }

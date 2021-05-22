@@ -29,6 +29,9 @@ static void exec_ld(vm_t *vm, process_t *process, params_t *params)
     else value = (int)get_param(vm, process->coord_pc.x,
             (params[0].param) % IDX_MOD, REG_SIZE);
     process->reg[params[1].param - 1] = value;
+    if (!value)
+        process->carry = 1;
+    else process->carry = 0;
 }
 
 static int init_ld(vm_t *vm, process_t *process, unsigned char indicator)
@@ -44,6 +47,7 @@ static int init_ld(vm_t *vm, process_t *process, unsigned char indicator)
         return -1;
     size_skip += params[0].type + params[1].type + params[2].type;
     if (verif_all_params(params)) {
+        free(params);
         return size_skip;
     }
     exec_ld(vm, process, params);

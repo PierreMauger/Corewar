@@ -21,7 +21,7 @@ static bool verif_args(unsigned char indicator)
 
 static void exec_st(vm_t *vm, process_t *process, params_t *params)
 {
-    if (params[1].type == T_IND) {
+    if (params[1].type != T_REG) {
         write_int_mem(vm, process->coord_pc.x,
             (process->coord_pc.x + params[1].param) % IDX_MOD,
             process->reg[params[0].param - 1]);
@@ -43,8 +43,10 @@ static int init_st(vm_t *vm, process_t *process, unsigned char indicator)
     if (params == NULL)
         return -1;
     size_skip += params[0].type + params[1].type + params[2].type;
-    if (verif_all_params(params))
+    if (verif_all_params(params)) {
+        free(params);
         return size_skip;
+    }
     exec_st(vm, process, params);
     free(params);
     return size_skip;
