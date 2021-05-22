@@ -82,7 +82,6 @@ int vm_loop(vm_t *vm)
         print_mem_ncurse(vm, cycle, scroll);
         ret = champion_loop(vm);
         if (update_it(vm)) {
-            endwin();
             return 0;
         }
         print_memory(vm);
