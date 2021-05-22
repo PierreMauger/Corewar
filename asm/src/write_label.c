@@ -56,6 +56,12 @@ void write_label(int fd, command_t *com, char *param, list_t *list)
     int com_pos = get_com_pos(com, list);
     int res = label_pos - com_pos;
 
-    res = swap_endian_2(res);
-    write(fd, &res, 2);
+    if (get_id(com->name) != 12) {
+        res = swap_endian_2(res);
+        write(fd, &res, 2);
+    }
+    else {
+        res = swap_endian_4(res);
+        write(fd, &res, 4);
+    }
 }
