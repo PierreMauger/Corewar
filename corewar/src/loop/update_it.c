@@ -35,6 +35,13 @@ static int check_lenght(vm_t *vm)
     return 0;
 }
 
+static void remove_destroy_elem(list_t *champion_list, list_node_t *temp)
+{
+    remove_node(champion_list, temp);
+    destroy_node(temp, destroy_champion);
+    free(temp);
+}
+
 int delete_dead(vm_t *vm)
 {
     list_t *champion_list = vm->champion_list;
@@ -47,9 +54,7 @@ int delete_dead(vm_t *vm)
         next = temp->next;
         champion = (champion_t *)temp->data;
         if (!champion->is_alive && champion->alive_it < last_live) {
-            remove_node(champion_list, temp);
-            destroy_node(temp, destroy_champion);
-            free(temp);
+            remove_destroy_elem(champion_list, temp);
         }
         else if (!champion->is_alive && champion->alive_it == last_live) {
             bprintf("The player %d(%s) has won.\n",

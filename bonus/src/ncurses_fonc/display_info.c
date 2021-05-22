@@ -22,13 +22,13 @@ static void display_encart(int y, int x)
     int stock = y + 1;
 
     mvprintw(y, x, "__________________________________________________");
-    while (stock != y + 65) {
+    while (stock != y + 30) {
         mvprintw(stock, x, "|");
         stock++;
     }
     stock = y + 1;
     x += 50;
-    while (stock != (y + 65)) {
+    while (stock != (y + 30)) {
         mvprintw(stock, x, "|");
         stock++;
     }
@@ -38,10 +38,13 @@ static void display_encart(int y, int x)
 
 static void display_cycle(vm_t *vm, int y, int x, int nb_cycle)
 {
-    mvprintw(y + 5, x + 5, "Nombre de cycles : ");
+    attron(A_BOLD);
+    mvprintw(y + 4, x + 7, "=============== INFO ===============");
+    attroff(A_BOLD);
+    mvprintw(y + 7, x + 5, "Nombre de cycles : ");
     x += 19;
     attron(A_BOLD);
-    mvprintw(y + 5, x + 5, "%d", nb_cycle);
+    mvprintw(y + 7, x + 5, "%d", nb_cycle);
     attroff(A_BOLD);
     x -= 19;
     mvprintw(y + 10, x + 5, "Cycles max :");
