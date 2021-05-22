@@ -7,7 +7,8 @@
 
 #include "corewar.h"
 
-static void display_el_proprio(list_node_t *temp_node, int y, size_t blue, size_t green)
+static void display_el_proprio(list_node_t *temp_node, int y, size_t blue,
+size_t green)
 {
     char *nom_champ = NULL;
     champion_t *temp_cast = NULL;

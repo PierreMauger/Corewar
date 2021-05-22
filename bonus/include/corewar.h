@@ -137,7 +137,7 @@ void destroy_all(vm_t *vm);
 // N_CURSES
 void print_ncurses(vm_t *vm);
 void init_ncurses(void);
-void print_mem_ncurse(vm_t *vm, int nb_cycle);
+void print_mem_ncurse(vm_t *vm, int nb_cycle, int scroll);
 mem_t **init_mem(size_t x, size_t y);
 void display_info(vm_t *vm, int nb_cycle, int y, int x);
 void find_color(mem_t mem);
