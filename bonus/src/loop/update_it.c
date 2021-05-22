@@ -29,6 +29,7 @@ static int check_lenght(vm_t *vm)
 
     if (vm->champion_list->lenght == 1) {
         champion = (champion_t *)vm->champion_list->head->data;
+        endwin();
         bprintf("The player %d(%s) has won.\n", champion->id, champion->name);
         return 1;
     }

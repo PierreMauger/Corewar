@@ -33,6 +33,7 @@ static void display_arena(vm_t *vm)
     int x = (COLS / 2) + (70 + 6);
     int y = 30;
 
+    attron(A_BOLD);
     mvprintw(y - 2, x, "---------- Arena distribution ----------");
     mvprintw(y, x, "%.2f%%", (vm->ncur.arena.white / MEM_SIZE) * 100);
     x += 8;
@@ -43,6 +44,7 @@ static void display_arena(vm_t *vm)
         x += 8;
     }
     display_arena_split(x, y, vm);
+    attroff(A_BOLD);
     vm->ncur.arena.white = 0;
     vm->ncur.arena.red = 0;
     vm->ncur.arena.blue = 0;
