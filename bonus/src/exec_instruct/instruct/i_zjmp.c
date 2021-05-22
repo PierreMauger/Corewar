@@ -10,7 +10,7 @@
 static void exec_zjmp(process_t *process, unsigned int jump)
 {
     if (!process->carry) {
-        increase_coord(process, T_ID + T_DIR);
+        increase_coord(process, T_ID + DIR_SIZE_INDEX);
         return;
     }
     process->coord_pc.y = (process->coord_pc.y + jump) % IDX_MOD;
