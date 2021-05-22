@@ -15,11 +15,12 @@ void print_color_ncurses(int x, int y, mem_t mem)
     find_color(mem);
     ret = bitoa_base(hex, HEXA_BASE);
     if (bstrlen(ret) == 1)
-        mvprintw(y, x, "0%s ", ret);
+        mvprintw(y, x, "0%s", ret);
     else
-        mvprintw(y, x, "%s ", ret);
+        mvprintw(y, x, "%s", ret);
     free(ret);
     del_color(mem);
+    mvprintw(y, x + 2, " ");
 }
 
 static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
