@@ -24,6 +24,9 @@ static void exec_add(process_t *process, params_t *params)
 {
     process->reg[params[2].param - 1] =
         process->reg[params[0].param - 1] + process->reg[params[1].param - 1];
+    if (!process->reg[params[2].param - 1])
+        process->carry = 1;
+    else process->carry = 0;
 }
 
 static int init_add(vm_t *vm, process_t *process, unsigned char indicator)
@@ -39,6 +42,7 @@ static int init_add(vm_t *vm, process_t *process, unsigned char indicator)
         return -1;
     size_skip += params[0].type + params[1].type + params[2].type;
     if (verif_all_params(params)) {
+        free(params);
         return size_skip;
     }
     exec_add(process, params);

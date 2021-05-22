@@ -40,6 +40,9 @@ static void exec_lldi(vm_t *vm, process_t *process, params_t *params)
     value_3 = (int)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + value_1 + value_2, REG_SIZE);
     process->reg[params[2].param - 1] = value_3;
+    if (!value_3)
+        process->carry = 1;
+    else process->carry = 0;
 }
 
 static int init_lldi(vm_t *vm, process_t *process, unsigned char indicator)
@@ -55,6 +58,7 @@ static int init_lldi(vm_t *vm, process_t *process, unsigned char indicator)
         return -1;
     size_skip += params[0].type + params[1].type + params[2].type;
     if (verif_all_params(params)) {
+        free(params);
         return size_skip;
     }
     exec_lldi(vm, process, params);

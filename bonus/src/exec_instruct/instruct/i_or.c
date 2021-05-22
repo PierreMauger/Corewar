@@ -32,6 +32,9 @@ static void exec_or(process_t *process, params_t *params)
         (unsigned int)process->reg[params[1].param - 1] : params[1].param;
 
     process->reg[params[2].param - 1] = value_1 | value_2;
+    if (!process->reg[params[2].param - 1])
+        process->carry = 1;
+    else process->carry = 0;
 }
 
 static int init_or(vm_t *vm, process_t *process, unsigned char indicator)
@@ -47,6 +50,7 @@ static int init_or(vm_t *vm, process_t *process, unsigned char indicator)
         return -1;
     size_skip += params[0].type + params[1].type + params[2].type;
     if (verif_all_params(params)) {
+        free(params);
         return size_skip;
     }
     exec_or(process, params);
