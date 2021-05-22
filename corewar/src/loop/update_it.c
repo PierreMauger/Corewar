@@ -39,13 +39,17 @@ int delete_dead(vm_t *vm)
 {
     list_t *champion_list = vm->champion_list;
     list_node_t *temp = NULL;
+    list_node_t *next = NULL;
     champion_t *champion = NULL;
     size_t last_live = get_last_live(vm);
 
-    foreach(champion_list->head, temp) {
+    for (temp = champion_list->head; temp; temp = next) {
+        next = temp->next;
         champion = (champion_t *)temp->data;
         if (!champion->is_alive && champion->alive_it < last_live) {
-            destroy_champion(champion);
+            remove_node(champion_list, temp);
+            destroy_node(temp, destroy_champion);
+            free(temp);
         }
         else if (!champion->is_alive && champion->alive_it == last_live) {
             bprintf("The player %d(%s) has won.\n",

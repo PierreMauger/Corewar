@@ -50,6 +50,7 @@ static int init_or(vm_t *vm, process_t *process, unsigned char indicator)
     size_skip += params[0].type + params[1].type + params[2].type;
     if (verif_all_params(params)) {
         process->carry = 0;
+        free(params);
         return size_skip;
     }
     exec_or(process, params);

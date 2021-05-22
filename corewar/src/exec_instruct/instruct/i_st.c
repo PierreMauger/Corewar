@@ -43,8 +43,10 @@ static int init_st(vm_t *vm, process_t *process, unsigned char indicator)
     if (params == NULL)
         return -1;
     size_skip += params[0].type + params[1].type + params[2].type;
-    if (verif_all_params(params))
+    if (verif_all_params(params)) {
+        free(params);
         return size_skip;
+    }
     exec_st(vm, process, params);
     free(params);
     return size_skip;
