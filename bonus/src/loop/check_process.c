@@ -33,7 +33,7 @@ int check_iteration(vm_t *vm, champion_t *champion, process_t *process)
 {
     int ret = 0;
 
-        printf("%s %ld %d\n", champion->name, process->coord_pc.y, process->id_instruct);
+    GET_CASE_PROCESS(vm, process) = 0;
     if (process->goal_it == 0) {
         check_case(vm, process);
     }
@@ -46,5 +46,6 @@ int check_iteration(vm_t *vm, champion_t *champion, process_t *process)
     else {
         process->current_it++;
     }
+    GET_CASE_PROCESS(vm, process) = champion->id;
     return ret;
 }

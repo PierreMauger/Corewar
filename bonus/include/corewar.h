@@ -41,6 +41,9 @@
 #define GET_CASE(vm, process) \
     vm->memory[process->coord_pc.x][process->coord_pc.y].cas
 
+#define GET_CASE_PROCESS(vm, process) \
+    vm->memory[process->coord_pc.x][process->coord_pc.y].id_process
+
 #define GET_ACT_CASE(vm, x, y) vm->memory[x][y].cas
 
 // VM
