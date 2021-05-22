@@ -160,5 +160,6 @@ void find_color(mem_t mem);
 void del_color(mem_t mem);
 void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green);
 void display_nb_yellow(vm_t *vm, size_t yellow);
+int count_len_nb(int nb);
 
 #endif // COREWAR_H

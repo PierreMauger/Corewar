@@ -47,16 +47,16 @@ static void display_cycle(vm_t *vm, int y, int x, int nb_cycle)
     mvprintw(y + 7, x + 5, "%d", nb_cycle);
     attroff(A_BOLD);
     x -= 19;
-    mvprintw(y + 10, x + 5, "Cycles max :");
+    mvprintw(y + 9, x + 5, "Cycles to die :");
     x += 14;
     attron(A_BOLD);
-    mvprintw(y + 10, x + 5, "%ld", vm->cycle.it_max);
+    mvprintw(y + 9, x + 5, "%ld", vm->cycle.it_max);
     x -= 14;
     attroff(A_BOLD);
-    mvprintw(y + 12, x + 5, "Speed cycle :");
+    mvprintw(y + 11, x + 5, "Speed cycle :");
     x += 14;
     attron(A_BOLD);
-    mvprintw(y + 12, x + 5, "%d", vm->ncur.speed);
+    mvprintw(y + 11, x + 5, "%d", vm->ncur.speed);
     attroff(A_BOLD);
 }
 
@@ -79,5 +79,4 @@ void display_info(vm_t *vm, int nb_cycle, int y, int x)
     }
     display_nb_proprio(vm, red, blue, green);
     display_nb_yellow(vm, yellow);
-    attroff(A_BOLD);
 }

@@ -7,6 +7,17 @@
 
 #include "corewar.h"
 
+int count_len_nb(int nb)
+{
+    int count = 1;
+
+    while (nb > 10) {
+        nb = nb / 10;
+        count++;
+    }
+    return (count);
+}
+
 void del_color(mem_t mem)
 {
     if (mem.proprio == 1)
