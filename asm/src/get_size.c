@@ -16,7 +16,7 @@ int get_size_dir(command_t *com, size_t i, list_t *list, size_t name_id)
             return 4;
     }
     if (is_label(com, i, list, 1)) {
-        if (name_id != 12)
+        if (name_id >= 8 && name_id <= 14 && name_id != 12)
             return 2;
         else
             return 4;
