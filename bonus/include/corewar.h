@@ -58,9 +58,17 @@ typedef struct {
 } mem_t;
 
 typedef struct {
+    int first;
+    int second;
+    int third;
+    int fourth;
+} alive_t;
+
+typedef struct {
     mem_t **memory;
     list_t *champion_list;
     cycle_t cycle;
+    alive_t alive;
     size_t dump;
 } vm_t;
 
