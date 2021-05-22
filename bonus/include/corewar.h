@@ -139,9 +139,10 @@ void print_ncurses(vm_t *vm);
 void init_ncurses(void);
 void print_mem_ncurse(vm_t *vm, int nb_cycle);
 mem_t **init_mem(size_t x, size_t y);
-void display_info(mem_t **mem, int nb_cycle, int y, int x);
-void display_count_proprio(int *x, size_t red, size_t blue, size_t green);
+void display_info(vm_t *vm, int nb_cycle, int y, int x);
 void find_color(mem_t mem);
 void del_color(mem_t mem);
+void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green);
+void display_nb_yellow(vm_t *vm, size_t yellow);
 
 #endif // COREWAR_H

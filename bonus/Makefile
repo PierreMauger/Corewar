@@ -49,6 +49,8 @@ SRC				=	src/create_struct/create_process.c					\
 					src/exec_instruct/write_params.c					\
 					src/ncurses_fonc/display_ncurses.c 					\
 					src/ncurses_fonc/init_ncurses.c						\
+					src/ncurses_fonc/display_info.c						\
+					src/ncurses_fonc/display_nb_case.c					\
 
 SRC				+=	main.c
 
