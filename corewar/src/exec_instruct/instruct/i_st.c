@@ -21,7 +21,7 @@ static bool verif_args(unsigned char indicator)
 
 static void exec_st(vm_t *vm, process_t *process, params_t *params)
 {
-    if (params[1].type == T_IND) {
+    if (params[1].type != T_REG) {
         write_int_mem(vm, process->coord_pc.x,
             (process->coord_pc.x + params[1].param) % IDX_MOD,
             process->reg[params[0].param - 1]);
