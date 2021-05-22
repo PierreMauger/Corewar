@@ -24,6 +24,9 @@ static void exec_add(process_t *process, params_t *params)
 {
     process->reg[params[2].param - 1] =
         process->reg[params[0].param - 1] + process->reg[params[1].param - 1];
+    if (!process->reg[params[2].param - 1])
+        process->carry = 1;
+    else process->carry = 0;
 }
 
 static int init_add(vm_t *vm, process_t *process, unsigned char indicator)
@@ -31,22 +34,18 @@ static int init_add(vm_t *vm, process_t *process, unsigned char indicator)
     params_t *params = NULL;
     int size_skip = 0;
 
-    if (verif_args(indicator)) {
-        process->carry = 0;
+    if (verif_args(indicator))
         return T_ID;
-    }
     size_skip += T_ID + T_INFO;
     params = get_params(vm, process, indicator, 3);
     if (params == NULL)
         return -1;
     size_skip += params[0].type + params[1].type + params[2].type;
     if (verif_all_params(params)) {
-        process->carry = 0;
         free(params);
         return size_skip;
     }
     exec_add(process, params);
-    process->carry = 1;
     free(params);
     return size_skip;
 }
