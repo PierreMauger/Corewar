@@ -32,6 +32,18 @@ static champion_t *verif_id_live(unsigned int id, vm_t *vm)
     return NULL;
 }
 
+static void recup_alive_cycle(vm_t *vm, int id_mem)
+{
+    if (id_mem == 1)
+        vm->alive.first = vm->cycle.it_total;
+    if (id_mem == 2)
+        vm->alive.second = vm->cycle.it_total;
+    if (id_mem == 3)
+        vm->alive.third = vm->cycle.it_total;
+    if (id_mem == 4)
+        vm->alive.fourth = vm->cycle.it_total;
+}
+
 int i_live(vm_t *vm, __attribute__((unused))champion_t *champion,
     process_t *process)
 {
@@ -44,7 +56,7 @@ int i_live(vm_t *vm, __attribute__((unused))champion_t *champion,
     if (!champ_id) {
         return 0;
     }
-    // bprintf("The player %d(%s) is alive.\n", id_mem, champ_id->name);
+    recup_alive_cycle(vm, id_mem);
     handle_nbr_live(vm);
     champ_id->is_alive = 1;
     champ_id->alive_it = vm->cycle.it_total;

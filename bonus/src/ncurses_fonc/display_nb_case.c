@@ -7,26 +7,24 @@
 
 #include "corewar.h"
 
-static void disp_el_pr(list_node_t *temp_node, int y, size_t blue, size_t green)
+static void dp_el_p(list_node_t *temp_node, vm_t *vm, size_t blue, size_t green)
 {
     char *nom_champ = NULL;
     champion_t *temp_cast = NULL;
     int x = (COLS / 2) + (70 + 5);
+    int y = 2;
 
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
     mvprintw(y + 16, x, "Le champion %s a %d cases.", nom_champ, blue);
+    mvprintw(y + 17, x, "Last live : %d", vm->alive.second);
     temp_node = temp_node->next;
     if (!temp_node)
         return;
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
     mvprintw(y + 19, x, "Le champion %s a %d cases.", nom_champ, green);
-    temp_node = temp_node->next;
-    if (!temp_node)
-        return;
-    temp_cast = (champion_t *)temp_node->data;
-    nom_champ = temp_cast->name;
+    mvprintw(y + 20, x, "Last live : %d", vm->alive.third);
 }
 
 void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green)
@@ -44,10 +42,11 @@ void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green)
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
     mvprintw(y + 13, x, "Le champion %s a %d cases.", nom_champ, red);
+    mvprintw(y + 14, x, "Last live : %d", vm->alive.first);
     temp_node = temp_node->next;
     if (!temp_node)
         return;
-    disp_el_pr(temp_node, y, blue, green);
+    dp_el_p(temp_node, vm, blue, green);
 }
 
 void display_nb_yellow(vm_t *vm, size_t yellow)
@@ -64,6 +63,8 @@ void display_nb_yellow(vm_t *vm, size_t yellow)
         nom_champ = temp_cast->name;
         compt++;
     }
-    if (yellow != 0 && compt >= 3)
+    if (yellow != 0 && compt >= 3) {
         mvprintw(y + 22, x, "Le champion %s a %d cases.", nom_champ, yellow);
+        mvprintw(y + 23, x, "Last live : %d", vm->alive.fourth);
+    }
 }

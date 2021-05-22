@@ -19,17 +19,10 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static void exec_ld(vm_t *vm, process_t *process, params_t *params)
+static void exec_ld(process_t *process, params_t *params)
 {
-    int value = 0;
-
-    if (params[0].type == I_IND)
-        value = (int)get_param(vm, process->coord_pc.x,
-            (process->coord_pc.y + params[0].param) % IDX_MOD, REG_SIZE);
-    else value = (int)get_param(vm, process->coord_pc.x,
-            (params[0].param) % IDX_MOD, REG_SIZE);
-    process->reg[params[1].param - 1] = value;
-    if (!value)
+    process->reg[params[1].param - 1] = params[0].param;
+    if (!params[0].param)
         process->carry = 1;
     else process->carry = 0;
 }
@@ -50,7 +43,7 @@ static int init_ld(vm_t *vm, process_t *process, unsigned char indicator)
         free(params);
         return size_skip;
     }
-    exec_ld(vm, process, params);
+    exec_ld(process, params);
     free(params);
     return size_skip;
 }

@@ -51,6 +51,5 @@ void print_mem_ncurse(vm_t *vm, int nb_cycle, int scroll)
         i = 0;
     }
     refresh();
-    clear();
-    usleep(30000);
+    usleep(10000);
 }
