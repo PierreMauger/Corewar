@@ -7,8 +7,7 @@
 
 #include "corewar.h"
 
-static void display_el_proprio(list_node_t *temp_node, int y, size_t blue,
-size_t green)
+static void disp_el_pr(list_node_t *temp_node, int y, size_t blue, size_t green)
 {
     char *nom_champ = NULL;
     champion_t *temp_cast = NULL;
@@ -16,13 +15,13 @@ size_t green)
 
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
-    mvprintw(y + 20, x, "Le champion %s a %d cases.", nom_champ, blue);
+    mvprintw(y + 16, x, "Le champion %s a %d cases.", nom_champ, blue);
     temp_node = temp_node->next;
     if (!temp_node)
         return;
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
-    mvprintw(y + 25, x, "Le champion %s a %d cases.", nom_champ, green);
+    mvprintw(y + 19, x, "Le champion %s a %d cases.", nom_champ, green);
     temp_node = temp_node->next;
     if (!temp_node)
         return;
@@ -44,11 +43,11 @@ void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green)
         return;
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
-    mvprintw(y + 15, x, "Le champion %s a %d cases.", nom_champ, red);
+    mvprintw(y + 13, x, "Le champion %s a %d cases.", nom_champ, red);
     temp_node = temp_node->next;
     if (!temp_node)
         return;
-    display_el_proprio(temp_node, y, blue, green);
+    disp_el_pr(temp_node, y, blue, green);
 }
 
 void display_nb_yellow(vm_t *vm, size_t yellow)
@@ -66,5 +65,5 @@ void display_nb_yellow(vm_t *vm, size_t yellow)
         compt++;
     }
     if (yellow != 0 && compt >= 3)
-        mvprintw(y + 30, x, "Le champion %s a %d cases.", nom_champ, yellow);
+        mvprintw(y + 22, x, "Le champion %s a %d cases.", nom_champ, yellow);
 }

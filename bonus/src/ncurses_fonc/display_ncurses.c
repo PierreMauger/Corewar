@@ -15,11 +15,12 @@ void print_color_ncurses(int x, int y, mem_t mem)
     find_color(mem);
     ret = bitoa_base(hex, HEXA_BASE);
     if (bstrlen(ret) == 1)
-        mvprintw(y, x, "0%s ", ret);
+        mvprintw(y, x, "0%s", ret);
     else
-        mvprintw(y, x, "%s ", ret);
+        mvprintw(y, x, "%s", ret);
     free(ret);
     del_color(mem);
+    mvprintw(y, x + 2, " ");
 }
 
 static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
@@ -43,7 +44,6 @@ void print_mem_ncurse(vm_t *vm, int nb_cycle, int scroll)
     int x = (COLS / 2) - (64 + 64);
     int y = 2;
 
-    clear();
     display_info(vm, nb_cycle, 0, ((COLS / 2) + (70)));
     for (size_t compt = scroll; compt < IDX_NBR; compt++) {
         while (i != IDX_MOD)
@@ -51,5 +51,6 @@ void print_mem_ncurse(vm_t *vm, int nb_cycle, int scroll)
         i = 0;
     }
     refresh();
-    usleep(70000);
+    clear();
+    usleep(30000);
 }
