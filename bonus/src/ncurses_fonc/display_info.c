@@ -51,6 +51,12 @@ static void display_cycle(vm_t *vm, int y, int x, int nb_cycle)
     x += 14;
     attron(A_BOLD);
     mvprintw(y + 10, x + 5, "%ld", vm->cycle.it_max);
+    x -= 14;
+    attroff(A_BOLD);
+    mvprintw(y + 12, x + 5, "Speed cycle :");
+    x += 14;
+    attron(A_BOLD);
+    mvprintw(y + 12, x + 5, "%d", vm->ncur.speed);
     attroff(A_BOLD);
 }
 

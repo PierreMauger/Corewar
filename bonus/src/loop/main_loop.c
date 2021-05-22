@@ -35,20 +35,40 @@ int champion_loop(vm_t *vm)
     return 0;
 }
 
-int event_loop(int scroll)
+static void split_event_loop(int *scroll, int input)
+{
+    if (input == 259 && *scroll > 0) {
+        (*scroll)--;
+        clear();
+    }
+    if (input == 258 && *scroll < 6) {
+        (*scroll)++;
+        clear();
+    }
+    if (input == 'p') {
+        flushinp();
+        input = 0;
+        while (input != 'p')
+            input = getch();
+    }
+}
+
+void event_loop(int *scroll, int *speed)
 {
     int input = getch();
 
-    if (input == 259 && scroll > 0) {
+    if (input == 260) {
+        *speed -= 10000;
+        if (*speed <= 0)
+            *speed = 1000;
         clear();
-        scroll--;
     }
-    if (input == 258 && scroll < 6) {
+    if (input == 261 && *speed < 75000) {
+        *speed += 10000;
         clear();
-        scroll++;
     }
+    split_event_loop(scroll, input);
     flushinp();
-    return scroll;
 }
 
 int vm_loop(vm_t *vm)
@@ -58,7 +78,7 @@ int vm_loop(vm_t *vm)
 
     init_ncurses();
     for (int cycle = 0; !ret; cycle++) {
-        scroll = event_loop(scroll);
+        event_loop(&scroll, &vm->ncur.speed);
         print_mem_ncurse(vm, cycle, scroll);
         ret = champion_loop(vm);
         if (update_it(vm)) {

@@ -68,10 +68,15 @@ typedef struct {
 } alive_t;
 
 typedef struct {
+    alive_t alive;
+    int speed;
+} ncurses_t;
+
+typedef struct {
     mem_t **memory;
     list_t *champion_list;
     cycle_t cycle;
-    alive_t alive;
+    ncurses_t ncur;
     size_t dump;
 } vm_t;
 

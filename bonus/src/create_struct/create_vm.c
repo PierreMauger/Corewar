@@ -22,11 +22,22 @@ mem_t **init_mem(size_t x, size_t y)
     return mem;
 }
 
+static ncurses_t create_ncurses(ncurses_t ncur)
+{
+    ncur.alive.first = 0;
+    ncur.alive.second = 0;
+    ncur.alive.third = 0;
+    ncur.alive.fourth = 0;
+    ncur.speed = 15000;
+    return (ncur);
+}
+
 vm_t *create_vm(void)
 {
     vm_t *result = bcalloc(sizeof(vm_t), 1);
 
     result->memory = init_mem(IDX_NBR, IDX_MOD);
     result->cycle.it_max = CYCLE_TO_DIE;
+    result->ncur = create_ncurses(result->ncur);
     return result;
 }

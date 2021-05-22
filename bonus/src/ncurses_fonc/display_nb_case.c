@@ -17,14 +17,14 @@ static void dp_el_p(list_node_t *temp_node, vm_t *vm, size_t blue, size_t green)
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
     mvprintw(y + 16, x, "Le champion %s a %d cases.", nom_champ, blue);
-    mvprintw(y + 17, x, "Last live : %d", vm->alive.second);
+    mvprintw(y + 17, x, "Last live : %d", vm->ncur.alive.second);
     temp_node = temp_node->next;
     if (!temp_node)
         return;
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
     mvprintw(y + 19, x, "Le champion %s a %d cases.", nom_champ, green);
-    mvprintw(y + 20, x, "Last live : %d", vm->alive.third);
+    mvprintw(y + 20, x, "Last live : %d", vm->ncur.alive.third);
 }
 
 void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green)
@@ -42,7 +42,7 @@ void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green)
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
     mvprintw(y + 13, x, "Le champion %s a %d cases.", nom_champ, red);
-    mvprintw(y + 14, x, "Last live : %d", vm->alive.first);
+    mvprintw(y + 14, x, "Last live : %d", vm->ncur.alive.first);
     temp_node = temp_node->next;
     if (!temp_node)
         return;
@@ -65,6 +65,6 @@ void display_nb_yellow(vm_t *vm, size_t yellow)
     }
     if (yellow != 0 && compt >= 3) {
         mvprintw(y + 22, x, "Le champion %s a %d cases.", nom_champ, yellow);
-        mvprintw(y + 23, x, "Last live : %d", vm->alive.fourth);
+        mvprintw(y + 23, x, "Last live : %d", vm->ncur.alive.fourth);
     }
 }
