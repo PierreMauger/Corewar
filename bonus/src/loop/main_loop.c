@@ -35,13 +35,27 @@ int champion_loop(vm_t *vm)
     return 0;
 }
 
+int event_loop(int scroll)
+{
+    int input = getch();
+
+    if (input == 259 && scroll > 0)
+        scroll--;
+    if (input == 258 && scroll < 6)
+        scroll++;
+    flushinp();
+    return scroll;
+}
+
 int vm_loop(vm_t *vm)
 {
     int ret = 0;
+    int scroll = 0;
 
     init_ncurses();
     for (int cycle = 0; !ret; cycle++) {
-        print_mem_ncurse(vm, cycle);
+        scroll = event_loop(scroll);
+        print_mem_ncurse(vm, cycle, scroll);
         ret = champion_loop(vm);
         if (update_it(vm)) {
             endwin();

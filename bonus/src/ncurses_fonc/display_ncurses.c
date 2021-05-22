@@ -72,7 +72,7 @@ static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
         *x += 3;
 }
 
-void print_mem_ncurse(vm_t *vm, int nb_cycle)
+void print_mem_ncurse(vm_t *vm, int nb_cycle, int scroll)
 {
     size_t i = 0;
     int x = (COLS / 2) - (64 + 32);
@@ -80,7 +80,7 @@ void print_mem_ncurse(vm_t *vm, int nb_cycle)
 
     clear();
     display_info(vm->memory, nb_cycle, 0, x);
-    for (size_t compt = 0; compt < IDX_NBR; compt++) {
+    for (size_t compt = scroll; compt < IDX_NBR; compt++) {
         while (i != IDX_MOD)
             print_mem_ncurse_spl(&x, &y, &i, vm->memory[compt]);
         i = 0;
