@@ -55,20 +55,16 @@ static void dp_el_p(list_node_t *temp_node, vm_t *vm, size_t blue, size_t green)
     int y = 2;
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
-    display_name_color(nom_champ, blue, 2, (y + 16));
-    mvprintw(y + 17, x, "Last live : ");
-    attron(A_BOLD);
-    mvprintw(y + 17, x + 12, "%d", vm->ncur.alive.second);
-    attroff(A_BOLD);
+    display_name_color(nom_champ, blue, 2, (y + 15));
+    display_live_bold(y + 16, x, vm->ncur.alive[1]);
+    display_process_bold(y + 17, x, vm->ncur.nb_process[1]);
     temp_node = temp_node->next;
     if (!temp_node) return;
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
     display_name_color(nom_champ, green, 3, y + 19);
-    mvprintw(y + 20, x, "Last live : ");
-    attron(A_BOLD);
-    mvprintw(y + 20, x + 12, "%d", vm->ncur.alive.third);
-    attroff(A_BOLD);
+    display_live_bold(y + 20, x, vm->ncur.alive[2]);
+    display_process_bold(y + 21, x, vm->ncur.nb_process[2]);
 }
 
 void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green)
@@ -84,11 +80,9 @@ void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green)
         return;
     temp_cast = (champion_t *)temp_node->data;
     nom_champ = temp_cast->name;
-    display_name_color(nom_champ, red, 1, y + 13);
-    mvprintw(y + 14, x, "Last live : ");
-    attron(A_BOLD);
-    mvprintw(y + 14, x + 12, "%d", vm->ncur.alive.first);
-    attroff(A_BOLD);
+    display_name_color(nom_champ, red, 1, y + 11);
+    display_live_bold(y + 12, x, vm->ncur.alive[0]);
+    display_process_bold(y + 13, x, vm->ncur.nb_process[0]);
     temp_node = temp_node->next;
     if (!temp_node)
         return;
@@ -110,10 +104,8 @@ void display_nb_yellow(vm_t *vm, size_t yellow)
         compt++;
     }
     if (yellow != 0 && compt >= 3) {
-        display_name_color(nom_champ, yellow, 4, y + 22);
-        mvprintw(y + 23, x, "Last live : ");
-        attron(A_BOLD);
-        mvprintw(y + 23, x + 12, "%d", vm->ncur.alive.fourth);
-        attroff(A_BOLD);
+        display_name_color(nom_champ, yellow, 4, y + 23);
+        display_live_bold(y + 24, x, vm->ncur.alive[3]);
+        display_process_bold(y + 25, x, vm->ncur.nb_process[3]);
     }
 }

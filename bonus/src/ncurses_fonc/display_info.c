@@ -7,6 +7,21 @@
 
 #include "corewar.h"
 
+void get_info_ncurses(vm_t *vm)
+{
+    list_t *champion_list = vm->champion_list;
+    list_node_t *temp = NULL;
+    champion_t *champion = NULL;
+    size_t compt = 0;
+
+    foreach(champion_list->head, temp) {
+        champion = (champion_t *)temp->data;
+        vm->ncur.alive[compt] = champion->alive_it;
+        vm->ncur.nb_process[compt] = champion->process_list->lenght;
+        compt++;
+    }
+}
+
 static void count_proprio(mem_t mem, size_t *red, size_t *blue, size_t *green)
 {
     if (mem.proprio == 1)
