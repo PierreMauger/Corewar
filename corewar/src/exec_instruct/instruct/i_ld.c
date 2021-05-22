@@ -19,7 +19,7 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static void exec_ld(vm_t *vm, process_t *process, params_t *params)
+static void exec_ld(process_t *process, params_t *params)
 {
     process->reg[params[1].param - 1] = params[0].param;
     if (!params[0].param)
@@ -43,7 +43,7 @@ static int init_ld(vm_t *vm, process_t *process, unsigned char indicator)
         free(params);
         return size_skip;
     }
-    exec_ld(vm, process, params);
+    exec_ld(process, params);
     free(params);
     return size_skip;
 }
