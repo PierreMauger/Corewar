@@ -44,7 +44,6 @@ void print_mem_ncurse(vm_t *vm, int nb_cycle, int scroll)
     int x = (COLS / 2) - (64 + 64);
     int y = 2;
 
-    clear();
     display_info(vm, nb_cycle, 0, ((COLS / 2) + (70)));
     for (size_t compt = scroll; compt < IDX_NBR; compt++) {
         while (i != IDX_MOD)
@@ -52,5 +51,6 @@ void print_mem_ncurse(vm_t *vm, int nb_cycle, int scroll)
         i = 0;
     }
     refresh();
-    usleep(70000);
+    clear();
+    usleep(30000);
 }
