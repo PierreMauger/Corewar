@@ -28,6 +28,10 @@ static ncurses_t create_ncurses(ncurses_t ncur)
     ncur.alive.second = 0;
     ncur.alive.third = 0;
     ncur.alive.fourth = 0;
+    ncur.arena.red = 0;
+    ncur.arena.blue = 0;
+    ncur.arena.green = 0;
+    ncur.arena.yellow = 0;
     ncur.speed = 15000;
     return (ncur);
 }

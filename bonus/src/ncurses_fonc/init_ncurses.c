@@ -18,6 +18,20 @@ int count_len_nb(int nb)
     return (count);
 }
 
+void arena_color(vm_t *vm, int color)
+{
+    if (color == 0)
+        vm->ncur.arena.white++;
+    if (color == 1)
+        vm->ncur.arena.red++;
+    if (color == 2)
+        vm->ncur.arena.blue++;
+    if (color == 3)
+        vm->ncur.arena.green++;
+    if (color == 4)
+        vm->ncur.arena.yellow++;
+}
+
 void del_color(mem_t mem)
 {
     if (mem.proprio == 1)
