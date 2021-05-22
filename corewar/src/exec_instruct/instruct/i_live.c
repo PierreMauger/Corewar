@@ -44,7 +44,7 @@ int i_live(vm_t *vm, __attribute__((unused))champion_t *champion,
     if (!champ_id) {
         return 0;
     }
-    // bprintf("The player %d(%s) is alive.\n", id_mem, champ_id->name);
+    bprintf("The player %d(%s) is alive.\n", id_mem, champ_id->name);
     handle_nbr_live(vm);
     champ_id->is_alive = 1;
     champ_id->alive_it = vm->cycle.it_total;
