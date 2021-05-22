@@ -39,10 +39,14 @@ int event_loop(int scroll)
 {
     int input = getch();
 
-    if (input == 259 && scroll > 0)
+    if (input == 259 && scroll > 0) {
+        clear();
         scroll--;
-    if (input == 258 && scroll < 6)
+    }
+    if (input == 258 && scroll < 6) {
+        clear();
         scroll++;
+    }
     flushinp();
     return scroll;
 }
