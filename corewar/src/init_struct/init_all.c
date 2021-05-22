@@ -18,7 +18,6 @@ process_t *init_process(parsing_t *pars_temp, champion_t *champ_temp)
         pars_temp->arg_a % IDX_MOD
     };
     process_temp->reg[r1] = champ_temp->id;
-    process_temp->carry = 1;
     return process_temp;
 }
 
