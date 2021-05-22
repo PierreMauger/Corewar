@@ -61,13 +61,6 @@ typedef struct {
 } mem_t;
 
 typedef struct {
-    int first;
-    int second;
-    int third;
-    int fourth;
-} alive_t;
-
-typedef struct {
     float red;
     float blue;
     float green;
@@ -76,7 +69,8 @@ typedef struct {
 } arena_t;
 
 typedef struct {
-    alive_t alive;
+    int *alive;
+    int *nb_process;
     arena_t arena;
     int speed;
 } ncurses_t;
@@ -171,5 +165,8 @@ void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green);
 void display_nb_yellow(vm_t *vm, size_t yellow);
 int count_len_nb(int nb);
 void arena_color(vm_t *vm, int color);
+void get_info_ncurses(vm_t *vm);
+void display_process_bold(int y, int x, int process);
+void display_live_bold(int y, int x, int live);
 
 #endif // COREWAR_H

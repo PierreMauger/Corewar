@@ -24,10 +24,8 @@ mem_t **init_mem(size_t x, size_t y)
 
 static ncurses_t create_ncurses(ncurses_t ncur)
 {
-    ncur.alive.first = 0;
-    ncur.alive.second = 0;
-    ncur.alive.third = 0;
-    ncur.alive.fourth = 0;
+    ncur.alive = malloc(sizeof(int) * 4);
+    ncur.nb_process = malloc(sizeof(int) * 4);
     ncur.arena.red = 0;
     ncur.arena.blue = 0;
     ncur.arena.green = 0;

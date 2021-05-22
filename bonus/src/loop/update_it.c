@@ -58,6 +58,7 @@ int delete_dead(vm_t *vm)
             remove_destroy_elem(champion_list, temp);
         }
         else if (!champion->is_alive && champion->alive_it == last_live) {
+            endwin();
             bprintf("The player %d(%s) has won.\n",
                 champion->id, champion->name);
             return 1;
@@ -73,6 +74,7 @@ int update_it(vm_t *vm)
         return 0;
     vm->cycle.current_it++;
     vm->cycle.it_total++;
+    get_info_ncurses(vm);
     if (vm->cycle.current_it >= vm->cycle.it_max) {
         vm->cycle.current_it = 0;
         vm->cycle.cycle_total++;
