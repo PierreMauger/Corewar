@@ -7,25 +7,6 @@
 
 #include "corewar.h"
 
-void display_count_proprio(int *x, size_t red, size_t blue, size_t green)
-{
-    int y = 0;
-
-    *x += 5;
-    if (red != 0) {
-        mvprintw(y, *x, "Le joueur 1 a %d cases.", red);
-        *x += 28;
-    }
-    if (blue != 0) {
-        mvprintw(y, *x, "Le joueur 2 a %d cases.", blue);
-        *x += 28;
-    }
-    if (green != 0) {
-        mvprintw(y, *x, "Le joueur 1 a %d cases.", green);
-        *x += 28;
-    }
-}
-
 void del_color(mem_t mem)
 {
     if (mem.proprio == 1)
