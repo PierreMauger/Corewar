@@ -34,9 +34,7 @@ static void exec_ldi(vm_t *vm, process_t *process, params_t *params)
     if ((short)value_1 < 0)
         value_1 = (short)value_1;
     nbr_to_coord(&x, &y, (value_1 + value_2) % IDX_MOD);
-    value_3 = get_param(vm, x, y, REG_SIZE);
-    if ((short)value_3 < 0)
-        value_3 = (short)value_3;
+    value_3 = (int)get_param(vm, x, y, REG_SIZE);
     process->reg[params[2].param - 1] = value_3;
     if (!value_3)
         process->carry = 1;
