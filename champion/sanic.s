@@ -11,7 +11,7 @@ run:
     ld %190055429, r3
     ld %190056197, r4
     ld %507, r5
-    fork %:FASTER
+    fork %:faster
     ld %190056453, r7
     ld %134443010, r8
     ld %0, r6
