@@ -54,9 +54,8 @@ int delete_dead(vm_t *vm)
     for (temp = champion_list->head; temp; temp = next) {
         next = temp->next;
         champion = (champion_t *)temp->data;
-        if (!champion->is_alive && champion->alive_it < last_live) {
+        if (!champion->is_alive && champion->alive_it < last_live)
             remove_destroy_elem(champion_list, temp);
-        }
         else if (!champion->is_alive && champion->alive_it == last_live) {
             endwin();
             bprintf("The player %d(%s) has won.\n",
