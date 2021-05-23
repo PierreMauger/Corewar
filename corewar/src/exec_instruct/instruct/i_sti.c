@@ -63,7 +63,6 @@ int i_sti(vm_t *vm, __attribute__((unused))champion_t *champion,
         process->coord_pc.y + T_ID, T_INFO);
     int size_skip = init_sti(vm, process, indicator);
 
-        printf("LOL\n");
     if (size_skip == -1)
         return 1;
     increase_coord(process, size_skip);
