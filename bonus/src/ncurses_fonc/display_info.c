@@ -84,13 +84,9 @@ void display_info(vm_t *vm, int nb_cycle, int y, int x)
 
     display_encart(y + 2, x);
     display_cycle(vm, y, x, nb_cycle);
-    for (size_t compt = 0; compt < IDX_NBR; compt++) {
-        for (i = 0; i < IDX_MOD; i++) {
+    for (size_t compt = 0; compt < IDX_NBR; compt++)
+        for (i = 0; i < IDX_MOD; i++)
             count_proprio(vm->memory[compt][i], player);
-            if (vm->memory[compt][i].proprio == 4)
-                player[3]++;
-        }
-    }
     display_nb_proprio(vm, player);
     display_nb_yellow(vm, player[3]);
 }

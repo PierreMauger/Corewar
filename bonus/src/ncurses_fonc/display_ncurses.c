@@ -68,11 +68,8 @@ void print_color_ncurses(int x, int y, mem_t mem)
     mvprintw(y, x + 2, " ");
 }
 
-static int print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
+static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
 {
-    int color = 0;
-
-    color = mem[*i].proprio;
     print_color_ncurses(*x, *y, mem[*i]);
     (*i)++;
     if (*i == 513) {
@@ -84,24 +81,20 @@ static int print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
     }
     else
         *x += 3;
-    return (color);
 }
 
 void print_mem_ncurse(vm_t *vm, int nb_cycle, int scroll)
 {
-    size_t i = 0;
-    int color = 0;
     int x = (COLS / 2) - (64 + 64);
     int y = 2;
 
     display_info(vm, nb_cycle, 0, ((COLS / 2) + (70)));
-    for (size_t compt = scroll; compt < IDX_NBR; compt++) {
-        while (i != IDX_MOD) {
-            color = print_mem_ncurse_spl(&x, &y, &i, vm->memory[compt]);
-            arena_color(vm, color);
-        }
-        i = 0;
-    }
+    for (size_t compt = scroll; compt < IDX_NBR; compt++)
+        for (size_t i = 0; i != IDX_MOD;)
+            print_mem_ncurse_spl(&x, &y, &i, vm->memory[compt]);
+    for (size_t compt = 0; compt < IDX_NBR; compt++)
+        for (size_t i = 0; i != IDX_MOD; i++)
+            arena_color(vm, vm->memory[compt][i].proprio);
     display_arena(vm);
     refresh();
     usleep(vm->ncur.speed);
