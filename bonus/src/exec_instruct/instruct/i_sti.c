@@ -34,6 +34,8 @@ static void exec_sti(vm_t *vm, champion_t *champion, process_t *process,
 
     if (params[1].type == 2)
         value_2 = (short)value_2;
+    if (params[2].type == 2)
+        value_3 = (short)value_3;
     nbr_to_coord(&x, &y, (value_2 + value_3) % IDX_MOD);
     write_int_mem(vm, champion, (coord_t){x, y}, value_1);
 }
