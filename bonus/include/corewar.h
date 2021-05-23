@@ -172,7 +172,7 @@ mem_t **init_mem(size_t x, size_t y);
 void display_info(vm_t *vm, int nb_cycle, int y, int x);
 void find_color(mem_t mem);
 void del_color(mem_t mem);
-void display_nb_proprio(vm_t *vm, size_t red, size_t blue, size_t green);
+void display_nb_proprio(vm_t *vm, size_t player[]);
 void display_nb_yellow(vm_t *vm, size_t yellow);
 int count_len_nb(int nb);
 void arena_color(vm_t *vm, int color);

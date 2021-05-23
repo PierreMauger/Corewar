@@ -22,14 +22,16 @@ void get_info_ncurses(vm_t *vm)
     }
 }
 
-static void count_proprio(mem_t mem, size_t *red, size_t *blue, size_t *green)
+static void count_proprio(mem_t mem, size_t *player)
 {
     if (mem.proprio == 1)
-        (*red)++;
+        player[0]++;
     if (mem.proprio == 2)
-        (*blue)++;
+        player[1]++;
     if (mem.proprio == 3)
-        (*green)++;
+        player[2]++;
+    if (mem.proprio == 4)
+        player[3]++;
 }
 
 static void display_encart(int y, int x)
@@ -78,20 +80,17 @@ static void display_cycle(vm_t *vm, int y, int x, int nb_cycle)
 void display_info(vm_t *vm, int nb_cycle, int y, int x)
 {
     size_t i = 0;
-    size_t red = 0;
-    size_t blue = 0;
-    size_t green = 0;
-    size_t yellow = 0;
+    size_t player[4] = {0};
 
     display_encart(y + 2, x);
     display_cycle(vm, y, x, nb_cycle);
     for (size_t compt = 0; compt < IDX_NBR; compt++) {
         for (i = 0; i < IDX_MOD; i++) {
-            count_proprio(vm->memory[compt][i], &red, &blue, &green);
+            count_proprio(vm->memory[compt][i], player);
             if (vm->memory[compt][i].proprio == 4)
-                yellow++;
+                player[3]++;
         }
     }
-    display_nb_proprio(vm, red, blue, green);
-    display_nb_yellow(vm, yellow);
+    display_nb_proprio(vm, player);
+    display_nb_yellow(vm, player[3]);
 }
