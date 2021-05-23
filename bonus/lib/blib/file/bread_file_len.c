@@ -33,6 +33,8 @@ static file_t *bloop_read(int fd, char *temp, file_t *buffer, size_t size_read)
         if (!buffer->file)
             return NULL;
     } while (ret == size_read);
+    if (!buffer->len)
+        return NULL;
     return buffer;
 }
 
