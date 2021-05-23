@@ -7,12 +7,23 @@
 
 #include "corewar.h"
 
-static bool is_index(process_t *process)
+static const info_params_t info_params[] = {
+    {T_REG, I_REG},
+    {DIR_SIZE, I_DIR},
+    {IND_SIZE, I_IND},
+
+    {0, 0}
+};
+
+int get_info_param(unsigned char indicator, size_t adv)
 {
-    if (process->id_instruct >= 8 && process->id_instruct <= 14 &&
-        process->id_instruct != 12)
-        return 1;
-    return 0;
+    int result = 0;
+
+    for (; info_params[result].size; result++) {
+        if (verif_act_param(indicator, adv, info_params[result].inf))
+            return result;
+    }
+    return -1;
 }
 
 void get_one_param(vm_t *vm, params_t *params, coord_t coord,
@@ -21,30 +32,31 @@ void get_one_param(vm_t *vm, params_t *params, coord_t coord,
     params[info.adv].param = (unsigned int)get_param(vm, coord.x,
         coord.y, info.size_read);
     params[info.adv].type = info.size_read;
+    params[info.adv].inf = info.inf;
 }
 
 params_t *get_params(vm_t *vm, process_t *process,
     unsigned char indicator, size_t nbr_args)
 {
     params_t *params = create_params(MAX_ARGS_NUMBER);
-    coord_t coord = {process->coord_pc.x, process->coord_pc.y +
-        T_ID + T_INFO + params[0].type + params[1].type};
-    info_size_t info = {0, 0};
+    coord_t coord = {process->coord_pc.x, process->coord_pc.y};
+    info_size_t info = {0};
+    int ret = 0;
 
     if (!params)
         return NULL;
     for (; info.adv < nbr_args; info.adv++) {
-        coord.y = process->coord_pc.y +
-        T_ID + T_INFO + params[0].type + params[1].type;
-        if (verif_act_param(indicator, info.adv, I_REG))
-            info.size_read = T_REG;
-        else if (verif_act_param(indicator, info.adv, I_DIR))
-            if (is_index(process))
+        coord.y = process->coord_pc.y + T_ID + T_INFO +
+            params[0].type + params[1].type;
+        ret = get_info_param(indicator, info.adv);
+        if (ret != -1) {
+            if (process->id_instruct >= 8 && process->id_instruct <= 14 &&
+                process->id_instruct != 12 && info_params[ret].inf == I_DIR)
                 info.size_read = DIR_SIZE_INDEX;
-            else info.size_read = DIR_SIZE;
-        else if (verif_act_param(indicator, info.adv, I_IND))
-            info.size_read = IND_SIZE;
-        get_one_param(vm, params, coord, info);
+            else info.size_read = info_params[ret].size;
+            info.inf = info_params[ret].inf;
+            get_one_param(vm, params, coord, info);
+        }
     }
     return params;
 }
@@ -65,4 +77,24 @@ size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get)
         y++;
     }
     return result;
+}
+
+int get_value(vm_t *vm, process_t *process, params_t param, bool mod)
+{
+    if (param.inf == I_REG) {
+        return process->reg[param.param - 1];
+    }
+    else if (param.inf == I_DIR) {
+        return param.param;
+    }
+    else if (param.inf == I_IND) {
+        if (mod) {
+            return (int)get_param(vm, process->coord_pc.x,
+                (process->coord_pc.y + param.param) % IDX_MOD, IND_SIZE);
+        }
+        else if (!mod)
+            return (int)get_param(vm, process->coord_pc.x,
+                (process->coord_pc.y + param.param), IND_SIZE);
+    }
+    return 0;
 }

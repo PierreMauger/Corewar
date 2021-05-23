@@ -25,11 +25,9 @@ static bool verif_args(unsigned char indicator)
 
 static void exec_sti(vm_t *vm, process_t *process, params_t *params)
 {
-    int value_1 = process->reg[params[0].param - 1];
-    int value_2 = params[1].type == T_REG ?
-        (unsigned int)process->reg[params[1].param - 1] : params[1].param;
-    int value_3 = params[2].type == T_REG ?
-        (unsigned int)process->reg[params[2].param - 1] : params[2].param;
+    int value_1 = get_value(vm, process, params[0], 1);
+    int value_2 = get_value(vm, process, params[1], 1);
+    int value_3 = get_value(vm, process, params[2], 1);
 
     write_int_mem(vm, process->coord_pc.x,
         (process->coord_pc.y + value_2 + value_3) % IDX_MOD, value_1);

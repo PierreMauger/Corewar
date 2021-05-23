@@ -59,12 +59,19 @@ typedef struct {
 typedef struct {
     unsigned int param;
     int type;
+    int inf;
 } params_t;
 
 typedef struct {
     size_t size_read;
     size_t adv;
+    int inf;
 } info_size_t;
+
+typedef struct {
+    size_t size;
+    int inf;
+} info_params_t;
 
 vm_t *create_vm(void);
 void destroy_vm(vm_t *vm);
@@ -100,6 +107,7 @@ int exec_instruct(vm_t *vm, champion_t *champion, process_t *process);
 // UTILS INSTRUCT
 void get_one_param(vm_t *vm,  params_t *params, coord_t coord,
     info_size_t info);
+int get_info_param(unsigned char indicator, size_t adv);
 params_t *get_params(vm_t *vm, process_t *process,
     unsigned char indicator, size_t nbr_args);
 void increase_coord(process_t *process, size_t increase);
@@ -108,6 +116,7 @@ bool verif_act_param(unsigned char indicator, int pos, int info);
 bool verif_all_params(params_t *params);
 void write_int_mem(vm_t *vm, size_t x, size_t y, int to_write);
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
+int get_value(vm_t *vm, process_t *process, params_t param, bool mod);
 
 // VM LOOP
 void check_case(vm_t *vm, process_t *process);
