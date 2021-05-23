@@ -18,8 +18,7 @@ char *get_label(char *buffer, size_t *adv)
         if (buffer[*adv + len] == ':') {
             label = bstrndup(buffer + *adv, len);
             *adv += len + 1;
-            for (; buffer[*adv] == ',' || buffer[*adv] == ' '
-                || buffer[*adv] == '\t' || buffer[*adv] == '\n'; (*adv)++);
+            for (; buffer[*adv] == '\n'; (*adv)++);
             break;
         }
     return label;
@@ -50,7 +49,7 @@ command_t *create_com(char *buffer, size_t *adv)
         return NULL;
     for (; buffer[*adv] && (buffer[*adv] == ' '
         || buffer[*adv] == ':' || buffer[*adv] == '\t'); (*adv)++);
-    com->params = get_command_params(buffer, *adv);
+    com->params = get_command_params(buffer, adv);
     if (!com->params)
         return NULL;
     return com;
@@ -58,9 +57,10 @@ command_t *create_com(char *buffer, size_t *adv)
 
 void print_elem(command_t *elem)
 {
-    bprintf("\e[34m%s \e[0m", elem->name);
+    if (elem->name)
+        bprintf("\e[34m%s \e[0m", elem->name);
     for (size_t i = 0; i < barray_len(elem->params); i++) {
-        bprintf("\e[35m%s->\e[0m", elem->params[i]);
+        bprintf("\e[35m%s \e[0m", elem->params[i]);
     }
     bprintf("\e[31m%s\e[0m", elem->label);
     bprintf("\n");
@@ -80,7 +80,6 @@ list_t *get_command(char *buffer, size_t adv)
         if (!elem || !node)
             return NULL;
         add_node(list, node);
-        for (; buffer[adv] && buffer[adv] != '\n'; adv++);
         check_new_line(buffer, &adv);
     }
     return list;

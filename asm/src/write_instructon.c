@@ -13,7 +13,7 @@ void write_dir(int fd, command_t *com, size_t i, list_t *list)
     int name_id = get_id(com->name);
 
     if (is_num(com->params[i] + 1)) {
-        if ((name_id >= 8 && name_id < 12) || name_id == 14 || name_id == 13) {
+        if (name_id >= 8 && name_id <= 14 && name_id != 12) {
             res = swap_endian_2(res);
             write(fd, &res, 2);
         }
@@ -29,14 +29,21 @@ void write_dir(int fd, command_t *com, size_t i, list_t *list)
 void write_ind(int fd, command_t *com, size_t i, list_t *list)
 {
     int res = 0;
+    int label_pos = 0;
+    int com_pos = 0;
 
     if (is_num(com->params[i])) {
         res = batoi(com->params[i]);
         res = swap_endian_2(res);
         write(fd, &res, 2);
     }
-    if (is_label(com, i, list, 0))
-        write_label(fd, com, com->params[i] + 1, list);
+    if (is_label(com, i, list, 0)) {
+        label_pos = get_label_pos(com->params[i] + 1, list);
+        com_pos = get_com_pos(com, list);
+        res = label_pos - com_pos;
+        res = swap_endian_2(res);
+        write(fd, &res, 2);
+    }
 }
 
 void write_params(int fd, command_t *com, list_t *list)

@@ -7,91 +7,95 @@
 
 #include "corewar.h"
 
-void print_ncurses(vm_t *vm)
+static void display_arena_split(int x, int y, vm_t *vm)
 {
-    char *hex = NULL;
-
-    for (size_t x = 0; x < IDX_NBR; x++) {
-        if (x < 6) attron(COLOR_PAIR(1));
-        else attron(COLOR_PAIR(2));
-        for (size_t y = 0; y < IDX_MOD; y++) {
-            hex = bitoa_base((int)GET_ACT_CASE(vm, x, y), HEXA_BASE);
-            if (bstrlen(hex) == 1)
-                printw("0%s ", hex);
-            else printw("%s ", hex);
-            free(hex);
-            if ((y + 1) % 64 == 0)
-                printw("\n");
-        }
-        if (x < 6) attroff(COLOR_PAIR(1));
-        else attroff(COLOR_PAIR(2));
+    if (vm->ncur.arena.blue > 0) {
+        attron(COLOR_PAIR(2));
+        mvprintw(y, x, "%.2f%%", (vm->ncur.arena.blue / MEM_SIZE) * 100);
+        attroff(COLOR_PAIR(2));
+        x += 8;
     }
-    refresh();
-    usleep(50000);
-    clear();
+    if (vm->ncur.arena.green > 0) {
+        attron(COLOR_PAIR(3));
+        mvprintw(y, x, "%.2f%%", (vm->ncur.arena.green / MEM_SIZE) * 100);
+        attroff(COLOR_PAIR(3));
+        x += 8;
+    }
+    if (vm->ncur.arena.yellow > 0) {
+        attron(COLOR_PAIR(4));
+        mvprintw(y, x, "%.2f%%", (vm->ncur.arena.yellow / MEM_SIZE) * 100);
+        attroff(COLOR_PAIR(4));
+    }
+}
+
+static void display_arena(vm_t *vm)
+{
+    int x = (COLS / 2) + (70 + 6);
+    int y = 30;
+
+    attron(A_BOLD);
+    mvprintw(y - 2, x, "---------- Arena distribution ----------");
+    mvprintw(y, x, "%.2f%%", (vm->ncur.arena.white / MEM_SIZE) * 100);
+    x += 8;
+    if (vm->ncur.arena.red > 0) {
+        attron(COLOR_PAIR(1));
+        mvprintw(y, x, "%.2f%%", (vm->ncur.arena.red / MEM_SIZE) * 100);
+        attroff(COLOR_PAIR(1));
+        x += 8;
+    }
+    display_arena_split(x, y, vm);
+    attroff(A_BOLD);
+    vm->ncur.arena.white = 0;
+    vm->ncur.arena.red = 0;
+    vm->ncur.arena.blue = 0;
+    vm->ncur.arena.green = 0;
+    vm->ncur.arena.yellow = 0;
 }
 
 void print_color_ncurses(int x, int y, mem_t mem)
 {
-    if (mem.proprio == 0)
-        attron(COLOR_PAIR(1));
-    if (mem.proprio == 1)
-        attron(COLOR_PAIR(2));
-    if (mem.id_process == 1)
-        attron(A_BOLD);
-    mvprintw(y, x, "%s ", mem.cas);
-    if (mem.proprio == 0)
-        attroff(COLOR_PAIR(1));
-    if (mem.proprio == 1)
-        attroff(COLOR_PAIR(2));
-    if (mem.id_process == 1)
-        attroff(A_BOLD);
+    char *ret = NULL;
+    int hex = mem.cas;
+
+    find_color(mem);
+    ret = bitoa_base(hex, HEXA_BASE);
+    if (bstrlen(ret) == 1)
+        mvprintw(y, x, "0%s", ret);
+    else
+        mvprintw(y, x, "%s", ret);
+    free(ret);
+    del_color(mem);
+    mvprintw(y, x + 2, " ");
 }
 
-void display_info(mem_t *mem, int nb_cycle, int y)
+static void print_mem_ncurse_spl(int *x, int *y, size_t *i, mem_t *mem)
 {
-    int x = 20;
-    size_t i = 0;
-    size_t red = 0;
-    size_t blue = 0;
-
-    clear();
-    mvprintw(y, x, "Nombre de cycle : ");
-    x += 18;
-    mvprintw(y, x, bitoa(nb_cycle));
-    while (mem[i].cas != NULL) {
-        if (mem[i].proprio == 0)
-            red++;
-        if (mem[i].proprio == 1)
-            blue++;
-        i++;
+    print_color_ncurses(*x, *y, mem[*i]);
+    (*i)++;
+    if (*i == 513) {
+        *x = (COLS / 2) - (64 + 64);
     }
-    x += 5;
-    mvprintw(y, x, "Le joueur 1 a %d cases.", red);
-    x += 28;
-    mvprintw(y, x, "Le joueur 2 a %d cases.", blue);
+    else if (*i % 64 == 0) {
+        *y += 1;
+        *x = COLS / 2 - (64 + 64);
+    }
+    else
+        *x += 3;
 }
 
-void print_mem_ncurse(vm_t *vm, int nb_cycle)
+void print_mem_ncurse(vm_t *vm, int nb_cycle, int scroll)
 {
-    mem_t *mem = NULL;
-    int i = 0;
-    int x = 20;
+    int x = (COLS / 2) - (64 + 64);
     int y = 2;
 
-    mem = init_mem(mem);
-    display_info(mem, nb_cycle, 0);
-    while (mem[i].cas != NULL) {
-        print_color_ncurses(x, y, mem[i]);
-        i++;
-        if (i % 64 == 0) {
-            mvprintw(y, x, "\n");
-            y += 1;
-            x = 20;
-        }
-        else
-            x += 3;
-    }
+    display_info(vm, nb_cycle, 0, ((COLS / 2) + (70)));
+    for (size_t compt = scroll; compt < IDX_NBR; compt++)
+        for (size_t i = 0; i != IDX_MOD;)
+            print_mem_ncurse_spl(&x, &y, &i, vm->memory[compt]);
+    for (size_t compt = 0; compt < IDX_NBR; compt++)
+        for (size_t i = 0; i != IDX_MOD; i++)
+            arena_color(vm, vm->memory[compt][i].proprio);
+    display_arena(vm);
     refresh();
-    usleep(70000);
+    usleep(vm->ncur.speed);
 }

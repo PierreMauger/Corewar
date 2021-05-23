@@ -15,7 +15,6 @@ static void aff(vm_t *vm, process_t *process)
     increase_coord(process, T_ID + T_INFO + T_REG);
     if (reg >= REG_NUMBER)
         return;
-    bprintf("%c", process->reg[reg] % 256);
 }
 
 int i_aff(vm_t *vm, __attribute__((unused))champion_t *champion,

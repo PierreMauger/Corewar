@@ -7,7 +7,8 @@
 
 #include "corewar.h"
 
-static int (*instruct[])(vm_t *, champion_t *, process_t *) = {
+static int (*instruct[])(vm_t *, champion_t *, process_t *) =
+{
     i_live,
     i_ld,
     i_st,

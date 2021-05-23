@@ -24,27 +24,36 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static bool verif_params(params_t *params)
+static void exec_xor(vm_t *vm, process_t *process, params_t *params)
 {
-    if ((params[0].type == T_REG && params[0].param >= REG_NUMBER) ||
-        (params[1].type == T_REG && params[1].param >= REG_NUMBER) ||
-        (params[2].param >= REG_NUMBER)) {
-        return 1;
-    }
-    return 0;
+    int value_1 = get_value(vm, process, params[0], 1);
+    int value_2 = get_value(vm, process, params[1], 1);
+
+    process->reg[params[2].param - 1] = value_1 ^ value_2;
+    if (!process->reg[params[2].param - 1])
+        process->carry = 1;
+    else process->carry = 0;
 }
 
-static void exec_or(process_t *process, params_t *params)
+static int init_xor(vm_t *vm, process_t *process, unsigned char indicator)
 {
-    int value_1 = params[0].type == T_REG ?
-        (unsigned int)process->reg[params[0].param] : params[0].param;
-    int value_2 = params[1].type == T_REG ?
-        (unsigned int)process->reg[params[1].param] : params[1].param;
+    params_t *params = NULL;
+    int size_skip = 0;
 
-    process->reg[params[2].param] = value_1 ^ value_2;
-    increase_coord(process, T_ID + T_INFO + params[0].type +
-        params[1].type + params[2].type);
+    if (verif_args(indicator))
+        return T_ID;
+    size_skip += T_ID + T_INFO;
+    params = get_params(vm, process, indicator, 3);
+    if (params == NULL)
+        return -1;
+    size_skip += params[0].type + params[1].type + params[2].type;
+    if (verif_all_params(params)) {
+        free(params);
+        return size_skip;
+    }
+    exec_xor(vm, process, params);
     free(params);
+    return size_skip;
 }
 
 int i_xor(vm_t *vm, __attribute__((unused))champion_t *champion,
@@ -52,15 +61,10 @@ int i_xor(vm_t *vm, __attribute__((unused))champion_t *champion,
 {
     unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID, T_INFO);
-    params_t *params = create_params(MAX_ARGS_NUMBER);
+    int size_skip = init_xor(vm, process, indicator);
 
-    if (params == NULL)
+    if (size_skip == -1)
         return 1;
-    if (verif_args(indicator))
-        return 0;
-    params = get_all_args(vm, process, indicator, params);
-    if (verif_params(params))
-        return 0;
-    exec_or(process, params);
+    increase_coord(process, size_skip);
     return 0;
 }

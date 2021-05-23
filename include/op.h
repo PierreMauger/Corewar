@@ -77,9 +77,10 @@ typedef struct {
 
 /* size (in bytes) */
 
-#define IND_SIZE    2
-#define DIR_SIZE    4
-#define REG_SIZE    DIR_SIZE
+#define IND_SIZE        2
+#define DIR_SIZE_INDEX  2
+#define DIR_SIZE        4
+#define REG_SIZE        DIR_SIZE
 
 /* op_tab */
 extern op_t op_tab[];

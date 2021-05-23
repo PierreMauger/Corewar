@@ -8,8 +8,8 @@
 .name "zork"
 .comment "just a basic  living  program"
 
+l1:
 l2:
-ld 34 r3
 sti r1 ,%:live ,%1
 and r1 ,%0 ,r1
 live: live %1

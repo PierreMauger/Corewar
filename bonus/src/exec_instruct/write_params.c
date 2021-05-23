@@ -15,18 +15,20 @@ static int swap_endian_4(int val)
             ((val & 0x000000ff) << 24);
 }
 
-void write_int_mem(vm_t *vm, size_t x, size_t y, int to_write)
+void write_int_mem(vm_t *vm, champion_t *champion, coord_t pos, int to_write)
 {
     int size = (int)sizeof(to_write);
 
     to_write = swap_endian_4(to_write);
-    for (int adv = 0; adv < size; adv++, y++) {
-        if (y >= IDX_MOD) {
-            x += (y / IDX_MOD);
-            y %= IDX_MOD;
-            x %= IDX_NBR;
+    for (int adv = 0; adv < size; adv++, pos.y++) {
+        if (pos.y >= IDX_MOD) {
+            pos.x += (pos.y / IDX_MOD);
+            pos.y %= IDX_MOD;
+            pos.x %= IDX_NBR;
         }
-        GET_ACT_CASE(vm, x, y) = (unsigned char)to_write;
+        GET_ACT_CASE(vm, pos.x, pos.y) =
+        (unsigned char)to_write;
+        GET_ACT_PROCESS(vm, pos.x, pos.y) = champion->id;
         to_write >>= 8;
     }
 }

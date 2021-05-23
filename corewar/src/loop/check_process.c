@@ -36,7 +36,7 @@ int check_iteration(vm_t *vm, champion_t *champion, process_t *process)
     if (process->goal_it == 0) {
         check_case(vm, process);
     }
-    else if (process->current_it == process->goal_it) {
+    else if (process->current_it == process->goal_it - 1) {
         process->current_it = 0;
         process->goal_it = 0;
         ret = exec_instruct(vm, champion, process);

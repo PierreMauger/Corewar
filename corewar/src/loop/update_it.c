@@ -35,17 +35,26 @@ static int check_lenght(vm_t *vm)
     return 0;
 }
 
+static void remove_destroy_elem(list_t *champion_list, list_node_t *temp)
+{
+    remove_node(champion_list, temp);
+    destroy_node(temp, destroy_champion);
+    free(temp);
+}
+
 int delete_dead(vm_t *vm)
 {
     list_t *champion_list = vm->champion_list;
     list_node_t *temp = NULL;
+    list_node_t *next = NULL;
     champion_t *champion = NULL;
     size_t last_live = get_last_live(vm);
 
-    foreach(champion_list->head, temp) {
+    for (temp = champion_list->head; temp; temp = next) {
+        next = temp->next;
         champion = (champion_t *)temp->data;
         if (!champion->is_alive && champion->alive_it < last_live) {
-            destroy_champion(champion);
+            remove_destroy_elem(champion_list, temp);
         }
         else if (!champion->is_alive && champion->alive_it == last_live) {
             bprintf("The player %d(%s) has won.\n",
@@ -63,7 +72,7 @@ int update_it(vm_t *vm)
         return 0;
     vm->cycle.current_it++;
     vm->cycle.it_total++;
-    if (vm->cycle.current_it == vm->cycle.it_max) {
+    if (vm->cycle.current_it >= vm->cycle.it_max) {
         vm->cycle.current_it = 0;
         vm->cycle.cycle_total++;
         return delete_dead(vm);
