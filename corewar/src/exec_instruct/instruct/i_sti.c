@@ -29,8 +29,8 @@ static void exec_sti(vm_t *vm, process_t *process, params_t *params)
     int value_2 = get_value(vm, process, params[1], 1);
     int value_3 = get_value(vm, process, params[2], 1);
 
-    write_int_mem(vm, process->coord_pc.x,
-        process->coord_pc.y + (value_2 + value_3) % IDX_MOD, value_1);
+    write_int_mem(vm, (coord_t){process->coord_pc.x, value_2 + value_3},
+        process, value_1);
 }
 
 static int init_sti(vm_t *vm, process_t *process, unsigned char indicator)

@@ -23,8 +23,8 @@ static void exec_st(vm_t *vm, champion_t *champion, process_t *process,
     params_t *params)
 {
     if (params[1].type != T_REG) {
-        write_int_mem(vm, champion, (coord_t){process->coord_pc.x,
-            (process->coord_pc.x + params[1].param) % IDX_MOD},
+        write_int_mem(vm, champion, (info_size_t){process->coord_pc.x,
+            params[1].param, process->coord_pc.y},
             process->reg[params[0].param - 1]);
     }
     else {

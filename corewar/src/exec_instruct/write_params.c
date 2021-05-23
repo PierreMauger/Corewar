@@ -15,18 +15,24 @@ static int swap_endian_4(int val)
             ((val & 0x000000ff) << 24);
 }
 
-void write_int_mem(vm_t *vm, size_t x, size_t y, int to_write)
+void write_int_mem(vm_t *vm, coord_t coord, process_t *process, int to_write)
 {
     int size = (int)sizeof(to_write);
 
+    if (coord.y >= IDX_MOD) {
+        coord.x += (coord.y / IDX_MOD);
+        coord.y %= IDX_MOD;
+        coord.x %= IDX_NBR;
+    }
+    coord.y += process->coord_pc.y;
     to_write = swap_endian_4(to_write);
-    for (int adv = 0; adv < size; adv++, y++) {
-        if (y >= IDX_MOD) {
-            x += (y / IDX_MOD);
-            y %= IDX_MOD;
-            x %= IDX_NBR;
+    for (int adv = 0; adv < size; adv++, coord.y++) {
+        if (coord.y >= IDX_MOD) {
+            coord.x += (coord.y / IDX_MOD);
+            coord.y %= IDX_MOD;
+            coord.x %= IDX_NBR;
         }
-        GET_ACT_CASE(vm, x, y) = (unsigned char)to_write;
+        GET_ACT_CASE(vm, coord.x, coord.y) = (unsigned char)to_write;
         to_write >>= 8;
     }
 }
