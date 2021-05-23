@@ -79,6 +79,7 @@ int vm_loop(vm_t *vm)
     init_ncurses();
     for (int cycle = 0; !ret; cycle++) {
         event_loop(&scroll, &vm->ncur.speed);
+        get_info_ncurses(vm);
         print_mem_ncurse(vm, cycle, scroll);
         ret = champion_loop(vm);
         if (update_it(vm)) {

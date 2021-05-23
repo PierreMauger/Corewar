@@ -73,7 +73,6 @@ int update_it(vm_t *vm)
         return 0;
     vm->cycle.current_it++;
     vm->cycle.it_total++;
-    get_info_ncurses(vm);
     if (vm->cycle.current_it >= vm->cycle.it_max) {
         vm->cycle.current_it = 0;
         vm->cycle.cycle_total++;
