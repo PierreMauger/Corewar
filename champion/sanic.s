@@ -17,7 +17,7 @@ run:
     ld %0, r6
     zjmp %:jump
 
-FASTER:
+faster:
     ld %134443010, r2
     ld %101253622, r3
     ld %101253622, r4
