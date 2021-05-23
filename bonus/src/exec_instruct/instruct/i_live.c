@@ -47,7 +47,7 @@ int i_live(vm_t *vm, __attribute__((unused))champion_t *champion,
         return 0;
     }
     handle_nbr_live(vm);
-    champion->is_alive = 1;
-    champion->alive_it = vm->cycle.it_total;
+    champ_id->is_alive = 1;
+    champ_id->alive_it = vm->cycle.it_total;
     return 0;
 }
