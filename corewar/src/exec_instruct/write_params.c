@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-static int swap_endian_4(int val)
+int swap_endian_4(int val)
 {
     return ((val & 0xff000000) >> 24) |
             ((val & 0x00ff0000) >> 8) |

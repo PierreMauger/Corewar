@@ -27,7 +27,9 @@ static void exec_st(vm_t *vm, process_t *process, params_t *params)
     ssize_t x = process->coord_pc.x;
     ssize_t y = process->coord_pc.y;
 
-    if (params[1].type != T_REG) {
+    if ((short)value_2 < 0)
+        value_2 = (short)value_2;
+    if (params[1].inf != I_REG) {
         nbr_to_coord(&x, &y, value_2 % IDX_MOD);
         write_int_mem(vm, (coord_t){x, y}, value_1);
     }

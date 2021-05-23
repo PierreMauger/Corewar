@@ -28,6 +28,8 @@ static void exec_st(vm_t *vm, champion_t *champion, process_t *process,
     ssize_t x = process->coord_pc.x;
     ssize_t y = process->coord_pc.y;
 
+    if ((short)value_2 < 0)
+        value_2 = (short)value_2;
     if (params[1].type != T_REG) {
         nbr_to_coord(&x, &y, value_2 % IDX_MOD);
         write_int_mem(vm, champion, (coord_t){x, y}, value_1);

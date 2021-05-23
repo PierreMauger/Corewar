@@ -25,12 +25,16 @@ static bool verif_args(unsigned char indicator)
 
 static void exec_sti(vm_t *vm, process_t *process, params_t *params)
 {
-    short value_1 = (short)get_value(vm, process, params[0], 1);
-    short value_2 = (short)get_value(vm, process, params[1], 1);
-    short value_3 = (short)get_value(vm, process, params[2], 1);
+    int value_1 = get_value(vm, process, params[0], 1);
+    int value_2 = get_value(vm, process, params[1], 1);
+    int value_3 = get_value(vm, process, params[2], 1);
     ssize_t x = process->coord_pc.x;
     ssize_t y = process->coord_pc.y;
 
+    if ((short)value_2 < 0)
+        value_2 = (short)value_2;
+    if ((short)value_3 < 0)
+        value_3 = (short)value_3;
     nbr_to_coord(&x, &y, (value_2 + value_3) % IDX_MOD);
     write_int_mem(vm, (coord_t){x, y}, value_1);
 }

@@ -118,6 +118,7 @@ bool verif_all_params(params_t *params);
 void write_int_mem(vm_t *vm, coord_t coord, int to_write);
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 int get_value(vm_t *vm, process_t *process, params_t param, bool mod);
+int swap_endian_4(int val);
 
 // VM LOOP
 void check_case(vm_t *vm, process_t *process);

@@ -89,11 +89,11 @@ int get_value(vm_t *vm, process_t *process, params_t param, bool mod)
     }
     else if (param.inf == I_IND) {
         if (mod) {
-            return (int)get_param(vm, process->coord_pc.x,
+            return (short)get_param(vm, process->coord_pc.x,
                 (process->coord_pc.y + param.param) % IDX_MOD, IND_SIZE);
         }
         else if (!mod)
-            return (int)get_param(vm, process->coord_pc.x,
+            return (short)get_param(vm, process->coord_pc.x,
                 (process->coord_pc.y + param.param), IND_SIZE);
     }
     return 0;

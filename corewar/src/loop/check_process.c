@@ -37,6 +37,8 @@ int check_iteration(vm_t *vm, champion_t *champion, process_t *process)
         check_case(vm, process);
     }
     else if (process->current_it == process->goal_it - 1) {
+        // if (process->coord_pc.y == 75)
+        //     printf("%d, %d\n", process->reg[r14], process->reg[r3]);
         process->current_it = 0;
         process->goal_it = 0;
         ret = exec_instruct(vm, champion, process);
