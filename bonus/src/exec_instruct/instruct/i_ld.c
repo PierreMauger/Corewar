@@ -21,12 +21,12 @@ static bool verif_args(unsigned char indicator)
 
 static void exec_ld(vm_t *vm, process_t *process, params_t *params)
 {
-    int value = params[0].type == IND_SIZE ? (unsigned int)get_param(vm,
-        process->coord_pc.x, (process->coord_pc.y + params[0].param) % IDX_MOD,
-        REG_SIZE) : params[0].param;
+    int value_1 = params[0].inf == I_DIR ? params[0].param :
+        (unsigned int)get_param(vm, process->coord_pc.x,
+        (process->coord_pc.y + params[0].param) % IDX_MOD, REG_SIZE);
 
-    process->reg[params[1].param - 1] = value;
-    if (!params[0].param)
+    process->reg[params[1].param - 1] = value_1;
+    if (!value_1)
         process->carry = 1;
     else process->carry = 0;
 }

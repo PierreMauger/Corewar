@@ -54,8 +54,7 @@ static int init_st(vm_t *vm, champion_t *champion, process_t *process,
     return size_skip;
 }
 
-int i_st(vm_t *vm, __attribute__((unused))champion_t *champion,
-    process_t *process)
+int i_st(vm_t *vm, champion_t *champion, process_t *process)
 {
     unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID, T_INFO);

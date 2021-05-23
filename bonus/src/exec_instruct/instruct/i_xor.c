@@ -24,12 +24,10 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static void exec_xor(process_t *process, params_t *params)
+static void exec_xor(vm_t *vm, process_t *process, params_t *params)
 {
-    int value_1 = params[0].type == T_REG ?
-        (unsigned int)process->reg[params[0].param - 1] : params[0].param;
-    int value_2 = params[1].type == T_REG ?
-        (unsigned int)process->reg[params[1].param - 1] : params[1].param;
+    int value_1 = get_value(vm, process, params[0], 1);
+    int value_2 = get_value(vm, process, params[1], 1);
 
     process->reg[params[2].param - 1] = value_1 ^ value_2;
     if (!process->reg[params[2].param - 1])
@@ -53,7 +51,7 @@ static int init_xor(vm_t *vm, process_t *process, unsigned char indicator)
         free(params);
         return size_skip;
     }
-    exec_xor(process, params);
+    exec_xor(vm, process, params);
     free(params);
     return size_skip;
 }
