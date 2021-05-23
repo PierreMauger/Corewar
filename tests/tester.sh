@@ -32,9 +32,9 @@ do
     then
         if [ $err1 == $err2 ]
         then
-            echo -e $filename "-> ${GREEN}Success${WHITE}"
+            echo -e $filename "-> ${GREEN}Succesfully failed${WHITE}"
         else
-            echo -e $filename "-> ${RED}Failure${WHITE}"
+            echo -e $filename "-> ${RED}Failed to fail${WHITE}"
         fi
         continue
     fi
