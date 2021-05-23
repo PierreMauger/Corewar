@@ -31,7 +31,7 @@ static void exec_sti(vm_t *vm, champion_t *champion, process_t *process,
     int value_3 = get_value(vm, process, params[2], 1);
 
     write_int_mem(vm, champion, (coord_t){process->coord_pc.x,
-        (process->coord_pc.y + value_2 + value_3) % IDX_MOD}, value_1);
+        process->coord_pc.y + (value_2 + value_3) % IDX_MOD}, value_1);
 }
 
 static int init_sti(vm_t *vm, champion_t *champion, process_t *process,

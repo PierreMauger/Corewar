@@ -20,10 +20,15 @@ void write_int_mem(vm_t *vm, champion_t *champion, coord_t pos, int to_write)
     int size = (int)sizeof(to_write);
 
     to_write = swap_endian_4(to_write);
-    for (int adv = 0; adv < size; adv++) {
-        GET_ACT_CASE(vm, pos.x, (pos.y + adv) % IDX_MOD) =
+    for (int adv = 0; adv < size; adv++, pos.y++) {
+        if (pos.y >= IDX_MOD) {
+            pos.x += (pos.y / IDX_MOD);
+            pos.y %= IDX_MOD;
+            pos.x %= IDX_NBR;
+        }
+        GET_ACT_CASE(vm, pos.x, pos.y) =
         (unsigned char)to_write;
-        GET_ACT_PROCESS(vm, pos.x, (pos.y + adv) % IDX_MOD) = champion->id;
+        GET_ACT_PROCESS(vm, pos.x, pos.y) = champion->id;
         to_write >>= 8;
     }
 }
