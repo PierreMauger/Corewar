@@ -12,32 +12,6 @@ sub r4,r4,r4
 zjmp %:live3
 live %1
 fork %-511
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
-st r4, -100
 
 live3:
 live %1
@@ -106,6 +80,7 @@ fork %:live1
 live %1
 fork %:army
 sub r4, r4, r4
+fork %:zork_sender
 
 live5:
 live %1
@@ -160,3 +135,15 @@ st r4, 6
 st r3, 200
 and r16, r16, r16
 zjmp %-25
+
+zork_sender:
+live %1
+ld -5, r16
+st r16, 485
+st r1, 481
+ld %150994944, r16
+ld %655310, r15
+st r16, 466
+st r15, 461
+sub r16, r16, r16
+zjmp %440
