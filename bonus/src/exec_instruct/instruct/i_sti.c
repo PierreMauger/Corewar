@@ -23,7 +23,8 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static void exec_sti(vm_t *vm, process_t *process, params_t *params)
+static void exec_sti(vm_t *vm, champion_t *champion, process_t *process,
+    params_t *params)
 {
     int value_1 = process->reg[params[0].param - 1];
     int value_2 = params[1].type == T_REG ?
@@ -31,11 +32,12 @@ static void exec_sti(vm_t *vm, process_t *process, params_t *params)
     int value_3 = params[2].type == T_REG ?
         (unsigned int)process->reg[params[2].param - 1] : params[2].param;
 
-    write_int_mem(vm, process->coord_pc.x,
-        (process->coord_pc.y + value_2 + value_3) % IDX_MOD, value_1);
+    write_int_mem(vm, champion, (coord_t){process->coord_pc.x,
+        (process->coord_pc.y + value_2 + value_3) % IDX_MOD}, value_1);
 }
 
-static int init_sti(vm_t *vm, process_t *process, unsigned char indicator)
+static int init_sti(vm_t *vm, champion_t *champion, process_t *process,
+    unsigned char indicator)
 {
     params_t *params = NULL;
     int size_skip = 0;
@@ -51,17 +53,17 @@ static int init_sti(vm_t *vm, process_t *process, unsigned char indicator)
         free(params);
         return size_skip;
     }
-    exec_sti(vm, process, params);
+    exec_sti(vm, champion, process, params);
     free(params);
     return size_skip;
 }
 
-int i_sti(vm_t *vm, __attribute__((unused))champion_t *champion,
+int i_sti(vm_t *vm, champion_t *champion,
     process_t *process)
 {
     unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID, T_INFO);
-    int size_skip = init_sti(vm, process, indicator);
+    int size_skip = init_sti(vm, champion, process, indicator);
 
     if (size_skip == -1)
         return 1;

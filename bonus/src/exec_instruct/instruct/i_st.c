@@ -19,11 +19,12 @@ static bool verif_args(unsigned char indicator)
     return 0;
 }
 
-static void exec_st(vm_t *vm, process_t *process, params_t *params)
+static void exec_st(vm_t *vm, champion_t *champion, process_t *process,
+    params_t *params)
 {
     if (params[1].type != T_REG) {
-        write_int_mem(vm, process->coord_pc.x,
-            (process->coord_pc.x + params[1].param) % IDX_MOD,
+        write_int_mem(vm, champion, (coord_t){process->coord_pc.x,
+            (process->coord_pc.x + params[1].param) % IDX_MOD},
             process->reg[params[0].param - 1]);
     }
     else {
@@ -31,7 +32,8 @@ static void exec_st(vm_t *vm, process_t *process, params_t *params)
     }
 }
 
-static int init_st(vm_t *vm, process_t *process, unsigned char indicator)
+static int init_st(vm_t *vm, champion_t *champion, process_t *process,
+    unsigned char indicator)
 {
     params_t *params = NULL;
     int size_skip = 0;
@@ -47,7 +49,7 @@ static int init_st(vm_t *vm, process_t *process, unsigned char indicator)
         free(params);
         return size_skip;
     }
-    exec_st(vm, process, params);
+    exec_st(vm, champion, process, params);
     free(params);
     return size_skip;
 }
@@ -57,7 +59,7 @@ int i_st(vm_t *vm, __attribute__((unused))champion_t *champion,
 {
     unsigned char indicator = (unsigned char)get_param(vm, process->coord_pc.x,
         process->coord_pc.y + T_ID, T_INFO);
-    int size_skip = init_st(vm, process, indicator);
+    int size_skip = init_st(vm, champion, process, indicator);
 
     if (size_skip == -1)
         return 1;
