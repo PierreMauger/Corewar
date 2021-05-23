@@ -138,11 +138,12 @@ void get_one_param(vm_t *vm,  params_t *params, coord_t coord,
 int get_info_param(unsigned char indicator, size_t adv);
 params_t *get_params(vm_t *vm, process_t *process,
     unsigned char indicator, size_t nbr_args);
-void increase_coord(process_t *process, size_t increase);
+void increase_coord(process_t *process, ssize_t increase);
+void nbr_to_coord(ssize_t *x, ssize_t *y, ssize_t increase);
 bool verif_nbr_param(unsigned char indicator, int nbr_param);
 bool verif_act_param(unsigned char indicator, int pos, int info);
 bool verif_all_params(params_t *params);
-void write_int_mem(vm_t *vm, champion_t *champion, info_size_t pos, int to_write);
+void write_int_mem(vm_t *vm, champion_t *champion, coord_t pos, int to_write);
 size_t get_param(vm_t *vm, size_t x, size_t y, size_t size_to_get);
 int get_value(vm_t *vm, process_t *process, params_t param, bool mod);
 

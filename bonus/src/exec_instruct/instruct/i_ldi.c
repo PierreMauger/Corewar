@@ -25,12 +25,14 @@ static bool verif_args(unsigned char indicator)
 
 static void exec_ldi(vm_t *vm, process_t *process, params_t *params)
 {
-    int value_1 = get_value(vm, process, params[0], 1);
-    int value_2 = get_value(vm, process, params[1], 1);
-    int value_3 = 0;
+    short value_1 = (short)get_value(vm, process, params[0], 1);
+    short value_2 = (short)get_value(vm, process, params[1], 1);
+    short value_3 = 0;
+    ssize_t x = process->coord_pc.x;
+    ssize_t y = process->coord_pc.y;
 
-    value_3 = (int)get_param(vm, process->coord_pc.x,
-        (process->coord_pc.y + value_1 + value_2) % IDX_MOD, REG_SIZE);
+    nbr_to_coord(&x, &y, (value_1 + value_2) % IDX_MOD);
+    value_3 = (short)get_param(vm, x, y, REG_SIZE);
     process->reg[params[2].param - 1] = value_3;
     if (!value_3)
         process->carry = 1;

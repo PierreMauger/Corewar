@@ -21,12 +21,18 @@ static bool verif_args(unsigned char indicator)
 
 static void exec_st(vm_t *vm, process_t *process, params_t *params)
 {
-    if (params[1].inf == I_IND) {
-        write_int_mem(vm, (coord_t){process->coord_pc.x, params[1].param},
-            process, process->reg[params[0].param - 1]);
+    int value_1 = get_value(vm, process, params[0], 1);
+    int value_2 = params[1].inf == I_REG ?
+        (unsigned)process->reg[params[1].param - 1] : params[1].param;
+    ssize_t x = process->coord_pc.x;
+    ssize_t y = process->coord_pc.y;
+
+    if (params[1].type != T_REG) {
+        nbr_to_coord(&x, &y, value_2 % IDX_MOD);
+        write_int_mem(vm, (coord_t){x, y}, value_1);
     }
     else {
-        process->reg[params[1].param - 1] = process->reg[params[0].param - 1];
+        process->reg[params[1].param - 1] = value_1;
     }
 }
 
